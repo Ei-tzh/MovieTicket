@@ -6,3 +6,28 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-duration-picker/dist/bootstrap-duration-picker.css';
+//adminlte
+@import '~admin-lte/dist/css/adminlte.css';
+//jquery
+@import '~jquery-ui/themes/base/all.css';
+@import '~jquery-ui/themes/base/spinner.css';
+
+
+
+//fontawesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+input[type='file']{
+    font-size: 14px;
+    padding:3px;
+    
+  }
+.image_upload{
+    position: absolute;
+    bottom: 0px;
+    left: 10%;
+}
+  

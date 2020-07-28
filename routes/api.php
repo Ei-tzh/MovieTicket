@@ -32,3 +32,32 @@ Route::get('/testing_theater',function(){
     
     
 });
+Route::get('/testing_seat',function(){
+    //$seat=App\Seat::count();
+    $theater=App\Theater::find(1);
+
+    return $theater->seats()->paginate(5);
+});
+Route::get('/booking',function(){
+    //$seat=App\Seat::count();
+    $user=App\User::find(1);
+    
+    //$booking=$user->bookings;
+    $booking=App\Booking::find(1);
+    $timetable=App\Timetable_theater::find($booking->timetabletheater_id);
+    $theater=App\Theater::find($timetable->theater_id);
+    //$showtime=App\Timetable::find($timetable->timetable_id);
+    return $theater->seats;
+});
+Route::get('/seats',function(){
+    $seat=App\Seat::find(1);
+    $theater= $seat->theaters()->first();
+    $aa=$theater->cinema_movie;
+    $cinema=App\Cinema::find($aa->cinema_id);
+    return $cinema->movies;
+});
+Route::get('/booking_seat',function(){
+    $seat=App\Seat_theater::find(1);
+    $booking=App\Booking::find(1);
+    return $booking->seat_theaters;
+});

@@ -21,7 +21,7 @@ class CreateMoviesTable extends Migration
             $table->date('end_date');
             $table->time('duration');
             $table->string('poster');
-            $table->string('trailer');
+            $table->string('trailer')->nullable();
             $table->text('description');
             $table->string('type');
             $table->timestamps();

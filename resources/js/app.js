@@ -5,6 +5,15 @@
  */
 
 require('./bootstrap');
+require('admin-lte/dist/js/adminlte.min.js');
+require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
+require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import 'jquery-ui/ui/widgets/datepicker.js';
+import 'jquery-ui/ui/widgets/spinner.js';
+import 'jquery-ui/ui/widgets/button.js';
 
 window.Vue = require('vue');
 

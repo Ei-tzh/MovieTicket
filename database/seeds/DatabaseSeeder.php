@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(CategoriesTableSeeder::class);
         //$this->call(Movie_CategoriesTableSeeder::class);
         //$this->call(CinemaTableSeeder::class);
-        $this->call(TheaterTableSeeder::class);
+        //$this->call(TheaterTableSeeder::class);
+        //$this->call(SeatTableSeeder::class);
+        $this->call(Seat_theaterTableSeeder::class);
     }
 }

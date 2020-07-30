@@ -26,10 +26,12 @@ Route::get('/testing_theater',function(){
     // $cinema_movie=App\Cinema_movie::find(1);
     // $cinema=App\Cinema::find($cinema_movie->cinema_id);
     // $movie=App\Movie::find($cinema_movie->cinema_id);
-    $movie=App\Movie::find(1);
-    $cinema=App\Cinema_movie::where('movie_id',$movie->id)->first();
-    return $cinema->theaters;
-    
+    // $movie=App\Movie::find(1);
+    // $cinema=App\Cinema_movie::where('movie_id',$movie->id)->first();
+    // return $cinema->theaters;
+    $theater=App\Theater::find(1);
+    return $theater->cinema_movie;
+
     
 });
 Route::get('/testing_seat',function(){
@@ -39,15 +41,8 @@ Route::get('/testing_seat',function(){
     return $theater->seats()->paginate(5);
 });
 Route::get('/booking',function(){
-    //$seat=App\Seat::count();
-    $user=App\User::find(1);
-    
-    //$booking=$user->bookings;
     $booking=App\Booking::find(1);
-    $timetable=App\Timetable_theater::find($booking->timetabletheater_id);
-    $theater=App\Theater::find($timetable->theater_id);
-    //$showtime=App\Timetable::find($timetable->timetable_id);
-    return $theater->seats;
+    return $booking->seat_timetable_theaters;
 });
 Route::get('/seats',function(){
     $seat=App\Seat::find(1);
@@ -60,4 +55,12 @@ Route::get('/booking_seat',function(){
     $seat=App\Seat_theater::find(1);
     $booking=App\Booking::find(1);
     return $booking->seat_theaters;
+});
+Route::get('/theater_timetable',function(){
+    $theater=App\Theater::find(2);
+    $aa=$theater->timetables()->having('pivot_id',3)->first();
+    $bb=$aa->pivot->id;
+    $theater_timetable=App\Timetable_theater::find($bb);
+
+    return $theater_timetable->seats;
 });

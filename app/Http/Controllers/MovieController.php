@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 use App\Movie;
+use App\Cinema_movie;
+use App\Theater;
 class MovieController extends Controller
 {
     /**
@@ -47,7 +49,7 @@ class MovieController extends Controller
             'hr'      => 'required|date_format:H',
             'min'      =>'required',
             'poster'        => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            //'trailer'         =>'mimes:mp4,mov,ogg,qt|required',
+            
             'description'   => 'required',
             'type'          => 'required'
         ]);
@@ -87,7 +89,15 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie=Movie::find($id);
+        $categories=$movie->categories;
+        $cinemas=$movie->cinemas()->first();
+        
+        $cinema_movie=Cinema_movie::where('id',$cinemas->pivot->id)->first();
+        $theaters=$cinema_movie->theaters()->first();
+        $timetables=$theaters->timetables;
+        
+        return view('admin.movies.show',compact('movie','categories','cinemas','theaters','timetables'));
     }
 
     /**

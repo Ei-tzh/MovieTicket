@@ -12,4 +12,7 @@ class Timetable_theater extends Model
     public function bookings(){
         return $this->hasMany('App\Booking');
     }
+    public function seats(){
+        return $this->belongsToMany('App\Seat','seat_timetabletheaters','timetabletheater_id','seat_id')->withPivot('id');
+    }
 }

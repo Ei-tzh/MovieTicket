@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
         //$this->call(CinemaTableSeeder::class);
         //$this->call(TheaterTableSeeder::class);
         //$this->call(SeatTableSeeder::class);
-        $this->call(Seat_theaterTableSeeder::class);
+        //$this->call(Seat_theaterTableSeeder::class);
+        //$this->call(Seat_timetabletheaterTableSeeder::class);
+
+        //$this->call(BookingTableSeeder::class);
+
+        $this->call(BookingSeatTableSeeder::class);
     }
 }

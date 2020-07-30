@@ -46,10 +46,12 @@
                         <td>{{ $movie->duration}}</td>
                         <td>{{ $movie->start_date.'/'.$movie->end_date}}</td>
                         <td>{{ $movie->type }}</td>
-                        <td><a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
-                                <i class="fas fa-edit"></i>
+                        <td><a href="{{ route('movies.show',$movie->id) }}" title="view">
+                              <i class="fas fa-eye green"></i>
                             </a> /
-                           
+                            <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
+                                <i class="fas fa-edit blue"></i>
+                            </a> /
                             @method('DELETE')
                             <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
                                 <i class="fas fa-trash red"></i>

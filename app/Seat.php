@@ -10,4 +10,7 @@ class Seat extends Model
     public function theaters(){
         return $this->belongsToMany('App\Theater');
     }
+    public function timetable_theaters(){
+        return $this->belongsToMany('App\Timetable_theater','seat_timetabletheaters','timetabletheater_id','seat_id');
+    }
 }

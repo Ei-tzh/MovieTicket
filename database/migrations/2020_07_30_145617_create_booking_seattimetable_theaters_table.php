@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeatTheaterBookingsTable extends Migration
+class CreateBookingSeattimetableTheatersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateSeatTheaterBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seat_theater_bookings', function (Blueprint $table) {
+        Schema::create('booking_seattimetable_theaters', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('seat_theater_id');
             $table->unsignedBigInteger('booking_id');
+            $table->unsignedBigInteger('seat_timetable_theater_id');
             $table->timestamps();
 
-            $table->foreign('seat_theater_id')->references('id')->on('seat_theater');
             $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->foreign('seat_timetable_theater_id')->references('id')->on('seat_timetabletheaters');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateSeatTheaterBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seat_theater_bookings');
+        Schema::dropIfExists('booking_seattimetable_theaters');
     }
 }

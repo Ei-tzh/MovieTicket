@@ -13,6 +13,6 @@ class Theater extends Model
        return $this->belongsToMany('App\Seat');
     }
     public function timetables(){
-        return $this->belongsToMany('App\Timetable','timetable_theater','theater_id','timetable_id');
+        return $this->belongsToMany('App\Timetable','timetable_theater','theater_id','timetable_id')->withPivot('id');
     }
 }

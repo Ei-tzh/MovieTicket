@@ -91,13 +91,27 @@ class MovieController extends Controller
     {
         $movie=Movie::find($id);
         $categories=$movie->categories;
-        $cinemas=$movie->cinemas()->first();
+        $cinemas=$movie->cinemas()->get();
         
-        $cinema_movie=Cinema_movie::where('id',$cinemas->pivot->id)->first();
-        $theaters=$cinema_movie->theaters()->first();
-        $timetables=$theaters->timetables;
-        
-        return view('admin.movies.show',compact('movie','categories','cinemas','theaters','timetables'));
+        foreach($cinemas as $cinema)
+        {
+            $cinema_movies=Cinema_movie::where('id',$cinema->pivot->id)->get();
+            
+            $cinemamovies[]=$cinema_movies;
+           foreach($cinema_movies as $cinema_movie){
+                $theaters=$cinema_movie->theaters;
+                //$theaters[]=$cinema_theaters;
+              
+                foreach($theaters as $theater){
+                    $timetables=$theater->timetables;
+                    //$theater_timetables[]=$timetables;
+                    
+                }
+           }
+            
+        }
+        //return $cinemamovies;
+        return view('admin.movies.show',compact('movie','categories','cinemamovies','cinemas'));
     }
 
     /**

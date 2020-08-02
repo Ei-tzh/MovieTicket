@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Movie;
+use App\Cinema_movie;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -63,4 +64,30 @@ Route::get('/theater_timetable',function(){
     $theater_timetable=App\Timetable_theater::find($bb);
 
     return $theater_timetable->seats;
+});
+Route::get('/test',function(){
+    $movies=Movie::find(1);
+    //$cinemas=$movies->cinemas()->get();
+    foreach($movies->cinemas as $cinema){
+        
+        // foreach($cinemas as $cinema)
+        // {
+            $cinemas[]=$cinema;
+            $cinema_movies=Cinema_movie::where('id',$cinema->pivot->id)->get();
+            
+            $cinemamovies[]=$cinema_movies;
+           foreach($cinema_movies as $cinema_movie){
+                $cinema_theaters=$cinema_movie->theaters;
+                $theaters[]=$cinema_theaters;
+              
+                foreach($cinema_theaters as $cinema_theater){
+                    $timetables=$cinema_theater->timetables;
+                    $theater_timetables[]=$timetables;
+                    
+                }
+           }
+            
+        // }
+    }
+        return $cinemas;
 });

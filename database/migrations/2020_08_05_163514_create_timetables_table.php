@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChangeseatTheaterTable extends Migration
+class CreateTimetablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class CreateChangeseatTheaterTable extends Migration
      */
     public function up()
     {
-        Schema::rename('seat_theaters','seat_theater');
+        Schema::create('timetables', function (Blueprint $table) {
+            $table->id();
+            $table->date('show_date');
+            $table->time('show_time');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateChangeseatTheaterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('changeseat_theater');
+        Schema::dropIfExists('timetables');
     }
 }

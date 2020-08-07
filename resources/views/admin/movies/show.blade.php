@@ -37,24 +37,12 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            {{-- <div class="card-header bg-success">
-                                <h3 class="card-title">Show Times</h3>
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>  --}}
-                            <!-- </card-header> -->
+                            
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap ">
                                     <thead>
                                         <tr class="bg-success">
                                             <th>Cinemas</th>
-                                            <th></th>
                                             <th>Theaters</th>
                                             <th>Timetables</th>
                                             <th>Action</th>
@@ -62,51 +50,39 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {{-- looping cinemas table--}}
-                                        @foreach($cinemas as $cinema)
-                                        {{-- looping cinemamovies table --}}
-                                            @foreach($cinemamovies as $val)
-                                            {{-- looping inner array of cinemamovie --}}
-                                                @foreach($val as $cinema_movie)
-                                                @if($cinema_movie->cinema_id == $cinema->id)
-                                                <tr>
-                                                    <td>{{ $cinema->name }}<td>
-                                                            @foreach($cinema_movie->theaters as $theater)
-                                                                <td>{{ $theater->name }}</td>
-                                                                <td>
-                                                                    <table class="table table-bordered table-sm">
-                                                                        <tbody>
-                                                                            @foreach($theater->timetables as  $val)
-                                                                            <tr class= "table-info">
-                                                                            <td >{{ $val->show_date.' / '.$val->show_time }}</td>
-                                                                            </tr>
-                                                                            @endforeach
-                                                                        </tbody>
-                                                                        
-                                                                    </table>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
-                                                                        <i class="fas fa-edit blue"></i>
-                                                                    </a> /
-                                                                    @method('DELETE')
-                                                                    <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
-                                                                        <i class="fas fa-trash red"></i>
-                                                                    </a>
-                                                                </td>
-                                                            @endforeach
-                                                </tr>
-                                                @endif
+                                        @foreach($theaters as $theater)
+                                            <tr>
+                                                <td>{{ $theater->cinema->name }}</td>
+                                                <td>{{ $theater->name }}</td>
+                                                @foreach($movie_theaters as $movie_theater)
+                                                    @foreach($movie_theater as $val)
+                                                        @if($val->id == $theater->pivot->id)
+                                                        <td>
+                                                            <table class="table table-bordered table-sm">
+                                                                <tbody>
+                                                                    @foreach($val->timetables as  $aa)
+                                                                    <tr class= "table-info">
+                                                                    <td >{{ $aa->show_date.' / '.$aa->show_time }}</td>
+                                                                    </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                                            
+                                                            </table>
+                                                        </td>
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
-                                            @endforeach
-                                        
+                                                <td>
+                                                    <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
+                                                        <i class="fas fa-edit blue"></i>
+                                                    </a> /
+                                                    @method('DELETE')
+                                                    <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
+                                                        <i class="fas fa-trash red"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
-                                    
-                                    
-                                       
-                                    
-                                    
-                                      
                                     </tbody>
                                 </table>
                             </div>

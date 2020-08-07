@@ -70,7 +70,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="/home" class="nav-link active">
+            <a href="/home" class="nav-link {{ Request::path() == 'home'?'active':'' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -79,7 +79,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('movies.index')}}" class="nav-link">
+            <a href="{{ route('movies.index')}}" class="nav-link {{ Request::path()=='home/movies'?'active':''}}">
               <i class="nav-icon fas fa-video"></i>
               <p>
                 Movies
@@ -88,7 +88,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ route('cinemas.index')}}" class="nav-link {{ Request::path()=='home/cinemas'?'active':''}}">
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Cinemas

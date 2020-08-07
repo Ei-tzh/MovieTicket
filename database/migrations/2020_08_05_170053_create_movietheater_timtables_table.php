@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimetableTheaterTable extends Migration
+class CreateMovietheaterTimtablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateTimetableTheaterTable extends Migration
      */
     public function up()
     {
-        Schema::create('timetable_theater', function (Blueprint $table) {
+        Schema::create('movietheater_timetables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('theater_id');
+            
+            $table->unsignedBigInteger('movietheater_id');
             $table->unsignedBigInteger('timetable_id');
             $table->timestamps();
 
-            $table->foreign('theater_id')->references('id')->on('theaters');
+            $table->foreign('movietheater_id')->references('id')->on('movie_theater');
             $table->foreign('timetable_id')->references('id')->on('timetables');
+            
         });
     }
 
@@ -31,6 +33,6 @@ class CreateTimetableTheaterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timetable_theater');
+        Schema::dropIfExists('movietheater_timetables');
     }
 }

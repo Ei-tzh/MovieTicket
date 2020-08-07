@@ -17,10 +17,12 @@ class CreateSeatsTable extends Migration
             $table->id();
             $table->string('seat_no');
             $table->double('price');
-            $table->unsignedBigInteger('theater_id');
+            $table->unsignedBigInteger('movietheater_timetable_id');
+            $table->unsignedBigInteger('booking_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('theater_id')->references('id')->on('theaters');
+            $table->foreign('movietheater_timetable_id')->references('id')->on('movietheater_timetables');
+            $table->foreign('booking_id')->references('id')->on('bookings');
         });
     }
 

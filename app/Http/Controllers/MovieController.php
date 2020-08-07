@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Movie;
 use App\Cinema_movie;
 use App\Theater;
+use App\Movie_theater;
 class MovieController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies=Movie::all();
-        return view('admin.index',compact('movies'));
+        return view('admin.movies.index',compact('movies'));
     }
 
     /**
@@ -30,7 +31,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.movies.create');
     }
 
     /**
@@ -91,27 +92,35 @@ class MovieController extends Controller
     {
         $movie=Movie::find($id);
         $categories=$movie->categories;
-        $cinemas=$movie->cinemas()->get();
-        
-        foreach($cinemas as $cinema)
-        {
-            $cinema_movies=Cinema_movie::where('id',$cinema->pivot->id)->get();
-            
-            $cinemamovies[]=$cinema_movies;
-           foreach($cinema_movies as $cinema_movie){
-                $theaters=$cinema_movie->theaters;
-                //$theaters[]=$cinema_theaters;
-              
-                foreach($theaters as $theater){
-                    $timetables=$theater->timetables;
-                    //$theater_timetables[]=$timetables;
-                    
-                }
-           }
-            
+        $theaters=$movie->theaters;
+        foreach($theaters as $theater){
+            $cinema=$theater->cinema;
+            $movie_theater=Movie_theater::where('id',$theater->pivot->id)->get();
+            $movie_theaters[]=$movie_theater;
+            foreach($movie_theater as $val){
+                $timetable=$val->timetables;
+            }
         }
-        //return $cinemamovies;
-        return view('admin.movies.show',compact('movie','categories','cinemamovies','cinemas'));
+        
+        // foreach($cinemas as $cinema)
+        // {
+        //     $cinema_movies=Cinema_movie::where('id',$cinema->pivot->id)->get();
+            
+        //     $cinemamovies[]=$cinema_movies;
+        //    foreach($cinema_movies as $cinema_movie){
+        //         $theaters=$cinema_movie->theaters;
+        //         //$theaters[]=$cinema_theaters;
+              
+        //         foreach($theaters as $theater){
+        //             $timetables=$theater->timetables;
+        //             //$theater_timetables[]=$timetables;
+                    
+        //         }
+        //    }
+            
+        // }
+        //return $movie_theaters;
+       return view('admin.movies.show',compact('movie','categories','theaters','movie_theaters'));
     }
 
     /**
@@ -123,7 +132,7 @@ class MovieController extends Controller
     public function edit($id)
     {
         $movie=Movie::find($id);
-        return view('admin.edit',compact('movie'));
+        return view('admin.movies.edit',compact('movie'));
     }
 
     /**

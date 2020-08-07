@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder
         //$this->call(Movie_CategoriesTableSeeder::class);
         //$this->call(CinemaTableSeeder::class);
         //$this->call(TheaterTableSeeder::class);
-        //$this->call(SeatTableSeeder::class);
+        //$this->call(MovieTheaterTableSeeder::class);
+        $this->call(SeatTableSeeder::class);
         //$this->call(Seat_theaterTableSeeder::class);
         //$this->call(Seat_timetabletheaterTableSeeder::class);
 
         //$this->call(BookingTableSeeder::class);
 
-        $this->call(BookingSeatTableSeeder::class);
+        //$this->call(BookingSeatTableSeeder::class);
     }
 }

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timetable extends Model
 {
-    public function theaters(){
-        return $this->belongsToMany('App\Theater','timetable_theater','theater_id','timetable_id');
+    //
+    public function movietheaters(){
+        return $this->belongsToMany('App\Movie_theater','movietheater_timetables','movietheater_id','timetable_id');
     }
 }

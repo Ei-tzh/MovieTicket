@@ -15,7 +15,7 @@ class Movie extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
-    public function cinemas(){
-        return $this->belongsToMany('App\Cinema','cinema_movies','movie_id','cinema_id')->withPivot('id');
+    public function theaters(){
+        return $this->belongsToMany('App\Theater')->withPivot('id');
     }
 }

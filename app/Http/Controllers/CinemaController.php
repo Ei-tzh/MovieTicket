@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CinemaRequest;
 use App\Cinema;
 use App\Township;
 class CinemaController extends Controller
@@ -41,9 +43,36 @@ class CinemaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CinemaRequest $request)
     {
-        //
+        // $validate_array=['name' => 'required',
+        //                 'address'  =>'required',
+        //                 'theaters' => 'required',
+        //                 'township' => 'required'];
+        
+        $validated = $request->validated();
+        $filename = $request->image->getClientOriginalName();
+        $request->image->storeAs('/public/images/cinemas',$filename);
+        $url=Storage::url('images/cinemas/'.$filename);
+        
+        $phone=implode(",",$request->ph_no);
+        $cinema=Cinema::create([
+            'name' => $request->name,
+            'address'=>$request->address,
+            'ph_no'=>$phone,
+            'image' => $url,
+            'township_id'=>$request->township
+        ]);
+        $cinema_theater=Cinema::find($cinema->id);
+       foreach($request->theaters as $theater){
+            
+            $cinema_theater->theaters()->create([
+                'name' =>$theater,
+                'location'=>'2nd floor'
+            ]);
+       }
+       
+        return redirect()->route('cinemas.index');
     }
 
     /**
@@ -65,7 +94,8 @@ class CinemaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cinema=Cinema::find($id);
+        return view('admin.cinemas.edit',compact('cinema'));
     }
 
     /**

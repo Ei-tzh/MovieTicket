@@ -68,7 +68,7 @@
                                         <a href="" title="view">
                                             <i class="fas fa-eye green"></i>
                                         </a> /
-                                        <a href="" title="Edit">
+                                        <a href="{{route('cinemas.edit',$cinema->id)}}" title="Edit">
                                             <i class="fas fa-edit blue"></i>
                                         </a> /
                                         @method('DELETE')

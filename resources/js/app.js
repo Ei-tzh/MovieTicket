@@ -9,6 +9,9 @@ require('admin-lte/dist/js/adminlte.min.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');
 
+window.Vue = require('vue');
+
+
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 import 'jquery-ui/ui/widgets/datepicker.js';

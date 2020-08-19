@@ -8,10 +8,12 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
     <link rel="stylesheet" href="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.css') }}">
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
-  
+    
+    
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -237,10 +239,12 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="{{ asset('js/app.js') }}"></script>
+
+
+<script src="{{ asset('js/app.js') }}"  defer></script>
 <script src="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.min.js') }}"></script>
+
 @stack('jquery')
-
-
+@stack('vue')
 </body>
 </html>

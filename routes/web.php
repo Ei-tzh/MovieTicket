@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/home/movies','MovieController');
 Route::resource('/home/cinemas','CinemaController');
+Route::resource('/home/test','test\testController');

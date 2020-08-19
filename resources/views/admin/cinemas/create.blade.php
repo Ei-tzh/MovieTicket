@@ -104,8 +104,8 @@
 
                     </div>
                     <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="{{ route('cinemas.index')}}"><button type="button" class="btn btn-success">Back</button></a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{{ route('cinemas.index')}}"><button type="button" class="btn btn-success">Back</button></a>
                     </div>
                 </form>
             <div>
@@ -135,7 +135,7 @@
         });
         function addRow(){
             i++;
-            var row='<div class="row'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'
+            var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'
                         +'<input type="tel" class="form-control" id="ph_no" name="ph_no[]" placeholder="09" >'
                             +'<div id="clear">'
                                 +'<button type="button" class="btn btn-success ml-1">-</button>'
@@ -144,8 +144,8 @@
             $('#phone').append(row);
         }
             $(this).on('click','#clear',function(){
-                var button_id = $('#phone div').attr("class"); 
-                $('.'+button_id).remove();
+                var button_id=$(this).parents('.row').attr('id'); 
+                $('#'+button_id).remove();
                 //console.log(button_id);
                 //$(this).parent().remove();
             });

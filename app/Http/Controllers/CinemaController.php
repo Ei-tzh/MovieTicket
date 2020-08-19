@@ -95,7 +95,9 @@ class CinemaController extends Controller
     public function edit($id)
     {
         $cinema=Cinema::find($id);
-        return view('admin.cinemas.edit',compact('cinema'));
+        $theaters=$cinema->theaters;
+        
+        return view('admin.cinemas.edit',compact('cinema','theaters'));
     }
 
     /**
@@ -107,7 +109,32 @@ class CinemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update_theater=$request->theaters;
+        $cinema=Cinema::find($id);
+        $theaters=$cinema->theaters;
+        foreach($theaters as $val){
+            $name[]=$val->name;
+        }
+        $remove=$this->removeTheater($name,$update_theater);
+        $update=$this->updateTheater($name,$update_theater);
+        foreach($remove as $val){
+            $cinema->theaters()->where('name',$val)->delete();
+        }
+        if($update){
+            foreach($update as $val){
+                $cinema->theaters()->create([
+                    'name'=>$val,
+                    'location'=>'2nd floor',
+                    'cinema_id'=>$cinema->id
+                ]);
+            }
+        }
+        return redirect()->route('cinemas.index');
+        
+        
+        
+        
+        
     }
 
     /**
@@ -119,5 +146,21 @@ class CinemaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    protected function removeTheater(array $a,array $b){
+        $array1=array_diff($a,$b);
+        $array2=array_diff($b,$a);
+
+        $output = array_merge($array1, $array2);
+        $remove=array_intersect($a,$output);
+        return $remove;
+    }
+    protected function updateTheater(array $name,array $request){
+        $array1=array_diff($name,$request);
+        $array2=array_diff($request,$name);
+
+        $output = array_merge($array1, $array2);
+        $edit=array_diff($output,$name);
+        return $edit;
     }
 }

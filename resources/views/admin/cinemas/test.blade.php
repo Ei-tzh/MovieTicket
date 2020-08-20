@@ -24,7 +24,7 @@
                                                                 v-bind:k="index"
                                                                 v-on:remove="remove_phoneno"
                                                                 ></phone-number>
-                                                <button type="button" class='btn btn-success  mt-2' v-on:click="addnew_phoneno()" >Add New</button>
+                                                <button type="button" class='btn btn-success  mt-2' v-on:click="addnew_phoneno" >Add New</button>
                                             
                                         </div>
                                     </div>
@@ -47,21 +47,11 @@
 <script>
 
 window.onload = function () {
-Vue.component('phone-number',{
-    props:['item','k','remove'],
-    template:' <div class="input-group" v-bind:id="k"><div class="input-group-prepend mt-2"><span class="input-group-text"><i class="fas fa-phone"></i></span></div><input type="tel" class="form-control mt-2" id="ph_no" name="ph_no[]"  placeholder="Enter phone number" v-model="item"><button type="button" class="btn btn-danger ml-2 mt-2" v-on:click="$emit(\'remove\',k)" >X</button></div>',
-    computed:{
-        value:function(){
-            return this.item
-        }
-    }
-    
-})
+
     var app2= new Vue({
         el: '#app-2',
         data: {
             phoneno:@json($phone_no)
-            
         },
         methods:{
             remove_phoneno:function(index){

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CinemaRequest;
+use App\Http\Requests\CinemaUpdateRequest;
 use App\Cinema;
 use App\Township;
 class CinemaController extends Controller
@@ -96,8 +97,9 @@ class CinemaController extends Controller
     {
         $cinema=Cinema::find($id);
         $theaters=$cinema->theaters;
-        
-        return view('admin.cinemas.edit',compact('cinema','theaters'));
+        $phone_no=explode(',',$cinema->ph_no);
+        $townships=Township::all();
+        return view('admin.cinemas.edit',compact('cinema','theaters'))->with('phoneno',$phone_no)->with('townships',$townships);
     }
 
     /**
@@ -107,30 +109,52 @@ class CinemaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CinemaUpdateRequest $request, $id)
     {
-        $update_theater=$request->theaters;
-        $cinema=Cinema::find($id);
+        $validated = $request->validated();
+        // for creating new theaters and deleting existing theaters
+
+        $update_theater=$request->theaters;//theaters by post method
+        $cinema=Cinema::find($id);//before updatind theaters
         $theaters=$cinema->theaters;
+        $phone=implode(",",$request->ph_no);
         foreach($theaters as $val){
             $name[]=$val->name;
         }
-        $remove=$this->removeTheater($name,$update_theater);
-        $update=$this->updateTheater($name,$update_theater);
+
+        $remove=$this->removeTheater($name,$update_theater);//for deleting existing theaters
+
+        $update=$this->updateTheater($name,$update_theater);//for creating new theaters
         foreach($remove as $val){
             $cinema->theaters()->where('name',$val)->delete();
         }
-        if($update){
-            foreach($update as $val){
-                $cinema->theaters()->create([
-                    'name'=>$val,
-                    'location'=>'2nd floor',
-                    'cinema_id'=>$cinema->id
-                ]);
-            }
-        }
-        return redirect()->route('cinemas.index');
         
+        foreach($update as $val){
+            $cinema->theaters()->create([
+                'name'=>$val,
+                'location'=>'2nd floor',
+                'cinema_id'=>$cinema->id
+            ]);
+        }
+        // for uploading image
+
+        if($request->hasfile('image')){
+            if(file_exists(public_path($cinema->image))){
+                unlink(public_path($cinema->image));
+            }
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('/public/images/cinemas',$filename);
+            $url=Storage::url('images/cinemas'.$filename);
+        }
+        // Cinema::where('id',$id)->update([
+        //         "name" => $request->name,
+        //         "address"=>$request->address,
+        //         "ph_no" => $phone,
+        //         "image"=>$request->image==''? $cinema->image : $url,
+        //         "township_id"=>$request->township
+        // ]);
+        //return redirect()->route('cinemas.index');
+        return $request->image;
         
         
         

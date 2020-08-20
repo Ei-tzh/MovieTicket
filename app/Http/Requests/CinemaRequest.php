@@ -28,7 +28,7 @@ class CinemaRequest extends FormRequest
             'address'   =>'required',
             'theaters'  => 'required',
             'township'  => 'required',
-            'image'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'        => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
         foreach($this->request->get('ph_no') as $key => $val){
             if($key==0){

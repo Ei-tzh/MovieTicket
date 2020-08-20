@@ -241,7 +241,7 @@
 
 
 
-<script src="{{ asset('js/app.js') }}"  defer></script>
+<script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.min.js') }}"></script>
 
 @stack('jquery')

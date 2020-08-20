@@ -123,7 +123,7 @@
     <br>
     @endif --}}
 @push('jquery')
-    <script type='text/javascript'>
+    <script>
         $(document).ready(function(){
             var i=1;
             $("#new_task").click(function(event){

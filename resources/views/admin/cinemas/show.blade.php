@@ -1,0 +1,66 @@
+@extends('layouts.master')
+
+@section('content')
+    <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{ $cinema->name }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('cinemas.index')}}">Cinemas</a></li>
+                            <li class="breadcrumb-item active">{{ $cinema->id }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <img src="{{ $cinema->image }}" alt="{{ $cinema->image }}" style='width:280px;height:250px'>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
+                                    <p class="text-muted">{{ $cinema-> address}}</p>
+                                    <hr>
+                                    <strong><i class="fas fa-city  mr-1"></i>Township</strong>
+                                    <p class="text-muted">{{ $township->name }}</p>
+                                    <hr>
+                                    <strong><i class="fas fa-phone mr-1"></i>Ph.no</strong>
+                                    <p class="text-muted">{{ $cinema->ph_no}}</p>
+                                    <hr>
+                                    
+                                    
+                                     
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    @foreach($theaters as $theater)
+                    <div class="row mt-3">
+                        <div class="col-8 col-sm-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                <h3 class="card-title">{{ $theater->name }}({{$theater->location}})</h3>
+                                </div>
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+              <!-- /.card-body -->
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection

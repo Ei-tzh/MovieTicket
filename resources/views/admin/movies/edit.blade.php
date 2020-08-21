@@ -3,6 +3,13 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    @if ($message = Session::get('status'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            <br>
+    @endif
 <section class="content">
 <div class="container mt-2">
     <div class="row">
@@ -123,7 +130,7 @@
                         <div class="form-group">
                             <label for="type">Type</label>
                             <select class="form-control" id="type" name='type'>
-                                    <option value='2D' {{ $movie->type=="2D"? 'selected':''}} >2D</option>
+                                    <option value='2D' >2D</option>
                                     <option value='3D' {{ $movie->type=="3D"? 'selected':''}} >3D</option>
                             </select>
                         </div>
@@ -131,6 +138,7 @@
                     </div>
                     <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{ route('cinemas.index') }}"><button type="submit" class="btn btn-success">Cancel</button></a>
                     </div>
                 </form>
             <div>

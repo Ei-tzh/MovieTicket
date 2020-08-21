@@ -84,7 +84,10 @@ class CinemaController extends Controller
      */
     public function show($id)
     {
-        //
+        $cinema=Cinema::find($id);
+        $township=$cinema->township;
+        $theaters=$cinema->theaters;
+        return view('admin.cinemas.show',compact('cinema','township','theaters'));
     }
 
     /**
@@ -143,21 +146,18 @@ class CinemaController extends Controller
                 unlink(public_path($cinema->image));
             }
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('/public/images/cinemas',$filename);
-            $url=Storage::url('images/cinemas'.$filename);
+            $request->image->storeAs('/public/images/cinemas/',$filename);
+            $url=Storage::url('images/cinemas/'.$filename);
         }
-        // Cinema::where('id',$id)->update([
-        //         "name" => $request->name,
-        //         "address"=>$request->address,
-        //         "ph_no" => $phone,
-        //         "image"=>$request->image==''? $cinema->image : $url,
-        //         "township_id"=>$request->township
-        // ]);
-        //return redirect()->route('cinemas.index');
-        return $request->image;
-        
-        
-        
+        Cinema::where('id',$id)->update([
+                "name" => $request->name,
+                "address"=>$request->address,
+                "ph_no" => $phone,
+                "image"=>$request->image==''? $cinema->image:$url,
+                "township_id"=>$request->township
+        ]);
+        $request->session()->flash('status','Congratulation,You have updated successfully!');
+        return redirect()->route('cinemas.index');
         
     }
 

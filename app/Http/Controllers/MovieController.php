@@ -20,7 +20,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies=Movie::all();
+        $movies=Movie::paginate(3);
         return view('admin.movies.index',compact('movies'));
     }
 
@@ -179,9 +179,9 @@ class MovieController extends Controller
             'description'=>$request->description,
             'type'     => $request->type
             ]);
-        
+        $request->session()->flash('status','Congratulation,You have updated successfully!');
         return redirect()->route('movies.index');
-        
+        //return $extension;
     }
 
     /**

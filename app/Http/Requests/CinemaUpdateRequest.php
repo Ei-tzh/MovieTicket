@@ -26,8 +26,8 @@ class CinemaUpdateRequest extends FormRequest
         $rules=[
             'name'      =>'required',
             'address'   =>'required',
-            'township'  => 'required',
-            'image'     =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'township'  =>'required',
+            'image'     =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
         foreach($this->request->get('ph_no') as $key => $val){
             $rules['ph_no.'.$key] = 'required|digits_between:9,11';

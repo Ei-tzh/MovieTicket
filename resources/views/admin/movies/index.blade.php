@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="content-wrapper">
+    @if ($message = Session::get('status'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            <br>
+    @endif
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -26,7 +33,7 @@
         <div class="row">
           <div class="col-lg-12">
               <table class='table table-striped'>
-                <thead>
+                <thead class='bg-success text-white'>
                   <tr>
                     <th>ID</th>
                     <th>MovieName</th>
@@ -70,7 +77,9 @@
         <!-- /.row -->
         
       </div><!-- /.container-fluid -->
+      {{ $movies->links() }}
     </section>
     <!-- /.content -->
   </div>
+  
 @endsection

@@ -81,7 +81,7 @@
                                     <label for="image">Image</label>
                                     <div class="input-group">
                                         <img src="{{ $cinema->image}} " alt="" style="width:100px;height:auto;">
-                                        <input type="file" id="image" name="poster" value="{{ $cinema->image }}" class='image_upload'>
+                                        <input type="file" id="image" name="image" value="{{ $cinema->image }}" class="image_upload">
                                     @error('image')
                                             <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -102,7 +102,7 @@
                             </div>
                             <!-- footer -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{ route('cinemas.index')}}"><button type="button" class="btn btn-success">Back</button></a>
                             </div>
                         </form>

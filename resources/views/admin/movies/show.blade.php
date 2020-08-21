@@ -1,4 +1,4 @@
-@extends('layouts.master');
+@extends('layouts.master')
 
 @section('content')
     <div class="content-wrapper">
@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <h1>Movie Details</h1>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
         <section class="content">
             <div class="card">

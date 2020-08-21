@@ -4,6 +4,13 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
+        @if ($message = Session::get('status'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            <br>
+        @endif
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -47,7 +54,7 @@
                                     <th style="width: 10px">ID</th>
                                     <th>Name</th>
                                     <th>Address</th>
-                                    <th>Ph.no</th>
+                                    <th style="width: 20px">Ph.no</th>
                                     <th>Theaters</th>
                                     <th>Image</th>
                                     <th>Township</th>
@@ -62,10 +69,10 @@
                                     <td>{{ $cinema->address}}</td>
                                     <td>{{ $cinema->ph_no }}</td>
                                     <td>{{ count($cinema->theaters) }}</td>
-                                    <td>{{ $cinema->image}}</td>
+                                    <td><img src="{{ $cinema->image }}" alt="image" style="width:80px;height:auto;"></td>
                                     <td>{{ $cinema->township->name }}</td>
                                     <td>
-                                        <a href="" title="view">
+                                        <a href="{{ route('cinemas.show',$cinema->id) }}" title="view">
                                             <i class="fas fa-eye green"></i>
                                         </a> /
                                         <a href="{{route('cinemas.edit',$cinema->id)}}" title="Edit">

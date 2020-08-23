@@ -50,9 +50,36 @@
                         <div class="col-8 col-sm-6">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                <h3 class="card-title">{{ $theater->name }}({{$theater->location}})</h3>
+                                <h3 class="card-title">{{ $theater->name }}<span style='font-size:16px'> ({{$theater->location}}) </span></h3>
+                                <a href=""><button type="button" class='btn btn-outline-light float-right'>Create</button></a>
                                 </div>
                                 <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Movies</th>
+                                                <th>Status</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($theater->movies as $movie)
+                                            <tr>
+                                                <td>{{ $movie->name }}</td>
+                                                @foreach($movietheaters as $movietheater)
+                                                    @foreach($movietheater as $value)
+                                                       @if($theater->id == $value->theater_id)
+                                                        <td class="text-success">{{ $value->status==1 ?'Active':'Inactive' }}</td>
+                                                        <td>{{ $value->start_date }}</td>
+                                                        <td>{{ $value->end_date }}</td>
+                                                        @endif 
+                                                    @endforeach
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

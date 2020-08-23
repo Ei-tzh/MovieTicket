@@ -3,13 +3,7 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @if ($message = Session::get('status'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
-            </div>
-            <br>
-    @endif
+    
 <section class="content">
 <div class="container mt-2">
     <div class="row">

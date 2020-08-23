@@ -8,6 +8,7 @@ use App\Http\Requests\CinemaRequest;
 use App\Http\Requests\CinemaUpdateRequest;
 use App\Cinema;
 use App\Township;
+use App\Movie_theater;
 class CinemaController extends Controller
 {
     /**
@@ -87,7 +88,16 @@ class CinemaController extends Controller
         $cinema=Cinema::find($id);
         $township=$cinema->township;
         $theaters=$cinema->theaters;
-        return view('admin.cinemas.show',compact('cinema','township','theaters'));
+        $movie_theaters=[];
+        foreach($theaters as $val){
+            $movies=$val->movies;
+            foreach($movies as $aa){
+                $movie_theater= Movie_theater::where('id',$aa->pivot->id)->get();
+                array_push($movie_theaters,$movie_theater);
+            }
+        } 
+        //return $movie_theaters;
+        return view('admin.cinemas.show',compact('cinema','township','theaters'))->with('movietheaters',$movie_theaters);
     }
 
     /**

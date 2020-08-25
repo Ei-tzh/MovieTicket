@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/home/movies','MovieController');
 Route::resource('/home/cinemas','CinemaController');
 Route::resource('/home/test','test\testController');
+Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}','TheaterController@create')->name('theaters.create');
+Route::post('/home/cinemas/{cinema_id}/theaters/{theater_id}','TheaterController@store')->name('theaters.store');

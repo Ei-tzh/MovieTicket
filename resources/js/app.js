@@ -9,6 +9,8 @@ require('admin-lte/dist/js/adminlte.min.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');
 
+//require('');
+//require('bootstrap-switch-button/dist/js/bootstrap-switch-button.min.js');
 window.Vue = require('vue');
 
 
@@ -17,7 +19,8 @@ window.$ = window.jQuery = $;
 import 'jquery-ui/ui/widgets/datepicker.js';
 import 'jquery-ui/ui/widgets/spinner.js';
 import 'jquery-ui/ui/widgets/button.js';
-
+import  'select2/dist/js/select2.min.js';
+import  'bootstrap-switch/dist/js/bootstrap-switch.min.js';//bootstrap-switch
 window.Vue = require('vue');
 
 /**

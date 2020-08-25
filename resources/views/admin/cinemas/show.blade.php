@@ -51,7 +51,7 @@
                             <div class="card card-primary">
                                 <div class="card-header">
                                 <h3 class="card-title">{{ $theater->name }}<span style='font-size:16px'> ({{$theater->location}}) </span></h3>
-                                <a href=""><button type="button" class='btn btn-outline-light float-right'>Create</button></a>
+                                <a href="{{ route('theaters.create',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-outline-light float-right'>Create</button></a>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped">

@@ -7,13 +7,16 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-duration-picker/dist/bootstrap-duration-picker.css';
+//bootstrap-switch
+@import '~bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
+//@import '~bootstrap-switch-button/css/bootstrap-switch-button.min.css';
 //adminlte
 @import '~admin-lte/dist/css/adminlte.css';
 //jquery
 @import '~jquery-ui/themes/base/all.css';
 @import '~jquery-ui/themes/base/spinner.css';
-
-
+//select2
+@import '~select2/dist/css/select2.min.css';
 
 //fontawesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";

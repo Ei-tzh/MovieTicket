@@ -16,6 +16,6 @@ class Movie extends Model
         return $this->belongsToMany(Category::class);
     }
     public function theaters(){
-        return $this->belongsToMany('App\Theater')->withPivot('id');
+        return $this->belongsToMany('App\Theater')->withPivot('id','status','start_date','end_date');
     }
 }

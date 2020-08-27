@@ -61,21 +61,25 @@
                                                 <th>Status</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
+                                                <th>Modify</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($theater->movies as $movie)
                                             <tr>
                                                 <td>{{ $movie->name }}</td>
-                                                @foreach($movietheaters as $movietheater)
-                                                    @foreach($movietheater as $value)
-                                                       @if($theater->id == $value->theater_id)
-                                                        <td class="text-success">{{ $value->status==1 ?'Active':'Inactive' }}</td>
-                                                        <td>{{ $value->start_date }}</td>
-                                                        <td>{{ $value->end_date }}</td>
-                                                        @endif 
-                                                    @endforeach
-                                                @endforeach
+                                                <td class="{{ $movie->pivot->status==1 ?'text-success':'text-danger' }}">{{ $movie->pivot->status==1 ?'Active':'Inactive' }}</td>
+                                                <td>{{ $movie->pivot->start_date }}</td>
+                                                <td>{{ $movie->pivot->end_date }}</td>
+                                                <td><a href="{{ route('theaters.edit',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id,'id'=>$movie->pivot->id])}}" title="Edit">
+                                                    <i class="fas fa-edit blue"></i>
+                                                    </a> /
+                                                    @method('DELETE')
+                                                    <a href="{{ route('theaters.destroy',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id,'id'=>$movie->pivot->id]) }}" title="Delete">
+                                                    
+                                                    <i class="fas fa-trash red"></i>
+                                                    </a>
+                                                </td>       
                                             </tr>
                                         @endforeach
                                         </tbody>

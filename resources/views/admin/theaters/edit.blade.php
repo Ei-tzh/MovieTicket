@@ -8,28 +8,21 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $theater->name }}</h3>
                 </div>
-                <form action="{{ route('theaters.store',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}" method="POST" >
+                <form action="{{ route('theaters.update',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id,'id'=>$movie_theater->id])}}" method="POST" >
                 @csrf
+                @method('put')
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-4">
-                                <label for="movies">Movies:</label>
-                                <select class="form-control" id='movies' name='movies[]' style="width: 100%;" multiple="multiple">
-                                 @foreach($movies as $key=>$movie)
-                                        <option value="{{ $movie->id }}" @foreach($theater->movies as $theater_movie)
-                                                                {{ $theater_movie->name == $movie->name? 'disabled':'' }}
-                                                                 @endforeach>{{ $movie->name }}</option>
-                                    
-                                @endforeach
+                                <label for="movie">Movies:</label>
+                                <select class="form-control select2" id='movie' name='movie' style="width: 100%;" readonly>
+                                    <option value="{{ $movie->id }}" selected >{{ $movie->name }}</option>
                                 </select>
-                                @error('movies')
-                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                @enderror
                             </div>
                             {{-- status --}}
                                 <label for="status">Status:</label>
-                                <input type="checkbox" name="status" id="status" data-bootstrap-switch data-off-color="danger" data-on-color="success" data-on-text="Active" data-off-text="Inactive">
+                                <input type="checkbox" name="status" id="status" {{ $movie_theater->status == 1 ? 'checked':''}} data-bootstrap-switch data-off-color="danger" data-on-color="success" data-on-text="Active" data-off-text="Inactive">
                             <!-- Start_date -->
                             <div class="row mt-3" >
                                 <div class="col-4">
@@ -41,7 +34,7 @@
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control float-right" name='start_date' id="start_date" value='{{ old("start_date") }}' placeholder="Choose start date">
+                                            <input type="text" class="form-control float-right" name='start_date' id="start_date" value='{{ $movie_theater->start_date }}' >
                                             
                                         </div>
                                         @error('start_date')
@@ -61,7 +54,7 @@
                                                 <i class="fas fa-calendar-alt"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control float-right" name="end_date" id="end_date" value="{{ old('end_date') }}" placeholder="Choose end date">
+                                        <input type="text" class="form-control float-right" name="end_date" id="end_date" value="{{ $movie_theater->end_date }}" >
                                         
                                     </div>
                                     @error('end_date')
@@ -76,7 +69,10 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="{{ route('cinemas.show',$cinema->id) }}">
+                        <button type="button" class="btn btn-primary">Back</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -94,7 +90,7 @@
                 
             });
             
-           $("#status").bootstrapSwitch('state',true);
+           $("#status").bootstrapSwitch('state');
            
             $('#start_date').datepicker({ dateFormat: 'yy-mm-dd' });
             $('#end_date').datepicker({ dateFormat: 'yy-mm-dd' });
@@ -102,5 +98,3 @@
         
     </script>   
 @endpush
-
-        

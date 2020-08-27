@@ -88,16 +88,12 @@ class CinemaController extends Controller
         $cinema=Cinema::find($id);
         $township=$cinema->township;
         $theaters=$cinema->theaters;
-        $movie_theaters=[];
+        //$movie_theaters=[];
         foreach($theaters as $val){
             $movies=$val->movies;
-            foreach($movies as $aa){
-                $movie_theater= Movie_theater::where('id',$aa->pivot->id)->get();
-                array_push($movie_theaters,$movie_theater);
-            }
         } 
-        //return $movie_theaters;
-        return view('admin.cinemas.show',compact('cinema','township','theaters'))->with('movietheaters',$movie_theaters);
+        
+        return view('admin.cinemas.show',compact('cinema','township','theaters'));
     }
 
     /**

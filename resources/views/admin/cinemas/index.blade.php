@@ -58,7 +58,7 @@
                                     <th>Theaters</th>
                                     <th>Image</th>
                                     <th>Township</th>
-                                    <th>Action</th>
+                                    <th>Modify</th>
                                 </tr>
                             </thead>
                             <tbody>

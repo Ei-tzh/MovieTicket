@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Movie;
 use App\Cinema_movie;
+use App\Timetable;
+use App\Movietheater_timetable;
+use App\Movie_theater;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -90,4 +93,11 @@ Route::get('/test',function(){
         // }
     }
         return $cinemas;
+});
+Route::get('/timetables',function(){
+    $aa=Timetable::all();
+    foreach($aa as $val){
+        $val->movie_theaters;
+    }
+    return $aa;
 });

@@ -101,10 +101,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ route('timetables.index')}}" class="nav-link {{ Request::path()=='home/timetables'?'active':''}}">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                ShowTimes
+                Timetables
                 <i class="right fas fa-angle-right"></i>
               </p>
             </a>

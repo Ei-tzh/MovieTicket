@@ -65,4 +65,5 @@ class TheaterController extends Controller
 
         return redirect()->route('cinemas.show',$cinema->id);
     }
+    
 }

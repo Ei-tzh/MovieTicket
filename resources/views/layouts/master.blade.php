@@ -14,7 +14,7 @@
          rel = "stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-    
+    @yield('style')
     
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

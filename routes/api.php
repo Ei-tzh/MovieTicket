@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Movie;
 use App\Cinema_movie;
 use App\Timetable;
+use App\Theater;
 use App\Movietheater_timetable;
 use App\Movie_theater;
 /*
@@ -94,10 +95,27 @@ Route::get('/test',function(){
     }
         return $cinemas;
 });
-Route::get('/timetables',function(){
-    $aa=Timetable::all();
-    foreach($aa as $val){
-        $val->movie_theaters;
-    }
-    return $aa;
+Route::get('/array',function(){
+        $timetables=Timetable::all();
+        $values=[];
+        $movie_values=[];
+        $seats=[];
+        foreach($timetables as $timetable){
+            $movietheaters=$timetable->movie_theaters;
+            
+            foreach($movietheaters as $movietheater){
+                $theater=Theater::find($movietheater->theater_id);
+                $movie=Movie::find($movietheater->movie_id);
+                $seat=Movietheater_timetable::find($movietheater->pivot->id)->seats;
+
+                if(!in_array($theater,$values)){
+                    array_push($values,$theater);
+                }
+                if(!in_array($movie,$movie_values)){
+                    array_push($movie_values,$movie);
+                }
+                
+            }
+        }
+        return $movie_values;
 });

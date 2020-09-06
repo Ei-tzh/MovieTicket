@@ -1,16 +1,26 @@
 @extends('layouts.master')
-
+@section('style')
+<style>
+.action {
+    float:right;
+    margin-right:10px;
+}
+.button{
+    border-radius:3px;
+}
+</style>
+@endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        {{-- @if ($message = Session::get('status'))
+        @if ($message = Session::get('status'))
             <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
             <br>
-        @endif --}}
+        @endif
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -55,14 +65,21 @@
                                     <th>Dates & Times</th>
                                     <th>Cinemas & Theaters<th>
                                     <th>Movies</th>
-                                    
+                                    <th>Modify<th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($timetables as $timetable)
                                     <tr>
+                                    
                                         <td>{{ $timetable->id }}</td>
-                                        <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span></td>
+                                        @if($loop->first)
+                                            <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span><span class="float-right badge bg-danger">New</span></td>
+                                    
+                                        @else
+
+                                            <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span></td>
+                                        @endif
                                         {{-- getting cinemas and theater --}}
                                         <td>
                                             <table class="table">
@@ -88,20 +105,30 @@
                                                         @if($movie_theater->movie_id == $movie->id)
                                                             <tr class="table-success">
                                                                 <td class="p-4">{{ $movie->name }}</td>
-                                                                <td class="p-4">
-                                                                        <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
-                                                                            <i class="fas fa-edit blue"></i>
-                                                                        </a> /
-                                                                        @method('DELETE')
-                                                                        <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
-                                                                            <i class="fas fa-trash red"></i>
-                                                                        </a>
+                                                                <td class="p-4 action">
+                                                                    @method('DELETE')
+                                                                    <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
+                                                                        <i class="fas fa-trash red"></i>
+                                                                    </a>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                         @endif 
                                                     @endforeach
                                                 @endforeach 
                                             </table>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('timetables.add',$timetable->id)}}" title="Add Movies">
+                                                <i class="fas fa-plus green"></i>
+                                            </a> /
+                                            <a href="" title="Edit">
+                                                <i class="fas fa-edit blue"></i>
+                                            </a> /
+                                            @method('DELETE')
+                                            <a href="" title="Delete">
+                                                <i class="fas fa-trash red"></i>
+                                            </a>
                                         </td>
                                         {{-- total numbers of seats --}}
                                         {{-- <td>

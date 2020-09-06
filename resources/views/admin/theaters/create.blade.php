@@ -16,12 +16,12 @@
                             <div class="form-group mb-4">
                                 <label for="movies">Movies:</label>
                                 <select class="form-control" id='movies' name='movies[]' style="width: 100%;" multiple="multiple">
-                                 @foreach($movies as $key=>$movie)
+                                    @foreach($movies as $key=>$movie)
                                         <option value="{{ $movie->id }}" @foreach($theater->movies as $theater_movie)
                                                                 {{ $theater_movie->name == $movie->name? 'disabled':'' }}
                                                                  @endforeach>{{ $movie->name }}</option>
                                     
-                                @endforeach
+                                    @endforeach
                                 </select>
                                 @error('movies')
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>

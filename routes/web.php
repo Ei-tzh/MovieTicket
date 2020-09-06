@@ -32,3 +32,5 @@ Route::put('/home/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','TheaterC
 Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','TheaterController@destroy')->name('theaters.destroy');
 
 Route::resource('/home/timetables','TimetableController');
+Route::get('/home/timetables/{id}/add','TimetableController@add')->name('timetables.add');
+Route::post('/home/timetables/{id}','TimetableController@add_new')->name('timetables.add_new');

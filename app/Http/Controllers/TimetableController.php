@@ -18,7 +18,7 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        $timetables=Timetable::latest()->get();
+        $timetables=Timetable::all();
 
         $theaters=[];
         $movies=[];
@@ -135,6 +135,12 @@ class TimetableController extends Controller
         $request->session()->flash('status','You have added to successfully!');
         return redirect()->route('timetables.index');
     }
+    public function remove($id,$movietheater_id){
+        $timetable=Timetable::find($id);
+        $timetable->movie_theaters()->detach($movietheater_id);
+        //$request->session()->flash('status','You have added to successfully!');
+        return redirect()->route('timetables.index');
+    }
     /**
      * Display the specified resource.
      *
@@ -154,7 +160,22 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $timetable=Timetable::find($id);
+        $movie_theaters=$timetable->movie_theaters;
+        $movies=[];
+        $theaters=[];
+        foreach($movie_theaters as $movie_theater){
+            $movie=Movie::find($movie_theater->movie_id);
+            $theater=Theater::find($movie_theater->theater_id);
+            $cinema=$theater->cinema;
+            if(!in_array($movie,$movies)){
+                array_push( $movies,$movie);
+            }
+            if(!in_array($theater,$theaters)){
+                array_push($theaters,$theater);
+            }
+        }
+        return view('admin.timetables.edit',compact('timetable','movies','theaters'));
     }
 
     /**
@@ -166,7 +187,18 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'show_date'=>'required|date_format:Y-m-d',
+            'show_time'=>'required'
+        ]);
+        $timetable=Timetable::find($id);
+        Timetable::where('id',$id)->update([
+            'show_date'=>$request->show_date,
+            'show_time'=>$request->show_time
+        ]);
+        $request->session()->flash('status','You have updated from '.$timetable->show_date.'( '.$timetable->show_time.' )'.' to '.$request->show_date.'( '.$request->show_time.' )!');
+        return redirect()->route('timetables.index');
+
     }
 
     /**
@@ -177,7 +209,16 @@ class TimetableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $timetable=Timetable::find($id);
+        
+        return $timetable;
     }
+
+    // public function delete(Request $request){
+    //     $id=$request->id;
+    //     Timetable::destroy($id);
+    //     return $request;
+    //     //return redirect()->route('timetables.index');
+    // }
     
 }

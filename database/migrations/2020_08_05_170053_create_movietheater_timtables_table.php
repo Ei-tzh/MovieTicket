@@ -20,8 +20,8 @@ class CreateMovietheaterTimtablesTable extends Migration
             $table->unsignedBigInteger('timetable_id');
             $table->timestamps();
 
-            $table->foreign('movietheater_id')->references('id')->on('movie_theater');
-            $table->foreign('timetable_id')->references('id')->on('timetables');
+            $table->foreign('movietheater_id')->references('id')->on('movie_theater')->onDelete('cascade');
+            $table->foreign('timetable_id')->references('id')->on('timetables')->onDelete('cascade');
             
         });
     }

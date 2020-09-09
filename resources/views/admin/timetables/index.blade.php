@@ -73,13 +73,8 @@
                                     <tr>
                                     
                                         <td>{{ $timetable->id }}</td>
-                                        @if($loop->first)
-                                            <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span><span class="float-right badge bg-danger">New</span></td>
-                                    
-                                        @else
-
-                                            <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span></td>
-                                        @endif
+                                        <td>{{ $timetable->show_date }}<span class="border rounded p-1 ml-3 border-success">{{ ' '.$timetable->show_time}}</span></td>
+                                        
                                         {{-- getting cinemas and theater --}}
                                         <td>
                                             <table class="table">
@@ -106,8 +101,9 @@
                                                             <tr class="table-success">
                                                                 <td class="p-4">{{ $movie->name }}</td>
                                                                 <td class="p-4 action">
+                                                                    @csrf
                                                                     @method('DELETE')
-                                                                    <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
+                                                                    <a href="{{ route('timetables.remove',['id'=>$timetable->id,'movietheater_id'=>$movie_theater->id ]) }}" title="Delete">
                                                                         <i class="fas fa-trash red"></i>
                                                                     </a>
                                                                     
@@ -122,44 +118,66 @@
                                             <a href="{{ route('timetables.add',$timetable->id)}}" title="Add Movies">
                                                 <i class="fas fa-plus green"></i>
                                             </a> /
-                                            <a href="" title="Edit">
+                                            <a href="{{ route('timetables.edit',$timetable->id )}}" title="Edit">
                                                 <i class="fas fa-edit blue"></i>
                                             </a> /
-                                            @method('DELETE')
-                                            <a href="" title="Delete">
+                                            {{-- can't delete --}}
+                                            @method('DELETE')                         
+                                            <a href="{{ route('timetables.destroy',$timetable->id)}}" title="Delete"> {{-- class="btn btn-default" data-toggle="modal" data-target="#delete_timetable"  data-target-id="{{ $timetable->id }}"> --}}
                                                 <i class="fas fa-trash red"></i>
                                             </a>
                                         </td>
-                                        {{-- total numbers of seats --}}
-                                        {{-- <td>
-                                            <table class="table">
-                                                @foreach($timetable->movie_theaters as $movie_theater)
-                                                    @foreach($seats as $key=>$value)
-                                                        @if($value[$key]->movietheater_timetable_id == $movie_theater->pivot->id)
-                                                            <tr class="table-success">
-                                                                <td class="p-4">{{ count($value).' seats' }}</td>
-                                                                    <td class="p-4">
-                                                                        <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
-                                                                            <i class="fas fa-edit blue"></i>
-                                                                        </a> /
-                                                                        @method('DELETE')
-                                                                        <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
-                                                                            <i class="fas fa-trash red"></i>
-                                                                        </a>
-                                                                    </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                @endforeach
-                                            </table>
-                                        </td> --}}
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{-- <div class="modal fade" id="delete_timetable">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Timetable</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="note">
+                                        </div>
+                                        <form action="{{ route('timetables.delete')}}" method="post">
+                                            @method('DELETE')
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id" id="pass_id">
+                                            
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        
+                                    </div>
+                                    </form>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                                <!-- /.modal-dialog -->
+                        </div> --}}
+                            <!-- /.modal -->
                     </div>
               <!-- /.card-body -->
             </div>
         </section>
     </div>
 @endsection
+@push('jquery')
+<script>
+    $(document).ready(function(){
+        $('#delete_timetable').on("show.bs.modal", function (e) {
+            var id = $(e.relatedTarget).data('target-id');
+            $('#pass_id').val(id);
+
+            var modal = $(this)
+            modal.find('.modal-body #note').html('Are you sure you want to delete id:' +id+' from this table?<br>It also deletes all movies that you created at this date and time!<br>')
+            });
+    })
+</script>
+@endpush

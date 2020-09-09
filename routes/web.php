@@ -34,3 +34,7 @@ Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','Theate
 Route::resource('/home/timetables','TimetableController');
 Route::get('/home/timetables/{id}/add','TimetableController@add')->name('timetables.add');
 Route::post('/home/timetables/{id}','TimetableController@add_new')->name('timetables.add_new');
+Route::get('/home/timetables/{id}/remove/{movietheater_id}','TimetableController@remove')->name('timetables.remove');
+//Route::get('/home/timetables/delete','TimetableController@delete')->name('timetables.delete');
+
+Route::resource('/home/users','UserController');

@@ -17,7 +17,7 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
-
+$turquoise:#4CE2E6;
 //fontawesome
 $fa-font-path:        "../webfonts";
 
@@ -50,4 +50,7 @@ $fa-font-path:        "../webfonts";
 }
 .cyan{
     color: $cyan
+}
+.turquoise{
+    color:$turquoise
 }

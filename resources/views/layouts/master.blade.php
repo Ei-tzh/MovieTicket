@@ -64,7 +64,7 @@
           <img src="{{ asset('/images/admin/admin.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }} </a>
+          <a href="#" class="d-block">{{ Auth::user()->role }} </a>
         </div>
       </div>
 
@@ -128,12 +128,16 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-power-off"></i>
-              <p>
-                logout
-              </p>
+            <a  class="nav-link {{ Request::path()=='logout'?'active':''}}" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                
+                <i class="nav-icon fas fa-power-off red"></i>
+                {{ __('Logout') }}
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
           </li>
           <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

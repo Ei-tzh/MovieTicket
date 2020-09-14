@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/admin','adminController@index')->name('admin')->middleware('admin');
 
 Route::resource('/home/movies','MovieController');
 Route::resource('/home/cinemas','CinemaController');

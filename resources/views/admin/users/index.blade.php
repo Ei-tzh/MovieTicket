@@ -1,5 +1,16 @@
 @extends('layouts.master')
-
+@section('style')
+<style>
+    .card-body .btn{
+        width:35px;
+        height:35px;
+    }
+   .card-body .btn i{
+       font-size:13px;
+       margin:auto;
+   }
+</style>
+@endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -15,8 +26,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <a href="{{ route('timetables.create') }}" class="float-left">
-                            <button class='btn btn-primary'><i class="fas fa-plus"></i> Add New User</button>
+                        <a href="{{ route('users.create') }}" class="float-left">
+                            <button class='btn btn-primary'><i class="fas fa-user"></i> Add Admin</button>
                         </a>
                     </div>
                     <div class="col-sm-6">
@@ -40,14 +51,41 @@
                             <!-- /.card-header -->
                             <div class="card-body p-0">
                                 <table class="table table-striped">
-                                    <thead>
+                                    <thead class="bg-primary text-white">
                                         <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Task</th>
-                                        <th>Progress</th>
-                                        <th style="width: 40px">Label</th>
+                                        
+                                        <th>Name</th>
+                                        <th>Email Address</th>
+                                        <th>Password</th>
+                                        <th>Role<th>
+                                        <th>Modify</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->password }}</td>
+                                                <td>{{ $user->role }}</td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="" title="view" class="btn btn-success">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="" title="Edit" class="btn btn-primary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    {{-- can't delete --}}
+                                                    @method('DELETE')                         
+                                                    <a href="" title="Delete" class="btn btn-danger"> 
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

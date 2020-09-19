@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -30,7 +34,16 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-
+    
+    public function redirectTo(){
+        if(Auth::user()->role=='admin'){
+            $this->redirectTo='/admin/dashboard';
+            return $this->redirectTo;
+        }else{
+            $this->redirectTo='/home';
+            return $this->redirectTo;
+        }
+    }
     /**
      * Create a new controller instance.
      *
@@ -40,7 +53,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
+    
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,8 +63,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name'  => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'ph_no' =>['required','digits_between:9,11'],
+            'role'  =>['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,8 +80,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'name'  => $data['name'],
             'email' => $data['email'],
+            'ph_no' => $data['ph_no'],
+            'role'  =>  $data['role'],
             'password' => Hash::make($data['password']),
         ]);
     }

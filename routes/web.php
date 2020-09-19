@@ -19,23 +19,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/admin','adminController@index')->name('admin')->middleware('admin');
+Route::resource('/admin/dashboard', 'Admin\AdminController')->middleware(['auth','admin']);
+Route::get('/home','HomeController@index')->name('home')->middleware(['auth','user']);
 
-Route::resource('/home/movies','MovieController');
-Route::resource('/home/cinemas','CinemaController');
-Route::resource('/home/test','test\testController');
+Route::resource('/admin/movies','Admin\MovieController');
+Route::resource('/admin/cinemas','Admin\CinemaController');
 
-Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}','TheaterController@create')->name('theaters.create');
-Route::post('/home/cinemas/{cinema_id}/theaters/{theater_id}','TheaterController@store')->name('theaters.store');
-Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','TheaterController@edit')->name('theaters.edit');
-Route::put('/home/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','TheaterController@update')->name('theaters.update');
-Route::get('/home/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','TheaterController@destroy')->name('theaters.destroy');
+Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');
+Route::post('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@store')->name('theaters.store');
+Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@edit')->name('theaters.edit');
+Route::put('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@update')->name('theaters.update');
+Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','Admin\TheaterController@destroy')->name('theaters.destroy');
 
-Route::resource('/home/timetables','TimetableController');
-Route::get('/home/timetables/{id}/add','TimetableController@add')->name('timetables.add');
-Route::post('/home/timetables/{id}','TimetableController@add_new')->name('timetables.add_new');
-Route::get('/home/timetables/{id}/remove/{movietheater_id}','TimetableController@remove')->name('timetables.remove');
-//Route::get('/home/timetables/delete','TimetableController@delete')->name('timetables.delete');
+Route::resource('/admin/timetables','Admin\TimetableController');
+Route::get('/admin/timetables/{id}/add','Admin\TimetableController@add')->name('timetables.add');
+Route::post('/admin/timetables/{id}','Admin\TimetableController@add_new')->name('timetables.add_new');
+Route::get('/admin/timetables/{id}/remove/{movietheater_id}','Admin\TimetableController@remove')->name('timetables.remove');
+//Route::get('/admin/timetables/delete','TimetableController@delete')->name('timetables.delete');
 
-Route::resource('/home/users','UserController');
+Route::resource('/admin/users','Admin\UserController');

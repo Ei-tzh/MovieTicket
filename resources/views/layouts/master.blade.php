@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Booking Movie Tickets</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -64,7 +64,7 @@
           <img src="{{ asset('/images/admin/admin.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->role }} </a>
+          <a href="#" class="d-block">{{ Auth::user()->name }} </a>
         </div>
       </div>
 
@@ -74,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="/home" class="nav-link {{ Request::path() == 'home'?'active':'' }}">
+            <a href="{{ route('dashboard.index')}}" class="nav-link {{ Request::path() == 'admin/dashboard'?'active':'' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -83,7 +83,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('movies.index')}}" class="nav-link {{ Request::path()=='home/movies'?'active':''}}">
+            <a href='{{ route('movies.index')}}' class="nav-link {{ Request::path()=='admin/movies'?'active':''}}">
               <i class="nav-icon fas fa-video"></i>
               <p>
                 Movies
@@ -92,7 +92,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('cinemas.index')}}" class="nav-link {{ Request::path()=='home/cinemas'?'active':''}}">
+            <a href="{{ route('cinemas.index') }}" class="nav-link {{ Request::path()=='admin/cinemas'?'active':''}}">
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Cinemas
@@ -101,7 +101,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('timetables.index')}}" class="nav-link {{ Request::path()=='home/timetables'?'active':''}}">
+            <a href="{{ route('timetables.index') }}" class="nav-link {{ Request::path()=='admin/timetables'?'active':''}}">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Timetables
@@ -119,7 +119,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('users.index')}}" class="nav-link {{ Request::path()=='home/users'?'active':''}}">
+            <a href="{{ route('users.index')}}" class="nav-link {{ Request::path()=='admin/users'?'active':''}}">
             <i class="nav-icon fas fa-user"></i>
               <p>
                 Users

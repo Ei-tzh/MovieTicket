@@ -14,9 +14,9 @@ class AddPhNoToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            // $table->string('ph_no')->after('email');
-            $table->string('role')->after('email')->nullable();
-            $table->string('image')->after('role')->nullable();
+            $table->string('ph_no')->after('email');
+            $table->string('role')->after('ph_no');
+            //$table->string('image')->after('role')->nullable();
         });
     }
 
@@ -29,7 +29,7 @@ class AddPhNoToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn(['ph_no','role', 'image']);
+            $table->dropColumn(['ph_no','role']);
         });
     }
 }

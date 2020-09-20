@@ -44,48 +44,55 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Users</h3>
+                                <h3 class="card-title">User Table</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <table class="table table-striped">
-                                    <thead class="bg-primary text-white">
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped" id="user_table">
+                                    <thead>
                                         <tr>
-                                        
-                                        <th>Name</th>
-                                        <th>Email Address</th>
-                                        <th>Password</th>
-                                        <th>Role<th>
-                                        <th>Modify</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone number</th>
+                                            <th>Role</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $user)
-                                            <tr>
-                                                
+                                       @foreach($users as $user)
+                                           <tr>
+                                                <td>{{ $user->id }}</td>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->password }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td></td>
+                                                <td class="text-primary text-bold">{{ $user->email }}</td>
+                                                <td>{{ $user->ph_no }}</td>
+                                                <td class="{{ $user->role =='admin'?'text-danger':''}}">{{ $user->role }}</td>
                                                 <td>
-                                                    <a href="" title="view" class="btn btn-success">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <a href="" title="Edit" class="btn btn-primary">
+                                                   
+                                                    <a href="{{ route('users.edit',$user->id)}}" title="Edit" class="btn btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     {{-- can't delete --}}
                                                     @method('DELETE')                         
-                                                    <a href="" title="Delete" class="btn btn-danger"> 
+                                                    <a href="{{ route('users.destroy',$user->id)}}" title="Delete" class="btn btn-danger"> 
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
-                                            </tr>
-                                        @endforeach
+                                           </tr>
+                                       @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone number</th>
+                                            <th>Role</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -95,3 +102,10 @@
         </section>
     </div>
 @endsection
+@push('jquery')
+<script>
+        $(document).ready(function(){
+            $('#user_table').DataTable();
+        });
+</script>
+@endpush

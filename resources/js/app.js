@@ -21,6 +21,7 @@ import 'jquery-ui/ui/widgets/spinner.js';
 import 'jquery-ui/ui/widgets/button.js';
 import  'select2/dist/js/select2.min.js';
 import  'bootstrap-switch/dist/js/bootstrap-switch.min.js';//bootstrap-switch
+import  'datatables.net/js/jquery.dataTables.min.js';
 window.Vue = require('vue');
 
 /**

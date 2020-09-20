@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.css') }}">
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
+    
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     @yield('style')

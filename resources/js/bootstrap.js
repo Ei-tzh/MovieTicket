@@ -12,6 +12,7 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('datatables.net-bs4');
     //require('bootstrap-duration-picker');
 } catch (e) {}
 

@@ -23,6 +23,9 @@
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
+//datatables
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+
 input[type='file']{
     font-size: 14px;
     padding:3px;

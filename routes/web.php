@@ -38,3 +38,4 @@ Route::get('/admin/timetables/{id}/remove/{movietheater_id}','Admin\TimetableCon
 //Route::get('/admin/timetables/delete','TimetableController@delete')->name('timetables.delete');
 
 Route::resource('/admin/users','Admin\UserController');
+Route::resource('/admin/bookings','Admin\BookingController');

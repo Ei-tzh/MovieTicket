@@ -11,9 +11,9 @@ class BookingTableSeeder extends Seeder
      */
     public function run()
     {
-        $user=App\User::find(1);
+        $user=App\User::find(10);
         App\Booking::create([
-            'booking_no'=>1,
+            'booking_no'=>mt_rand(),
             'user_id'   => $user->id,
             'date'      => now(),
             'time'      =>now()

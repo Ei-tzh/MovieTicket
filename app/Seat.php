@@ -11,5 +11,7 @@ class Seat extends Model
     public function theater(){
         return $this->belongsTo('App\Theater');
     }
-
+    public function booking(){
+        return $this->belongsTo('App\Booking');
+    }
 }

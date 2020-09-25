@@ -123,7 +123,6 @@
             $("#new_task").click(function(event){
             event.preventDefault();
             event.stopPropagation();
-            
             addRow();
             
         });
@@ -137,22 +136,23 @@
                     +'</div>'+'</div>'+'</div>'+'</div>';
             $('#phone').append(row);
         }
-            $(this).on('click','#clear',function(){
-                var button_id=$(this).parents('.row').attr('id'); 
-                $('#'+button_id).remove();
-                //console.log(button_id);
-                //$(this).parent().remove();
-            });
+        $(this).on('click','#clear',function(){
+            var button_id=$(this).parents('.row').attr('id'); 
+            $('#'+button_id).remove();
+            //console.log(button_id);
+            //$(this).parent().remove();
+        });
           
         
 
         //for theaters
         var input=$('<input/>',{type:'text',class:"form-control mt-2",id:"theaters",name:"theaters[]",placeholder:"Enter theater's name"});
         function addDiv(){
+            //var input=$('<input/>',{type:'text',class:"form-control mt-2",id:"theaters",name:"theaters[]",placeholder:"Enter theater's name"});
             $('#new_theater').append(input.clone());
         }
         $('#theaters').change(function () {
-            $( "#new_theater" ).empty();
+            $( "#new_theater" ).empty(); //clear the recent input text
             
             var str=$(this).children("option:selected").val();
             for(var i=1;i<=str;i++){

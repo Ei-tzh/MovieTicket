@@ -8,6 +8,7 @@ use App\Timetable;
 use App\Theater;
 use App\Movietheater_timetable;
 use App\Movie_theater;
+use App\Booking_movietheatertimetable;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -119,3 +120,16 @@ Route::get('/array',function(){
         }
         return $movie_values;
 });
+Route::get('/bookings',function(){
+    $booking_movietheatertimetables=Booking_movietheatertimetable::all();
+    $bookings=[];
+    
+    foreach($booking_movietheatertimetables as $booking){
+        $aa=App\Booking::find($booking->booking_id);
+        $movietheater=App\Movietheater_timetable::find($bookings->movietheater_timetable_id);
+        
+        array_push($bookings,$aa);
+    }
+    return $bookings;
+});
+Route::get('/getmovietheaters','Admin\APIController@getmovietheaters');

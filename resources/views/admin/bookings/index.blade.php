@@ -56,7 +56,8 @@
                                     <th>User</th>
                                     <th>Movies</th>
                                     <th>Theaters</th>
-                                    <th>Seats</th>
+                                    <th>Cinemas</th>
+                                    <th>Seats(Price)</th>
                                     <th>Show Date & Show Time</th>
                                     <th>Action</th>
                                 </tr>
@@ -64,16 +65,37 @@
                             <tbody>
                                 @foreach($bookings as $booking)
                                 <tr>
-                                    <td>{{ $booking->id }}</td>
-                                    <td>{{ $booking->booking_no }}</td>
+                                    @if(count($booking->movietheater_timetables)>1)
+                                        <td rowspan='1'>{{ $booking->id }}</td>
+                                        <td rowspan='1'>{{ $booking->booking_no }}</td>
+                                    @else
+                                        <td>{{ $booking->id }}</td>
+                                        <td>{{ $booking->booking_no }}</td>
+                                    @endif
                                     <td>{{ $booking->user->name }}</td>
+                                    <td>
+                                       
+                                            @foreach($booking->movietheater_timetables as $movietheater_timetable)
+                                                @foreach($movietheaters as $movietheater)
+                                                    @if($movietheater_timetable->movietheater_id == $movietheater->id)
+                                                        @foreach($movies as $movie)
+                                                            @if($movietheater->movie_id == $movie->id)
+                                                                <p>{{ $movie->name }}</p>
+                                                                
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                        
+                                    </td>
                                     <td>
                                         @foreach($booking->movietheater_timetables as $movietheater_timetable)
                                             @foreach($movietheaters as $movietheater)
                                                 @if($movietheater_timetable->movietheater_id == $movietheater->id)
-                                                    @foreach($movies as $movie)
-                                                        @if($movietheater->movie_id == $movie->id)
-                                                        {{ $movie->name }}
+                                                    @foreach($theaters as $theater)
+                                                        @if($movietheater->theater_id == $theater->id)
+                                                            <p class="text-primary">{{ $theater->name }}<p>
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -86,8 +108,8 @@
                                                 @if($movietheater_timetable->movietheater_id == $movietheater->id)
                                                     @foreach($theaters as $theater)
                                                         @if($movietheater->theater_id == $theater->id)
-                                                            <p class="text-success">{{ $theater->name }}<p>
-                                                            <p>{{ $theater->cinema->name }}<p>
+                                                           
+                                                            <p class="text-bold">{{ $theater->cinema->name }}<p>
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -95,16 +117,19 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        @foreach($booking->seats as $seat)
-                                            <p>{{ $seat->seat_no.'( '.$seat->price.' )' }}</p>
-                                           
-                                        @endforeach
+                                        <table class="table table-sm">
+                                             <tr>
+                                                @foreach($booking->seats as $seat)
+                                                        <td>{{ $seat->seat_no }}<br><span class="text-danger">({{ $seat->price }})</span></td>
+                                                @endforeach
+                                            </tr>
+                                        </table>
                                     </td>
                                     <td>
                                         @foreach($booking->movietheater_timetables as $movietheater_timetable)
                                             @foreach($timetables as $timetable)
                                                 @if($movietheater_timetable->timetable_id == $timetable->id)
-                                                    {{ $timetable->show_date }},{{ $timetable->show_time}}
+                                                    <p>{{ $timetable->show_date }},{{ $timetable->show_time}}</p>
                                                 @endif
                                             @endforeach
                                         @endforeach
@@ -122,6 +147,7 @@
                                             <i class="fas fa-trash red"></i>
                                         </a>
                                     </td>
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>

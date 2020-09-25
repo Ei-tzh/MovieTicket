@@ -58,6 +58,40 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="movietheater_timetables" class="col-md-4 col-form-label text-md-right">Movie Theater's timetables:</label>
+
+                                        <div class="col-md-6">
+                                            <select class="form-control" id='movietheater_timetables' name='movietheater_timetables' style="width: 100%;" >
+                                                @foreach($movietheater_timetables as $key=>$movietheater_timetable)
+                                                    @foreach($timetables as $timetable)
+                                                        @if($key==$timetable->id)
+                                                            <option value="{{ $timetable->id }}" disabled>{{ $timetable->show_time."/".$timetable->show_date }}</option>
+                                                            @foreach($timetable->movie_theaters as $value)
+                                                               
+                                                                   @foreach($movies as $movie)
+                                                                        @foreach($theaters as $theater)
+                                                                            @if($value->movie_id== $movie->id && $value->theater_id== $theater->id )
+                                                                                <option value="{{ $timetable->id }},{{ $value->id }}">{{ $movie->name.' - '.$theater->name.'( '.$theater->cinema->name.' )' }}</option>
+                                                                                
+                                                                            @endif
+                                                                        @endforeach
+                                                                
+                                                                    @endforeach
+                                                                
+                                                            @endforeach 
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            <select>
+                                            @error('movietheater_timetables')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     {{-- <div class="form-group row">
                                         <label for='date' class="col-md-4 col-form-label text-md-right">Date:</label>
 

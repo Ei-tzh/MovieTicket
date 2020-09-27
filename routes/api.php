@@ -133,3 +133,6 @@ Route::get('/bookings',function(){
     return $bookings;
 });
 Route::get('/getmovietheaters','Admin\APIController@getmovietheaters');
+Route::get('/gettimetables','Admin\APIController@gettimetables');
+Route::get('/getmovies','Admin\APIController@getmovies');
+Route::get('/gettheaters','Admin\APIController@gettheaters');

@@ -17,7 +17,10 @@
 @import '~jquery-ui/themes/base/spinner.css';
 //select2
 @import '~select2/dist/css/select2.min.css';
-
+@import '~@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css';
+@import '~@ttskch/select2-bootstrap4-theme/src/layout.scss';
+@import '~@ttskch/select2-bootstrap4-theme/src/_multiple.scss';
+@import '~@ttskch/select2-bootstrap4-theme/src/_single.scss';
 //fontawesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";

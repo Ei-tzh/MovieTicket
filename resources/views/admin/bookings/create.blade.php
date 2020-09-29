@@ -1,5 +1,11 @@
 @extends('layouts.master')
-
+@section('style')
+<style>
+   select>option{ 
+                   height:20px;
+                 }
+</style>
+@endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -46,7 +52,7 @@
                                         <label for="user" class="col-md-4 col-form-label text-md-right">User:</label>
 
                                         <div class="col-md-6">
-                                            <select class="form-control" id='user' name='user' style="width: 100%;" >
+                                            <select class="form-control js-states select2" id='user' name='user' style="width: 100%;" >
                                                 @foreach($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
@@ -58,11 +64,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group row" >
+                                    {{-- <div class="form-group row" >
                                         <label for="movietheater" class="col-md-4 col-form-label text-md-right">Movie Theaters:</label>
 
                                         <div class="col-md-6">
-                                           <select class='form-control' id='movietheater' name="movietheater" v-model='movietheater' @change='gettimetables()'>
+                                           <select class="form-control"  id='movietheater' name="movietheater" v-model='movietheater' @change='gettimetables()'>
                                                 <option value='0'>Select Movietheaters</option>
                                                 <option v-for='data in movietheaters' :value='data.id'>@{{ movienames(data.movie_id) }}-@{{ theaters_cinema(data.theater_id) }}</option>
                                             </select>
@@ -77,30 +83,31 @@
                                                 <option v-for='data in timetables'  :value='data.id'>@{{ data.show_time }} - @{{ data.show_date}}</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 
-                                    {{-- <div class="form-group row">
+                                    <div class="form-group row">
                                         <label for="movietheater_timetables" class="col-md-4 col-form-label text-md-right">Movie Theater's timetables:</label>
 
                                         <div class="col-md-6">
-                                            <select class="form-control" id='movietheater_timetables' name='movietheater_timetables' style="width: 100%;" >
+                                            <select class="form-control js-states" id='movietheater_timetables' name='movietheater_timetables[]' style="width: 100%;" multiple >
                                                 @foreach($movietheater_timetables as $key=>$movietheater_timetable)
                                                     @foreach($timetables as $timetable)
                                                         @if($key==$timetable->id)
-                                                            <option value="{{ $timetable->id }}" disabled>{{ $timetable->show_time."/".$timetable->show_date }}</option>
-                                                            @foreach($timetable->movie_theaters as $value)
-                                                               
-                                                                   @foreach($movies as $movie)
-                                                                        @foreach($theaters as $theater)
-                                                                            @if($value->movie_id== $movie->id && $value->theater_id== $theater->id )
-                                                                                <option value="{{ $timetable->id }},{{ $value->id }}">{{ $movie->name.' - '.$theater->name.'( '.$theater->cinema->name.' )' }}</option>
-                                                                            @endif
+                                                            <optgroup label='{{ $timetable->show_time."/".$timetable->show_date }}'>
+                                                                @foreach($timetable->movie_theaters as $value)
+                                                                
+                                                                    @foreach($movies as $movie)
+                                                                            @foreach($theaters as $theater)
+                                                                                @if($value->movie_id== $movie->id && $value->theater_id== $theater->id )
+                                                                                    <option value="{{ $timetable->id }},{{ $value->id }}">{{ $movie->name.' - '.$theater->name.'( '.$theater->cinema->name.' )' }}</option>
+                                                                                @endif
+                                                                            @endforeach
+                                                                    
                                                                         @endforeach
-                                                                
-                                                                    @endforeach
-                                                                
-                                                            @endforeach 
+                                                                    
+                                                                @endforeach 
+                                                            </optgroup>
                                                         @endif
                                                     @endforeach
                                                 @endforeach
@@ -111,13 +118,18 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Submit') }}
                                             </button>
+                                            <a href="{{ route('bookings.index')}}">
+                                                <button type="button" class="btn btn-danger">
+                                                   Cancel
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -129,11 +141,24 @@
 
     </div>
 @endsection
-
-@push('vue')
+@push('jquery')
+    <script>
+     $(document).ready(function(){
+         $('#user').select2({
+            theme: 'bootstrap4',
+        });
+         $('#movietheater_timetables').select2({
+            
+             placeholder:"Please Select Movies You Want To Book"
+         });
+     });
+    </script>
+@endpush
+{{-- @push('vue')
 <script>
-    
+
     window.onload = function () {
+       //$('#movietheater').select2();
         var app1= new Vue({
             el: '#app1',
             data: {
@@ -204,4 +229,4 @@
     }
     
 </script>
-@endpush
+@endpush --}}

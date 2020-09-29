@@ -99,21 +99,21 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'booking_no'  => ['required'],
-            'user' => ['required']
-        ]);
-        $dt = Carbon::now();
+        // $request->validate([
+        //     'booking_no'  => ['required'],
+        //     'user' => ['required']
+        // ]);
+        // $dt = Carbon::now();
         
-        Booking::create([
-            'booking_no' => $request->booking_no,
-            'user_id'   =>  $request->user,
-            'date'      =>  $dt->toDateString(),
-            'time'      =>  $dt->toTimeString()
-        ]);
-        $request->session()->flash('status','Congratulation,A New Booking is created successfully!');
-        return redirect()->route('bookings.index');
-       
+        // Booking::create([
+        //     'booking_no' => $request->booking_no,
+        //     'user_id'   =>  $request->user,
+        //     'date'      =>  $dt->toDateString(),
+        //     'time'      =>  $dt->toTimeString()
+        // ]);
+        // $request->session()->flash('status','Congratulation,A New Booking is created successfully!');
+        // return redirect()->route('bookings.index');
+       return $request;
     }
 
     /**

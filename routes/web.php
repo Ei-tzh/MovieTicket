@@ -39,3 +39,5 @@ Route::get('/admin/timetables/{id}/remove/{movietheater_id}','Admin\TimetableCon
 
 Route::resource('/admin/users','Admin\UserController');
 Route::resource('/admin/bookings','Admin\BookingController');
+
+Route::resource('/admin/testing','test\testController');

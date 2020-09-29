@@ -4,7 +4,7 @@ namespace App\Http\Controllers\test;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Cinema;
+use App\User;
 class testController extends Controller
 {
     /**
@@ -14,10 +14,10 @@ class testController extends Controller
      */
     public function index()
     {
-        $cinema=Cinema::find(11);
-        $phone_no=explode(',',$cinema->ph_no);
-        
-        return view('admin.cinemas.test')->with('cinema',$cinema)->with('phone_no',$phone_no);
+        $users=User::where('role','user')->get();
+        //$phone_no=explode(',',$cinema->ph_no);
+        //return $users;
+        return view('test')->with('users',$users);
     }
 
     /**

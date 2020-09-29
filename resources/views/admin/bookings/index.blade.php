@@ -57,7 +57,7 @@
                                     <th>Movies</th>
                                     <th>Theaters</th>
                                     <th>Cinemas</th>
-                                    <th>Seats(Price)</th>
+                                    
                                     <th>Show Date & Show Time</th>
                                     <th>Action</th>
                                 </tr>
@@ -116,15 +116,7 @@
                                             @endforeach
                                         @endforeach
                                     </td>
-                                    <td>
-                                        <table class="table table-sm">
-                                             <tr>
-                                                @foreach($booking->seats as $seat)
-                                                        <td>{{ $seat->seat_no }}<br><span class="text-danger">({{ $seat->price }})</span></td>
-                                                @endforeach
-                                            </tr>
-                                        </table>
-                                    </td>
+                                    
                                     <td>
                                         @foreach($booking->movietheater_timetables as $movietheater_timetable)
                                             @foreach($timetables as $timetable)

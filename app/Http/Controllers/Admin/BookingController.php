@@ -24,34 +24,45 @@ class BookingController extends Controller
     {
         $bookings=Booking::all();
        
-        $booking_movietheater_timetables=[];
+        
         $timetables=[];
         $movietheaters=[];
         $movies=[];
         $theaters=[];
-        $seats=[];
+        
         foreach($bookings as $booking){
-                $seats=$booking->seats;
-            $value=$booking->movietheater_timetables;
-            array_push($booking_movietheater_timetables,$value);
-            foreach($value as $val){
+                
+            $values=$booking->movietheater_timetables;
+            //array_push($booking_movietheater_timetables,$values);
+            foreach($values as $val){
                 $timetable=Timetable::find($val->timetable_id);
-                array_push($timetables,$timetable);
+                if(!in_array($timetable,$timetables)){
+                    array_push($timetables,$timetable);
+                }
+                
 
                 $movietheater=Movie_theater::find($val->movietheater_id);
-                array_push($movietheaters,$movietheater);
+                if(!in_array($movietheater,$movietheaters)){
+                    array_push($movietheaters,$movietheater);
+                }
+                
 
                 $movie=Movie::find($movietheater->movie_id);
-                array_push($movies,$movie);
+                if(!in_array($movie,$movies)){
+                    array_push($movies,$movie);
+                }
 
 
                 $theater=Theater::find($movietheater->theater_id);
                 $theater->cinema;
-                array_push($theaters,$theater);
+                if(!in_array($theater,$theaters)){
+                    array_push($theaters,$theater);
+                }
+                
             }
             
         }
-       //return $bookings;
+       //return $movietheaters;
        return view('admin.bookings.index',compact('bookings','timetables','movietheaters','movies','theaters'));
     }
 
@@ -87,7 +98,7 @@ class BookingController extends Controller
                 
             
         }
-        //return $theaters;
+        //return $timetables;
         return view('admin.bookings.create',compact('users','booking_no','movietheater_timetables','timetables','movies','theaters'));
     }
 
@@ -99,21 +110,26 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'booking_no'  => ['required'],
-        //     'user' => ['required']
-        // ]);
-        // $dt = Carbon::now();
+        $request->validate([
+            'booking_no'  => 'required',
+            'user' => 'required',
+            'movietheater_timetables'=>'required'
+        ]);
+        $movietheaters=$this->getmovietheater($request->movietheater_timetables);//call function getmovietheater
+        $dt = Carbon::now();//creating booking date and time
         
-        // Booking::create([
-        //     'booking_no' => $request->booking_no,
-        //     'user_id'   =>  $request->user,
-        //     'date'      =>  $dt->toDateString(),
-        //     'time'      =>  $dt->toTimeString()
-        // ]);
-        // $request->session()->flash('status','Congratulation,A New Booking is created successfully!');
-        // return redirect()->route('bookings.index');
-       return $request;
+        $booking=Booking::create([
+            'booking_no' => $request->booking_no,
+            'user_id'   =>  $request->user,
+            'date'      =>  $dt->toDateString(),
+            'time'      =>  $dt->toTimeString()
+        ]);
+        $aa=Booking::find($booking->id);
+        $aa->movietheater_timetables()->attach($movietheaters);//inserting booking_movietheatertimetables(many to many)
+
+        $request->session()->flash('status','Congratulation,A New Booking is created successfully!');
+        return redirect()->route('bookings.index');
+       
     }
 
     /**
@@ -159,5 +175,14 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+    protected function getmovietheater(array $array){
+        $movietheaters=[];
+        foreach($array as $a){
+            $value=explode(',',$a);
+            $movietheater=Movietheater_timetable::where('movietheater_id',$value[1])->where('timetable_id',$value[0])->first();
+            array_push($movietheaters,$movietheater->id);
+        }
+        return $movietheaters;
     }
 }

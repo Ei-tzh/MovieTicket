@@ -11,9 +11,9 @@ class Booking extends Model
     public function movietheater_timetables(){
         return $this->belongsToMany('App\Movietheater_timetable','booking_movietheatertimetables','booking_id','movietheater_timetable_id')->withPivot('id');
     }
-    public function seats(){
-        return $this->hasMany('App\Seat');
-    }
+    // public function seats(){
+    //     return $this->hasMany('App\Seat');
+    // }
     public function user(){
         return $this->belongsTo('App\User');
     }

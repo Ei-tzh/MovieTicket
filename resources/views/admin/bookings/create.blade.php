@@ -90,7 +90,7 @@
                                         <label for="movietheater_timetables" class="col-md-4 col-form-label text-md-right">Movie Theater's timetables:</label>
 
                                         <div class="col-md-6">
-                                            <select class="form-control js-states" id='movietheater_timetables' name='movietheater_timetables[]' style="width: 100%;" multiple >
+                                            <select class="form-control @error('movietheater_timetables') is-invalid @enderror" id='movietheater_timetables' name='movietheater_timetables[]' style="width: 100%;" multiple >
                                                 @foreach($movietheater_timetables as $key=>$movietheater_timetable)
                                                     @foreach($timetables as $timetable)
                                                         @if($key==$timetable->id)
@@ -113,9 +113,7 @@
                                                 @endforeach
                                             <select>
                                             @error('movietheater_timetables')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -148,8 +146,8 @@
             theme: 'bootstrap4',
         });
          $('#movietheater_timetables').select2({
-            
-             placeholder:"Please Select Movies You Want To Book"
+             placeholder:"Please Select Movies You Want To Book",
+             tags:true
          });
      });
     </script>

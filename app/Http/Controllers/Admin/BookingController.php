@@ -22,48 +22,44 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings=Booking::all();
-       
-        
+        $booking_movietheatertimetables=Booking_movietheatertimetable::orderBy('booking_id')->get();
+        $bookings=[];
         $timetables=[];
+        $movietheater_timetables=[];
         $movietheaters=[];
         $movies=[];
         $theaters=[];
-        
-        foreach($bookings as $booking){
-                
-            $values=$booking->movietheater_timetables;
-            //array_push($booking_movietheater_timetables,$values);
-            foreach($values as $val){
-                $timetable=Timetable::find($val->timetable_id);
-                if(!in_array($timetable,$timetables)){
-                    array_push($timetables,$timetable);
-                }
-                
-
-                $movietheater=Movie_theater::find($val->movietheater_id);
-                if(!in_array($movietheater,$movietheaters)){
-                    array_push($movietheaters,$movietheater);
-                }
-                
-
-                $movie=Movie::find($movietheater->movie_id);
-                if(!in_array($movie,$movies)){
-                    array_push($movies,$movie);
-                }
-
-
-                $theater=Theater::find($movietheater->theater_id);
-                $theater->cinema;
-                if(!in_array($theater,$theaters)){
-                    array_push($theaters,$theater);
-                }
-                
+        foreach($booking_movietheatertimetables as $val){
+            
+            $a=Booking::find($val->booking_id);
+            if(!in_array($a,$bookings)){
+                array_push($bookings,$a);
+            }
+            $movietheater_timetable=Movietheater_timetable::find($val->movietheater_timetable_id);
+            if(!in_array($movietheater_timetable,$movietheater_timetables)){
+                array_push($movietheater_timetables,$movietheater_timetable);
+            }
+            $timetable=Timetable::find($movietheater_timetable->timetable_id);
+            if(!in_array($timetable,$timetables)){
+                array_push($timetables,$timetable);
             }
             
+            $movietheater=$timetable->movie_theaters()->having('pivot_id',$val->movietheater_timetable_id)->first();
+            if(!in_array($movietheater,$movietheaters)){
+                array_push($movietheaters,$movietheater);
+            }
+            $movie=Movie::find($movietheater->movie_id);
+            if(!in_array($movie,$movies)){
+                array_push($movies,$movie);
+            }
+            $theater=Theater::find($movietheater->theater_id);
+            $theater->cinema;
+            if(!in_array($theater,$theaters)){
+                array_push($theaters,$theater);
+            }
         }
-       //return $movietheaters;
-       return view('admin.bookings.index',compact('bookings','timetables','movietheaters','movies','theaters'));
+       //return $seats;
+       return view('admin.bookings.index',compact('booking_movietheatertimetables','bookings','movietheater_timetables','timetables','movietheaters','movies','theaters'));
     }
 
     /**

@@ -120,18 +120,7 @@ Route::get('/array',function(){
         }
         return $movie_values;
 });
-Route::get('/bookings',function(){
-    $booking_movietheatertimetables=Booking_movietheatertimetable::all();
-    $bookings=[];
-    
-    foreach($booking_movietheatertimetables as $booking){
-        $aa=App\Booking::find($booking->booking_id);
-        $movietheater=App\Movietheater_timetable::find($bookings->movietheater_timetable_id);
-        
-        array_push($bookings,$aa);
-    }
-    return $bookings;
-});
+
 Route::get('/getmovietheaters','Admin\APIController@getmovietheaters');
 Route::get('/gettimetables','Admin\APIController@gettimetables');
 Route::get('/getmovies','Admin\APIController@getmovies');

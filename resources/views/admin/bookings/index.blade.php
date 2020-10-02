@@ -51,83 +51,68 @@
                         <table class="table table-bordered table-striped">
                             <thead>                  
                                 <tr>
-                                    <th style="width: 10px">ID</th>
-                                    <th>Booking.No</th>
-                                    <th>User</th>
-                                    <th>Movies</th>
-                                    <th>Theaters</th>
-                                    <th>Cinemas</th>
-                                    
-                                    <th>Show Date & Show Time</th>
+                                    <th>Booking.ID</th>
+                                    <th>Seats</th>
+                                    <th>Show Dates & Show Times</th>
+                                    <th>Movies<th>
+                                    <th>Theaters && Cinemas</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($bookings as $booking)
-                                <tr>
-                                    @if(count($booking->movietheater_timetables)>1)
-                                        <td rowspan='1'>{{ $booking->id }}</td>
-                                        <td rowspan='1'>{{ $booking->booking_no }}</td>
-                                    @else
-                                        <td>{{ $booking->id }}</td>
-                                        <td>{{ $booking->booking_no }}</td>
-                                    @endif
-                                    <td>{{ $booking->user->name }}</td>
-                                    <td>
-                                       
-                                            @foreach($booking->movietheater_timetables as $movietheater_timetable)
+                                @foreach($booking_movietheatertimetables as $booking_movietheatertimetable)
+                                    <tr>
+                                        
+                                        @foreach($bookings as $booking)
+                                            @if($booking->id == $booking_movietheatertimetable->booking_id)
+                                                <td>{{ $booking->booking_no}}</td>
+                                            @endif
+                                        @endforeach
+
+                                        <td>
+                                            @foreach($booking_movietheatertimetable->seats as $seat)
+                                                    {{ $seat->seat_no.' , '}}
+                                            @endforeach
+                                        </td>
+
+                                        @foreach($movietheater_timetables as $movietheater_timetable)
+                                            @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
+                                                @foreach($timetables as $timetable)
+                                                    @if($timetable->id == $movietheater_timetable->timetable_id)
+                                                        <td>{{ $timetable->show_date }} / {{ $timetable->show_time }}</td>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+            
+                                        @foreach($movietheater_timetables as $movietheater_timetable)
+                                            @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
                                                 @foreach($movietheaters as $movietheater)
-                                                    @if($movietheater_timetable->movietheater_id == $movietheater->id)
+                                                    @if($movietheater->id == $movietheater_timetable->movietheater_id)
                                                         @foreach($movies as $movie)
-                                                            @if($movietheater->movie_id == $movie->id)
-                                                                <p>{{ $movie->name }}</p>
-                                                                
+                                                            @if($movie->id == $movietheater->movie_id)
+                                                                <td>{{ $movie->name }}</td>
                                                             @endif
                                                         @endforeach
                                                     @endif
-                                                @endforeach
-                                            @endforeach
-                                        
-                                    </td>
-                                    <td>
-                                        @foreach($booking->movietheater_timetables as $movietheater_timetable)
-                                            @foreach($movietheaters as $movietheater)
-                                                @if($movietheater_timetable->movietheater_id == $movietheater->id)
-                                                    @foreach($theaters as $theater)
-                                                        @if($movietheater->theater_id == $theater->id)
-                                                            <p class="text-primary">{{ $theater->name }}<p>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
+                                                @endforeach   
+                                            @endif
                                         @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($booking->movietheater_timetables as $movietheater_timetable)
-                                            @foreach($movietheaters as $movietheater)
-                                                @if($movietheater_timetable->movietheater_id == $movietheater->id)
-                                                    @foreach($theaters as $theater)
-                                                        @if($movietheater->theater_id == $theater->id)
-                                                           
-                                                            <p class="text-bold">{{ $theater->cinema->name }}<p>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
+                                        <td></td>
+                                        @foreach($movietheater_timetables as $movietheater_timetable)
+                                            @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
+                                                @foreach($movietheaters as $movietheater)
+                                                    @if($movietheater->id == $movietheater_timetable->movietheater_id)
+                                                        @foreach($theaters as $theater)
+                                                            @if($theater->id == $movietheater->theater_id)
+                                                                <td><p>{{ $theater->name }}</p>{{ $theater->cinema->name }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach   
+                                            @endif
                                         @endforeach
-                                    </td>
-                                    
-                                    <td>
-                                        @foreach($booking->movietheater_timetables as $movietheater_timetable)
-                                            @foreach($timetables as $timetable)
-                                                @if($movietheater_timetable->timetable_id == $timetable->id)
-                                                    <p>{{ $timetable->show_date }},{{ $timetable->show_time}}</p>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-
-                                    </td>
-                                    <td>
+                                        <td>
                                         <a href="" title="view">
                                             <i class="fas fa-eye green"></i>
                                         </a> /
@@ -139,8 +124,7 @@
                                             <i class="fas fa-trash red"></i>
                                         </a>
                                     </td>
-                                    
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

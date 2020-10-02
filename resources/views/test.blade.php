@@ -10,24 +10,75 @@
                             <div class="card-header">
                                 <h3 class="card-title">Test</h3>
                             </div>
-                            <form action="" method="post">
-                            @csrf
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="user" class="col-md-4 col-form-label text-md-right">User:</label>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>                  
+                                        <tr>
+                                            <th>Booking.ID</th>
+                                            <th>Seats</th>
+                                            <th>Show Dates & Show Times</th>
+                                            <th>Movies<td>
+                                            <th>Theaters && Cinemas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($booking_movietheatertimetables as $booking_movietheatertimetable)
+                                            <tr>
+                                               
+                                                @foreach($bookings as $booking)
+                                                    @if($booking->id == $booking_movietheatertimetable->booking_id)
+                                                        <td>{{ $booking->booking_no}}</td>
+                                                    @endif
+                                                @endforeach
 
-                                        <div class="col-md-6" id="user">
-                                        {{-- <select2 class="form-control" :options="users" v-model='selected' name='users' id='users'>
-                                            <option disabled value="0">Select one</option>
-                                        </select2> --}}
-                                            <select class="form-control" id='user' name='user' style="width: 100%;">
-                                                <option v-for='user in users' :value="user.id">@{{user.name}}</option>
-                                            </select>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                                <td>
+                                                    @foreach($booking_movietheatertimetable->seats as $seat)
+                                                            {{ $seat->seat_no.' , '}}
+                                                    @endforeach
+                                                </td>
+
+                                                @foreach($movietheater_timetables as $movietheater_timetable)
+                                                    @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
+                                                        @foreach($timetables as $timetable)
+                                                            @if($timetable->id == $movietheater_timetable->timetable_id)
+                                                                <td>{{ $timetable->show_date }} / {{ $timetable->show_time }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach($movietheater_timetables as $movietheater_timetable)
+                                                    @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
+                                                        @foreach($movietheaters as $movietheater)
+                                                            @if($movietheater->id == $movietheater_timetable->movietheater_id)
+                                                                @foreach($movies as $movie)
+                                                                    @if($movie->id == $movietheater->movie_id)
+                                                                        <td>{{ $movie->name }}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach   
+                                                    @endif
+                                                @endforeach
+                                                <td></td>
+                                                @foreach($movietheater_timetables as $movietheater_timetable)
+                                                    @if($movietheater_timetable->id == $booking_movietheatertimetable->movietheater_timetable_id)
+                                                        @foreach($movietheaters as $movietheater)
+                                                            @if($movietheater->id == $movietheater_timetable->movietheater_id)
+                                                                @foreach($theaters as $theater)
+                                                                    @if($theater->id == $movietheater->theater_id)
+                                                                        <td><p>{{ $theater->name }}</p>{{ $theater->cinema->name }}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach   
+                                                    @endif
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,15 +86,3 @@
         </section>   
     </div>
 @endsection
-@push('vue')
-<script>
-    var vm = new Vue({
-        el: "#test",
-        //template: "#user",
-        data: {
-          selected:'',
-          users: @json($users)
-        }
-      });
-</script>
-@endpush

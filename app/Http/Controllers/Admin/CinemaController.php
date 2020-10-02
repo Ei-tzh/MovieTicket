@@ -48,10 +48,7 @@ class CinemaController extends Controller
      */
     public function store(CinemaRequest $request)
     {
-        // $validate_array=['name' => 'required',
-        //                 'address'  =>'required',
-        //                 'theaters' => 'required',
-        //                 'township' => 'required'];
+    
         
         $validated = $request->validated();
         $filename = $request->image->getClientOriginalName();

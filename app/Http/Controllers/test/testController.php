@@ -4,7 +4,15 @@ namespace App\Http\Controllers\test;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\User;
+use App\Booking_movietheatertimetable;
+use App\Booking;
+use App\Movietheater_timetable;
+use App\Timetable;
+use App\Movie_theater;
+use App\Movie;
+use App\Theater;
 class testController extends Controller
 {
     /**
@@ -14,10 +22,44 @@ class testController extends Controller
      */
     public function index()
     {
-        $users=User::where('role','user')->get();
-        //$phone_no=explode(',',$cinema->ph_no);
-        //return $users;
-        return view('test')->with('users',$users);
+        $booking_movietheatertimetables=Booking_movietheatertimetable::orderBy('booking_id')->get();
+        $bookings=[];
+        $timetables=[];
+        $movietheater_timetables=[];
+        $movietheaters=[];
+        $movies=[];
+        $theaters=[];
+        foreach($booking_movietheatertimetables as $val){
+            
+            $a=Booking::find($val->booking_id);
+            if(!in_array($a,$bookings)){
+                array_push($bookings,$a);
+            }
+            $movietheater_timetable=Movietheater_timetable::find($val->movietheater_timetable_id);
+            if(!in_array($movietheater_timetable,$movietheater_timetables)){
+                array_push($movietheater_timetables,$movietheater_timetable);
+            }
+            $timetable=Timetable::find($movietheater_timetable->timetable_id);
+            if(!in_array($timetable,$timetables)){
+                array_push($timetables,$timetable);
+            }
+            
+            $movietheater=$timetable->movie_theaters()->having('pivot_id',$val->movietheater_timetable_id)->first();
+            if(!in_array($movietheater,$movietheaters)){
+                array_push($movietheaters,$movietheater);
+            }
+            $movie=Movie::find($movietheater->movie_id);
+            if(!in_array($movie,$movies)){
+                array_push($movies,$movie);
+            }
+            $theater=Theater::find($movietheater->theater_id);
+            $theater->cinema;
+            if(!in_array($theater,$theaters)){
+                array_push($theaters,$theater);
+            }
+        }
+        
+       return view('test',compact('booking_movietheatertimetables','bookings','movietheater_timetables','timetables','movietheaters','movies','theaters'));
     }
 
     /**
@@ -38,7 +80,7 @@ class testController extends Controller
      */
     public function store(Request $request)
     {
-            dd($request->theaters);
+            
     }
 
     /**
@@ -85,4 +127,5 @@ class testController extends Controller
     {
         //
     }
+   
 }

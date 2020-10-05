@@ -105,7 +105,7 @@
                                                     @if($movietheater->id == $movietheater_timetable->movietheater_id)
                                                         @foreach($theaters as $theater)
                                                             @if($theater->id == $movietheater->theater_id)
-                                                                <td><p>{{ $theater->name }}</p>{{ $theater->cinema->name }}</td>
+                                                                <td><p class='text-bold'>{{ $theater->name }}</p>{{ $theater->cinema->name }}</td>
                                                             @endif
                                                         @endforeach
                                                     @endif
@@ -113,8 +113,8 @@
                                             @endif
                                         @endforeach
                                         <td>
-                                        <a href="" title="view">
-                                            <i class="fas fa-eye green"></i>
+                                        <a href="{{ route('bookings.addSeat',$booking_movietheatertimetable->id) }}" title="Add Seat">
+                                            <i class="fas fa-plus green" ></i>
                                         </a> /
                                         <a href="" title="Edit">
                                             <i class="fas fa-edit blue"></i>

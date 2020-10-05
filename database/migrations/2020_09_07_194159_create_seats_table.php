@@ -18,11 +18,10 @@ class CreateSeatsTable extends Migration
             $table->string('seat_no');
             $table->double('price');
             $table->unsignedBigInteger('theater_id');
-            $table->unsignedBigInteger('booking_id')->nullable();
             $table->timestamps();
 
             $table->foreign('theater_id')->references('id')->on('theaters')->onDelete('cascade');
-            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
+            
             
         });
     }

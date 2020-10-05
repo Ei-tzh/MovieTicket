@@ -39,5 +39,6 @@ Route::get('/admin/timetables/{id}/remove/{movietheater_id}','Admin\TimetableCon
 
 Route::resource('/admin/users','Admin\UserController');
 Route::resource('/admin/bookings','Admin\BookingController');
+Route::get('/admin/bookings/{id}/addSeat','Admin\BookingController@addSeat')->name('bookings.addSeat');
 
 Route::resource('/admin/testing','test\testController');

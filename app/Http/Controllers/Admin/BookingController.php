@@ -127,7 +127,20 @@ class BookingController extends Controller
         return redirect()->route('bookings.index');
        
     }
+    public function addSeat($id){
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+        $seats=$booking_movietheatertimetable->seats;
+        $booking=Booking::find($booking_movietheatertimetable->booking_id);
+        $movietheater_timetable=Movietheater_timetable::find($booking_movietheatertimetable->movietheater_timetable_id);
+        $timetable=Timetable::find($movietheater_timetable->timetable_id);
 
+        $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
+        $movie=Movie::find($movietheater->movie_id);
+        $theater=Theater::find($movietheater->theater_id);
+        $theater->cinema;
+        $theater->seats;
+        return view('admin.bookings.addSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
+    }
     /**
      * Display the specified resource.
      *

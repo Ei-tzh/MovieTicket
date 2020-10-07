@@ -141,6 +141,16 @@ class BookingController extends Controller
         $theater->seats;
         return view('admin.bookings.addSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
     }
+    public function storeSeat($id,Request $request){
+        $request->validate([
+            'seats'  => 'required'
+           
+        ]);
+        $booking=Booking_movietheatertimetable::find($id);
+        $booking->seats()->attach($request->seats);
+        
+        return redirect()->route('bookings.index');
+    }
     /**
      * Display the specified resource.
      *

@@ -14,11 +14,16 @@
 }
 .form-check{
     display:inline;
-    padding-right:10px;
+    padding-right:12px;
     
 }
 .checkbox{
     padding-top:5px;
+}
+input[type="checkbox"]:checked+label{ font-weight: bold; }
+input[type="checkbox"]:disabled+label
+{
+    
 }
 </style>
 @endsection
@@ -34,7 +39,7 @@
                             <h3 class="card-title">Booking Seats</h3>
                         </div>
                         <!-- form start -->
-                        <form action="" method="post">
+                        <form action="{{ route('bookings.storeSeat',$booking_movietheatertimetable->id)}}" method="post">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -69,21 +74,23 @@
                             </div>
                             <div class="form-group row">
                                 <label for="seats" class="col-md-4 col-form-label text-md-right">Seats:</label>
-                                <div class="checkbox col-md-5">
+                                <div class="checkbox col-md-4">
                                     @foreach($theater->seats as $seat)
                                         <div class="form-check">
-                                            <input class="form-check-input" id="{{ $seat->id }}" type="checkbox" name="seats[]" @foreach($booking_movietheatertimetable->seats as $booking_seat)
-                                               {{ $seat->id==$booking_seat->id?'checked disabled':'' }} 
+                                            <input class="form-check-input" id="{{ $seat->id }}" type="checkbox" value="{{ $seat->id }}" name="seats[]" @foreach($booking_movietheatertimetable->seats as $booking_seat)
+                                               {{ $seat->id==$booking_seat->id?'checked disabled ':'' }} 
                                             @endforeach >
                                             <label class="form-check-label" for="{{ $seat->id }}">{{ $seat->seat_no}}</label>
                                         </div>
                                     @endforeach
-                                    
                                 </div>
+                                @error('seats')
+                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>    
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary">Booking</button>
                                 <a href="{{ route('bookings.index') }}">
                                     <button type="button" class="btn btn-danger">Back</button>
                                 </a>

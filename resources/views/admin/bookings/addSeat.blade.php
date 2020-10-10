@@ -14,17 +14,13 @@
 }
 .form-check{
     display:inline;
-    padding-right:12px;
+    padding-right:8px;
     
 }
 .checkbox{
     padding-top:5px;
 }
-input[type="checkbox"]:checked+label{ font-weight: bold; }
-input[type="checkbox"]:disabled+label
-{
-    
-}
+
 </style>
 @endsection
 @section('content')
@@ -34,7 +30,7 @@ input[type="checkbox"]:disabled+label
         <div class="container mt-2">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card ">
+                    <div class="card " id="app3">
                         <div class="card-header">
                             <h3 class="card-title">Booking Seats</h3>
                         </div>
@@ -74,20 +70,30 @@ input[type="checkbox"]:disabled+label
                             </div>
                             <div class="form-group row">
                                 <label for="seats" class="col-md-4 col-form-label text-md-right">Seats:</label>
-                                <div class="checkbox col-md-4">
+                                <div class="checkbox col-md-5">
+                                   
                                     @foreach($theater->seats as $seat)
                                         <div class="form-check">
-                                            <input class="form-check-input" id="{{ $seat->id }}" type="checkbox" value="{{ $seat->id }}" name="seats[]" @foreach($booking_movietheatertimetable->seats as $booking_seat)
-                                               {{ $seat->id==$booking_seat->id?'checked disabled ':'' }} 
+                                            <input class="form-check-input" id="{{ $seat->id }}" type="checkbox" value="{{ $seat->id }}" name="seats[]"  @foreach($booking_movietheatertimetable->seats as $booking_seat)
+                                               {{ $seat->id==$booking_seat->id?'disabled checked':''}} 
                                             @endforeach >
-                                            <label class="form-check-label" for="{{ $seat->id }}">{{ $seat->seat_no}}</label>
+                                            <label class="form-check-label" for="{{ $seat->id }}" >{{ $seat->seat_no}}</label>
                                         </div>
+                                        @if($seat->seat_no =='A7+A8' ||$seat->seat_no =='B10' || $seat->seat_no =='C10' || $seat->seat_no =='D10' || $seat->seat_no =='E10' || $seat->seat_no =='F10')
+                                            <br>
+                                        @endif   
                                     @endforeach
                                 </div>
                                 @error('seats')
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            {{-- <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right text-success">Selected Seats:</label>
+                                <div class="col-md-5">
+                                   <p></p>
+                                </div>
+                            </div> --}}
                         </div>    
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Booking</button>
@@ -104,3 +110,40 @@ input[type="checkbox"]:disabled+label
     </section>
 </div>
 @endsection
+{{-- @push('vue')
+    <script>
+        window.onload = function () {
+            var app3= new Vue({
+            el: '#app3',
+             data: {
+                checkedSeat:3,
+                seatName:''
+                },
+                methods:{
+                   /* seatName:function(value){
+                        for(var j=0;j<value.length;j++){
+                            for(var i=0;i<this.theaters.seats.length;i++){
+                                if(this.theaters.seats[i].id==value[j]){
+                                    return this.theaters.seats[i].seat_no
+                                }
+                            }
+                        }
+                            
+                        
+                    }
+                }*/
+                    getSeats:function(){
+                        axios.get('/api/getSeats',{
+                            params: {
+                                id: this.checkedSeat
+                            }
+                        })
+                        .then(function(response){
+                            this.seatName= response.data;
+                        }.bind(this));
+                    }
+                }
+            })
+        }
+    </script>
+@endpush --}}

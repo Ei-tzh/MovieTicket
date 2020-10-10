@@ -9,6 +9,7 @@ use App\Theater;
 use App\Movietheater_timetable;
 use App\Movie_theater;
 use App\Booking_movietheatertimetable;
+use App\Seat;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -125,3 +126,4 @@ Route::get('/getmovietheaters','Admin\APIController@getmovietheaters');
 Route::get('/gettimetables','Admin\APIController@gettimetables');
 Route::get('/getmovies','Admin\APIController@getmovies');
 Route::get('/gettheaters','Admin\APIController@gettheaters');
+Route::get('/getSeats','Admin\APIController@getSeatsNo');

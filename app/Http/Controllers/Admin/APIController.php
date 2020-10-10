@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Movie_theater;
 use App\Movie;
 use App\Theater;
+use App\Seat;
 class APIController extends Controller
 {
     //
@@ -44,5 +45,9 @@ class APIController extends Controller
             
         }
         return response()->json($theaters);
+    }
+    public function getSeatsNo(Request $request){
+        $seat=Seat::find($request->id);
+        return response()->json($seat);
     }
 }

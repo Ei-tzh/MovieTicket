@@ -1,11 +1,5 @@
 @extends('layouts.master')
-@section('style')
-<style>
-   select>option{ 
-                   height:20px;
-                 }
-</style>
-@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

@@ -71,7 +71,11 @@
 
                                         <td>
                                             @foreach($booking_movietheatertimetable->seats as $seat)
+                                                    @if($loop->last)
+                                                        {{ $seat->seat_no}}
+                                                    @else
                                                     {{ $seat->seat_no.' , '}}
+                                                    @endif
                                             @endforeach
                                         </td>
 
@@ -116,7 +120,7 @@
                                         <a href="{{ route('bookings.addSeat',$booking_movietheatertimetable->id) }}" title="Add Seat">
                                             <i class="fas fa-plus green" ></i>
                                         </a> /
-                                        <a href="" title="Edit">
+                                        <a href="{{ route('bookings.edit',$booking_movietheatertimetable->id) }}" title="Edit">
                                             <i class="fas fa-edit blue"></i>
                                         </a> /
                                         @method('DELETE')

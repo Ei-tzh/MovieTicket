@@ -144,7 +144,6 @@ class BookingController extends Controller
     public function storeSeat($id,Request $request){
         $request->validate([
             'seats'  => 'required'
-           
         ]);
         $booking=Booking_movietheatertimetable::find($id);
         $booking->seats()->attach($request->seats);
@@ -159,7 +158,6 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -170,7 +168,46 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $timetables=[];
+        $movietheaters=[];
+        $movies=[];
+        $theaters=[];
+
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+        $seats=$booking_movietheatertimetable->seats;
+        $booking=Booking::find($booking_movietheatertimetable->booking_id);
+        $booking->movietheater_timetables;
+       
+
+        $movietheater_timetables=Movietheater_timetable::all();
+        
+        foreach($movietheater_timetables as $movietheater_timetable){
+           
+                $timetable=Timetable::find($movietheater_timetable->timetable_id);
+                if(!in_array($timetable,$timetables)){
+                    array_push($timetables,$timetable); 
+                }
+                $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
+                if(!in_array($movietheater,$movietheaters)){
+                    array_push($movietheaters,$movietheater); 
+                }
+                   
+                        $movie=Movie::find($movietheater->movie_id);
+                        $theater=Theater::find($movietheater->theater_id);
+                        $theater->cinema;
+                        if(!in_array($movie,$movies)){
+                            array_push($movies,$movie);
+                        }
+                        if(!in_array($theater,$theaters)){
+                            array_push($theaters,$theater);
+                        }
+                    
+
+                
+        }
+        //return $theaters;
+        return view('admin.bookings.edit',compact('booking_movietheatertimetable','booking','movietheater_timetables','timetables','movietheaters','movies','theaters'));
+    
     }
 
     /**

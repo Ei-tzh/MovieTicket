@@ -66,8 +66,8 @@
                                         <td class="text-primary">{{ $booking->user->name }}</td>
                                         <td>{{ $booking->date.'/ '.$booking->time }}</td>
                                         <td>
-                                        <a href="" title="view">
-                                            <i class="fas fa-eye green"></i>
+                                        <a href="{{ route('bookings.show',$booking->id)}}" title="view">
+                                            <i class="fas fa-file-alt green" style="font-size:16px;"></i>
                                         </a> /
                                         <a href="{{ route('bookings.edit',$booking->id)}}" title="Edit">
                                             <i class="fas fa-edit blue"></i>

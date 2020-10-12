@@ -133,6 +133,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'checkbox'=>[
+            'required' => 'You need to check to get the current date and time!!!'
+        ]
     ],
 
     /*

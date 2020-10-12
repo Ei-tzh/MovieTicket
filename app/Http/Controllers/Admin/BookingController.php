@@ -40,31 +40,9 @@ class BookingController extends Controller
     {
         $users=User::where('role','user')->get();
         $booking_no=mt_rand();
-        $movietheater_timetables=Movietheater_timetable::all()->groupBy('timetable_id');
-        $timetables=[];
-        $movies=[];
-        $theaters=[];
-        foreach($movietheater_timetables as $key=>$movietheater_timetable){
-           
-                $timetable=Timetable::find($key);
-                $movietheater=$timetable->movie_theaters;
-                array_push($timetables,$timetable);
-                    foreach($movietheater as $movie_theater){
-                        $movie=Movie::find($movie_theater->movie_id);
-                        $theater=Theater::find($movie_theater->theater_id);
-                        $theater->cinema;
-                        if(!in_array($movie,$movies)){
-                            array_push($movies,$movie);
-                        }
-                        if(!in_array($theater,$theaters)){
-                            array_push($theaters,$theater);
-                        }
-                    }
-                
-            
-        }
-        //return $timetables;
-        return view('admin.bookings.create',compact('users','booking_no','movietheater_timetables','timetables','movies','theaters'));
+       
+       
+        return view('admin.bookings.create',compact('users','booking_no'));
     }
 
     /**
@@ -76,23 +54,18 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'booking_no'  => 'required',
-            'user' => 'required',
-            'movietheater_timetables'=>'required'
+            'booking_no' => 'required',
+            'checkbox'  => 'required'
         ]);
-        $movietheaters=$this->getmovietheater($request->movietheater_timetables);//call function getmovietheater
-        $dt = Carbon::now();//creating booking date and time
-        
-        $booking=Booking::create([
-            'booking_no' => $request->booking_no,
-            'user_id'   =>  $request->user,
-            'date'      =>  $dt->toDateString(),
-            'time'      =>  $dt->toTimeString()
+        $dt = Carbon::now();
+        Booking::create([
+            'booking_no'=>$request->booking_no,
+            'user_id'   =>$request->user,
+            'date'      =>$dt->toDateString(),
+            'time'      =>$dt->toTimeString()
         ]);
-        $aa=Booking::find($booking->id);
-        $aa->movietheater_timetables()->attach($movietheaters);//inserting booking_movietheatertimetables(many to many)
 
-        $request->session()->flash('status','Congratulation,A New Booking is created successfully!');
+        $request->session()->flash('status','A New Booking is created successfully!');
         return redirect()->route('bookings.index');
        
     }
@@ -127,6 +100,47 @@ class BookingController extends Controller
      */
     public function show($id)
     {
+        $seats=[];
+        $timetables=[];
+        $movietheaters=[];
+        $movies=[];
+        $theaters=[];
+
+        $booking=Booking::find($id);
+        $user=$booking->user;
+        
+        $movietheatertimetables=$booking->movietheater_timetables;
+
+        foreach($movietheatertimetables as $movietheatertimetable){
+            $seat=Booking_movietheatertimetable::find($movietheatertimetable->pivot->id)->seats;
+            //$seat=$bookingmovietheater->seats;
+
+            if(!in_array($seat,$seats)){
+                array_push($seats,$seat);
+            }
+            $timetable=Timetable::find($movietheatertimetable->timetable_id);
+            if(!in_array($timetable,$timetables)){
+                array_push($timetables,$timetable);
+            }
+
+            $movietheater=Movie_theater::find($movietheatertimetable->movietheater_id);
+            if(!in_array($movietheater,$movietheaters)){
+                array_push($movietheaters,$movietheater);
+            }
+
+            $movie=Movie::find($movietheater->movie_id);
+            if(!in_array($movie,$movies)){
+                array_push($movies,$movie);
+            }
+            $theater=Theater::find($movietheater->theater_id);
+            $cinema=$theater->cinema;
+            if(!in_array($theater,$theaters)){
+                array_push($theaters,$theater);
+            }
+        }
+
+        //return $movietheatertimetables;
+        return view('admin.bookings.show',compact('booking','movietheatertimetables','timetables','movietheaters','movies','theaters','seats'));
     }
 
     /**
@@ -140,7 +154,6 @@ class BookingController extends Controller
         $booking=Booking::find($id);
         $users=User::where('role','user')->get();
         return view('admin.bookings.edit',compact('booking','users'));
-    
     }
 
     /**

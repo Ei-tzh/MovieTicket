@@ -111,22 +111,24 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('bookings.index')}}" class="nav-link">
+            <a href="{{ route('bookings.index')}}" class="nav-link {{ Request::path()=='admin/bookings'?'active':''}}">
             <i class="nav-icon fas fa-notes-medical"></i>
               <p>
                 Bookings
                 <i class="right fas fa-angle-right"></i>
               </p>
             </a>
-            {{-- <ul class="nav nav-treeview" style="display: block;">
-              <li class="nav-item">
-                <a href="{{ route('booking.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Invoices</p>
-                </a>
-              </li>
-            </ul> --}}
+            
           </li>
+          {{-- <li class="nav-item">
+            <a href="{{ route('invoices.index')}}" class="nav-link {{ Request::path()=='admin/invoices'?'active':''}}">
+            <i class="nav-icon fas fa-file-invoice"></i>
+              <p>
+                Invoices
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('users.index')}}" class="nav-link {{ Request::path()=='admin/users'?'active':''}}">
             <i class="nav-icon fas fa-user"></i>

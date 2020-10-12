@@ -41,5 +41,8 @@ Route::resource('/admin/users','Admin\UserController');
 Route::resource('/admin/bookings','Admin\BookingController');
 Route::get('/admin/bookings/{id}/addSeat','Admin\BookingController@addSeat')->name('bookings.addSeat');
 Route::post('/admin/bookings/{id}','Admin\BookingController@storeSeat')->name('bookings.storeSeat');
+Route::get('/admin/bookings/delete/{id}','Admin\BookingController@delete')->name('bookings.delete');
+Route::resource('/admin/invoices','Admin\InvoiceController');
+
 
 Route::resource('/admin/testing','test\testController');

@@ -131,8 +131,8 @@
 
                     </div>
                     <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('cinemas.index') }}"><button type="submit" class="btn btn-success">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('cinemas.index') }}"><button type="submit" class="btn btn-success">Cancel</button></a>
                     </div>
                 </form>
             <div>

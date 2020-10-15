@@ -39,10 +39,13 @@ Route::get('/admin/timetables/{id}/remove/{movietheater_id}','Admin\TimetableCon
 
 Route::resource('/admin/users','Admin\UserController');
 Route::resource('/admin/bookings','Admin\BookingController');
-Route::get('/admin/bookings/{id}/addSeat','Admin\BookingController@addSeat')->name('bookings.addSeat');
-Route::post('/admin/bookings/{id}','Admin\BookingController@storeSeat')->name('bookings.storeSeat');
+// Route::get('/admin/bookings/{id}/addSeat','Admin\BookingController@addSeat')->name('bookings.addSeat');
+// Route::post('/admin/bookings/{id}','Admin\BookingController@storeSeat')->name('bookings.storeSeat');
 Route::get('/admin/bookings/delete/{id}','Admin\BookingController@delete')->name('bookings.delete');
-Route::resource('/admin/invoices','Admin\InvoiceController');
+
+Route::get('/admin/bookings/{id}/addmovietheater','Admin\BookingController@addmovietheater')->name('bookings.addmovietheater');
+Route::post('/admin/bookings/{id}','Admin\BookingController@storemovietheater')->name('bookings.storemovietheater');
+Route::get('/admin/bookings/{booking_id}/{id}/addSeat','Admin\BookingController@addSeat')->name('bookings.addSeat');  
 
 
 Route::resource('/admin/testing','test\testController');

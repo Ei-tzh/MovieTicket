@@ -35,7 +35,7 @@
                             <h3 class="card-title">Booking Seats</h3>
                         </div>
                         <!-- form start -->
-                        <form action="{{ route('bookings.storeSeat',$booking_movietheatertimetable->id)}}" method="post">
+                        <form action="" method="post">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">

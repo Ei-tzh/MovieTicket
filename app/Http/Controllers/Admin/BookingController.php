@@ -69,7 +69,7 @@ class BookingController extends Controller
         return redirect()->route('bookings.index');
        
     }
-    public function addSeat($id){
+    public function addSeat($booking_id,$id){
         $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
         $seats=$booking_movietheatertimetable->seats;
         $booking=Booking::find($booking_movietheatertimetable->booking_id);
@@ -199,6 +199,65 @@ class BookingController extends Controller
         $booking=Booking::find($booking_movietheatertimetable->booking_id);
         $booking->movietheater_timetables()->detach($booking_movietheatertimetable->movietheater_timetable_id);
         return redirect()->route('bookings.index');
+    }
+    public function addmovietheater($id){
+        $booking_id=[];
+        $timetables=[];
+        $movies=[];
+        $theaters=[];
+        $movietheaters=[];
+
+        $booking=Booking::find($id);
+        $booking_movietheatertimetables=$booking->movietheater_timetables;
+        foreach($booking_movietheatertimetables as $val){
+            array_push($booking_id,$val->id);
+        }
+
+        
+        $movietheater_timetables=Movietheater_timetable::whereNotIn('id',$booking_id)->get();//retrieve except booking's movietheater timetables
+
+        foreach($movietheater_timetables as $movietheater_timetable){
+
+                $timetable=Timetable::find($movietheater_timetable->timetable_id);
+                if(!in_array($timetable,$timetables)){
+                    array_push($timetables,$timetable); 
+                }
+                $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
+                if(!in_array($movietheater,$movietheaters)){
+                    array_push($movietheaters,$movietheater); 
+                }
+                   
+                $movie=Movie::find($movietheater->movie_id);
+                $theater=Theater::find($movietheater->theater_id);
+                $theater->cinema;
+                if(!in_array($movie,$movies)){
+                    array_push($movies,$movie);
+                }
+                if(!in_array($theater,$theaters)){
+                    array_push($theaters,$theater);
+                }
+                    
+
+                
+        }
+        //return $movietheater_timetables;
+       return view('admin.bookings.addmovietheater',compact('booking','movietheater_timetables','timetables','movietheaters','movies','theaters'));
+    }
+
+    public function storemovietheater(Request $request, $id){
+        $request->validate([
+            'movietheater_timetables'  => 'required'
+        ]);
+        $booking=Booking::find($id);
+        //$booking->movietheater_timetables()->attach($request->movietheater_timetables);
+        if(count($request->movietheater_timetables)>1){
+            $request->session()->flash('status','Movies are booked successfully!'); 
+        }else{
+            $request->session()->flash('status','A New Movie is booked successfully!');
+        }
+       
+        return redirect()->route('bookings.show',$booking->id);
+        
     }
     protected function getmovietheater(array $array){
         $movietheaters=[];

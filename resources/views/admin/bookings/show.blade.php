@@ -76,8 +76,12 @@
                                 </div>
                             </div>
                             <!--end info row -->
+                            
                             <div class="row">
                                 <div class="col-12 table-responsive">
+                                    <a href='{{ route('bookings.addmovietheater',$booking->id)}}' class="float-right mb-3" >
+                                        <button class='btn' style="background-color:#117a8b;color:#fff"><i class="fas fa-plus"></i> Add Movietheater</button>
+                                    </a>
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -124,15 +128,19 @@
                                                         @endif
                                                     @endforeach
                                                     <td>
-                                                    @forelse($seats as $seat)
-                                                            @foreach($seat as $val)
-                                                                @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
-                                                                {{ $val->seat_no}}
-                                                                @endif
-                                                            @endforeach
-                                                    @empty
-                                                        <p>no seat</p>
-                                                    @endforelse
+                                                    @foreach($seats as $seat)
+                                                        @foreach($seat as $val)
+                                                            @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
+                                                            {{ $val->seat_no.','}}
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                        <p>
+                                                            <a href="{{ route('bookings.addSeat',['booking_id'=>$booking->id,
+                                                                                                'id'=>$movietheatertimetable->id] )}}">
+                                                                <i class="fas fa-plus green" style="font-size:16px;"></i>
+                                                            </a>
+                                                        </p>
                                                     </td> 
                                                 </tr>
                                             @endforeach

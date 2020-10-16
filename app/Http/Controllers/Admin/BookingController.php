@@ -13,6 +13,7 @@ use App\Movie;
 use App\Theater;
 use App\Booking_movietheatertimetable;
 use App\Movietheater_timetable;
+use App\Seat;
 class BookingController extends Controller
 {
     /**
@@ -69,29 +70,9 @@ class BookingController extends Controller
         return redirect()->route('bookings.index');
        
     }
-    public function addSeat($booking_id,$id){
-        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
-        $seats=$booking_movietheatertimetable->seats;
-        $booking=Booking::find($booking_movietheatertimetable->booking_id);
-        $movietheater_timetable=Movietheater_timetable::find($booking_movietheatertimetable->movietheater_timetable_id);
-        $timetable=Timetable::find($movietheater_timetable->timetable_id);
-
-        $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
-        $movie=Movie::find($movietheater->movie_id);
-        $theater=Theater::find($movietheater->theater_id);
-        $theater->cinema;
-        $theater->seats;
-        return view('admin.bookings.addSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
-    }
-    public function storeSeat($id,Request $request){
-        $request->validate([
-            'seats'  => 'required'
-        ]);
-        $booking=Booking_movietheatertimetable::find($id);
-        $booking->seats()->attach($request->seats);
-        
-        return redirect()->route('bookings.index');
-    }
+    
+    
+    
     /**
      * Display the specified resource.
      *
@@ -100,7 +81,7 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        $seats=[];
+        $booking_seats=[];
         $timetables=[];
         $movietheaters=[];
         $movies=[];
@@ -112,11 +93,11 @@ class BookingController extends Controller
         $movietheatertimetables=$booking->movietheater_timetables;
 
         foreach($movietheatertimetables as $movietheatertimetable){
-            $seat=Booking_movietheatertimetable::find($movietheatertimetable->pivot->id)->seats;
-            //$seat=$bookingmovietheater->seats;
+            $booking_seat=Booking_movietheatertimetable::find($movietheatertimetable->pivot->id)->seats;
+            //$booking_seat=$bookingmovietheater->seats;
 
-            if(!in_array($seat,$seats)){
-                array_push($seats,$seat);
+            if(!in_array($booking_seat,$booking_seats)){
+                array_push($booking_seats,$booking_seat);
             }
             $timetable=Timetable::find($movietheatertimetable->timetable_id);
             if(!in_array($timetable,$timetables)){
@@ -140,7 +121,7 @@ class BookingController extends Controller
         }
 
         //return $movietheatertimetables;
-        return view('admin.bookings.show',compact('booking','movietheatertimetables','timetables','movietheaters','movies','theaters','seats'));
+        return view('admin.bookings.show',compact('booking','movietheatertimetables','timetables','movietheaters','movies','theaters','booking_seats'));
     }
 
     /**
@@ -194,12 +175,12 @@ class BookingController extends Controller
         $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
         return $booking_movietheatertimetable;
     }
-    public function delete($id){
-        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
-        $booking=Booking::find($booking_movietheatertimetable->booking_id);
-        $booking->movietheater_timetables()->detach($booking_movietheatertimetable->movietheater_timetable_id);
-        return redirect()->route('bookings.index');
-    }
+    // public function delete($id){
+    //     $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+    //     $booking=Booking::find($booking_movietheatertimetable->booking_id);
+    //     $booking->movietheater_timetables()->detach($booking_movietheatertimetable->movietheater_timetable_id);
+    //     return redirect()->route('bookings.index');
+    // }
     public function addmovietheater($id){
         $booking_id=[];
         $timetables=[];
@@ -249,7 +230,8 @@ class BookingController extends Controller
             'movietheater_timetables'  => 'required'
         ]);
         $booking=Booking::find($id);
-        //$booking->movietheater_timetables()->attach($request->movietheater_timetables);
+        $booking->movietheater_timetables()->attach($request->movietheater_timetables);
+
         if(count($request->movietheater_timetables)>1){
             $request->session()->flash('status','Movies are booked successfully!'); 
         }else{
@@ -258,6 +240,61 @@ class BookingController extends Controller
        
         return redirect()->route('bookings.show',$booking->id);
         
+    }
+
+    // adding seats to booking
+    public function addSeat($booking_id,$id){
+        
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+
+        $seats=$booking_movietheatertimetable->seats;//to get booking seats 
+
+        $booking=Booking::find($booking_movietheatertimetable->booking_id);//to get booking.no
+
+        $movietheater_timetable=Movietheater_timetable::find($booking_movietheatertimetable->movietheater_timetable_id);
+        $timetable=Timetable::find($movietheater_timetable->timetable_id);
+
+        $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
+
+        $movie=Movie::find($movietheater->movie_id);
+        $theater=Theater::find($movietheater->theater_id);
+       
+        return view('admin.bookings.addSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
+    }
+
+    //to store booking seats
+    public function storeSeat($booking_id,$id,Request $request){
+        $results=[];
+        $request->validate([
+            'seats'  => 'required'
+        ]);
+        foreach($request->seats as $seat){          //to get seat.no from seat table using seat_id
+            $result=Seat::find($seat);
+            array_push($results,$result->seat_no);
+        }
+        $booking_seats=implode(',',$results);
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+        $booking_movietheatertimetable->seats()->attach($request->seats);
+
+        //to show status message
+        $request->session()->flash('status','Seats('.$booking_seats.' )are added to booking successfully!'); 
+        return redirect()->route('bookings.show',$booking_id);
+    }
+    public function editBookingSeat($booking_id,$id){
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+
+        $seats=$booking_movietheatertimetable->seats;//to get booking seats 
+
+        $booking=Booking::find($booking_movietheatertimetable->booking_id);//to get booking.no
+
+        $movietheater_timetable=Movietheater_timetable::find($booking_movietheatertimetable->movietheater_timetable_id);
+        $timetable=Timetable::find($movietheater_timetable->timetable_id);
+
+        $movietheater=Movie_theater::find($movietheater_timetable->movietheater_id);
+
+        $movie=Movie::find($movietheater->movie_id);
+        $theater=Theater::find($movietheater->theater_id);
+        return view('admin.bookings.editBookingSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
     }
     protected function getmovietheater(array $array){
         $movietheaters=[];

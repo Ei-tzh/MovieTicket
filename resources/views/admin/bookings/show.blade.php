@@ -128,20 +128,46 @@
                                                         @endif
                                                     @endforeach
                                                     <td>
-                                                    @foreach($seats as $seat)
-                                                        @foreach($seat as $val)
+                                                    @foreach($booking_seats as $booking_seat)
+                                                        @foreach($booking_seat as $val)
                                                             @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
                                                             {{ $val->seat_no.','}}
                                                             @endif
                                                         @endforeach
                                                     @endforeach
-                                                        <p>
+                                                        <div class="float-right">
                                                             <a href="{{ route('bookings.addSeat',['booking_id'=>$booking->id,
-                                                                                                'id'=>$movietheatertimetable->id] )}}">
+                                                                                                'id'=>$movietheatertimetable->pivot->id] )}}">
                                                                 <i class="fas fa-plus green" style="font-size:16px;"></i>
                                                             </a>
-                                                        </p>
+                                                        </div>
                                                     </td> 
+                                                    <td>
+                                                    @php $prices=[]; @endphp
+                                                        @foreach($booking_seats as $booking_seat)
+                                                            @foreach($booking_seat as $val)
+                                                                @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
+                                                                    @php
+                                                                        array_push($prices,intval($val['price']));
+                                                                    @endphp
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                       
+                                                        @foreach(array_count_values($prices) as $key => $value)
+                                                            {{ '('.$key.' x '.$value.')'}}
+                                                        @endforeach
+                                                    </td> 
+                                                    <td>
+                                                        <a href="{{ route('bookings.editBookingSeat',['booking_id'=>$booking->id,
+                                                                                                'id'=>$movietheatertimetable->pivot->id] )}}" title="Edit Seat">
+                                                            <i class="fas fa-edit blue"></i>
+                                                        </a> /
+                                                        @method('DELETE')
+                                                        <a href="" title="Delete">
+                                                            <i class="fas fa-trash red"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

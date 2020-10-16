@@ -1,17 +1,6 @@
 @extends('layouts.master')
 @section('style')
 <style>
-.card-header{
-    background-color:#fff;
-}
-.card-header>h3{
-    border:1px solid #17a2b8;
-    padding:10px;
-    background:#17a2b8;
-    border-radius:20px;
-    color:#fff;
-    margin:0px;
-}
 .form-check{
     display:inline;
     padding-right:8px;
@@ -30,13 +19,14 @@
         <div class="container mt-2">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card " id="app3">
+                    <div class="card card-primary" id="app3">
                         <div class="card-header">
-                            <h3 class="card-title">Booking Seats</h3>
+                            <h3 class="card-title">Edit Booking Seats</h3>
                         </div>
                         <!-- form start -->
-                        <form action="{{ route('bookings.storeSeat',['booking_id'=>$booking->id,'id'=>$booking_movietheatertimetable->id] )}}" method="post">
+                        <form action="" method="post">
                         @csrf
+                        @method('put')
                         <div class="card-body">
                             <div class="form-group row">
                                 <label for="booking_no" class="col-md-4 col-form-label text-md-right">Booking.no:</label>
@@ -44,12 +34,7 @@
                                     <input type="text" class="form-control" id="booking_no" name='booking_no' value="{{ $booking->booking_no }}" disabled>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="booking_movietheatertimetable_id" class="col-md-4 col-form-label text-md-right">Booking Movietheatertimetable ID:</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" id="booking_movietheatertimetable_id" name='booking_no' value="{{ $booking_movietheatertimetable->id }}" disabled>
-                                </div>
-                            </div>
+                            
                             <div class="form-group row">
                                 <label for="timetable" class="col-md-4 col-form-label text-md-right">Show Date && Time:</label>
                                 <div class="col-md-5">
@@ -81,7 +66,7 @@
                                     @foreach($theater->seats as $seat)
                                         <div class="form-check">
                                             <input class="form-check-input" id="{{ $seat->id }}" type="checkbox" value="{{ $seat->id }}" name="seats[]"  @foreach($booking_movietheatertimetable->seats as $booking_seat)
-                                               {{ $seat->id==$booking_seat->id?'disabled checked':''}} 
+                                               {{ $seat->id==$booking_seat->id?'checked':''}} 
                                             @endforeach >
                                             <label class="form-check-label" for="{{ $seat->id }}" >{{ $seat->seat_no}}</label>
                                         </div>
@@ -89,24 +74,20 @@
                                             <br>
                                         @endif   
                                     @endforeach
+                                    
                                 </div>
                                 @error('seats')
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right text-success">Selected Seats:</label>
-                                <div class="col-md-5">
-                                   <p></p>
-                                </div>
-                            </div> --}}
+                            
                         </div>    
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Booking</button>
-                                <a href="{{ route('bookings.index') }}">
-                                    <button type="button" class="btn btn-danger">Back</button>
-                                </a>
-                            </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Booking</button>
+                            <a href="{{ route('bookings.index') }}">
+                                <button type="button" class="btn btn-danger">Back</button>
+                            </a>
+                        </div>
                         </form>
                          <!-- form end -->
                     </div>
@@ -116,40 +97,3 @@
     </section>
 </div>
 @endsection
-{{-- @push('vue')
-    <script>
-        window.onload = function () {
-            var app3= new Vue({
-            el: '#app3',
-             data: {
-                checkedSeat:3,
-                seatName:''
-                },
-                methods:{
-                   /* seatName:function(value){
-                        for(var j=0;j<value.length;j++){
-                            for(var i=0;i<this.theaters.seats.length;i++){
-                                if(this.theaters.seats[i].id==value[j]){
-                                    return this.theaters.seats[i].seat_no
-                                }
-                            }
-                        }
-                            
-                        
-                    }
-                }*/
-                    getSeats:function(){
-                        axios.get('/api/getSeats',{
-                            params: {
-                                id: this.checkedSeat
-                            }
-                        })
-                        .then(function(response){
-                            this.seatName= response.data;
-                        }.bind(this));
-                    }
-                }
-            })
-        }
-    </script>
-@endpush --}}

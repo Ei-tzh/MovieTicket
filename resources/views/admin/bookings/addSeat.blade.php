@@ -94,12 +94,7 @@
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right text-success">Selected Seats:</label>
-                                <div class="col-md-5">
-                                   <p></p>
-                                </div>
-                            </div> --}}
+                           
                         </div>    
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Booking</button>

@@ -85,7 +85,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10px">ID</th>
+                                                <th style='width:10px'>ID</th>
                                                 <th>Movies</th>
                                                 <th>Theaters && Cinemas</th>
                                                 <th>Show Dates && Times</th>
@@ -95,9 +95,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php $number=0; @endphp
                                             @foreach($booking->movietheater_timetables as $movietheatertimetable)
                                                 <tr>
-                                                    <td>{{ $movietheatertimetable->id }}</td>
+                                                    <td>{{ ++$number }}</td>
                                                     @foreach($movietheaters as $movietheater)
                                                         @if($movietheater->id == $movietheatertimetable->movietheater_id)
                                                             @foreach($movies as $movie)
@@ -131,7 +132,11 @@
                                                     @foreach($booking_seats as $booking_seat)
                                                         @foreach($booking_seat as $val)
                                                             @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
-                                                            {{ $val->seat_no.','}}
+                                                                @if($loop->last)
+                                                                    {{ $val->seat_no }}
+                                                                @else
+                                                                    {{ $val->seat_no.','}}
+                                                                @endif
                                                             @endif
                                                         @endforeach
                                                     @endforeach
@@ -155,7 +160,11 @@
                                                         @endforeach
                                                        
                                                         @foreach(array_count_values($prices) as $key => $value)
-                                                            {{ '('.$key.' x '.$value.')'}}
+                                                            @if($loop->last)
+                                                                {{ '('.$key.' x '.$value.')'}}
+                                                            @else
+                                                                {{ '('.$key.' x '.$value.'),'}}
+                                                            @endif
                                                         @endforeach
                                                     </td> 
                                                     <td>

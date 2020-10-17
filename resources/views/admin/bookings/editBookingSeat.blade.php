@@ -24,7 +24,8 @@
                             <h3 class="card-title">Edit Booking Seats</h3>
                         </div>
                         <!-- form start -->
-                        <form action="" method="post">
+                        <form action="{{ route('bookings.updateBookingSeat',['booking_id'=>$booking->id,
+                                                                            'id'=>$booking_movietheatertimetable->id])}}" method="post">
                         @csrf
                         @method('put')
                         <div class="card-body">
@@ -60,7 +61,24 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="seats" class="col-md-4 col-form-label text-md-right">Seats:</label>
+                                <div class="col-md-4 col-form-label text-md-right">
+                                    <label for="seats">Seats:</label><br>
+                                    {{-- to show which seats were selected for booking as note! --}}
+                                    <p class="text-secondary">*(
+                                        @foreach($booking_movietheatertimetable->seats as $booking_seat)
+                                            @if ($loop->last)
+                                                {{ "'".$booking_seat->seat_no."'" }}
+                                            @else
+                                            {{ "'".$booking_seat->seat_no."'".',' }}
+                                            @endif
+                                        @endforeach
+                                        {{ count($booking_movietheatertimetable->seats)>1?'are':'is'}}selected for booking.)
+                                    </p>
+                                    @error('seats')
+                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                    {{-- end note --}}
+                                </div>
                                 <div class="checkbox col-md-5">
                                    
                                     @foreach($theater->seats as $seat)
@@ -76,15 +94,13 @@
                                     @endforeach
                                     
                                 </div>
-                                @error('seats')
-                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+                                
                             </div>
                             
                         </div>    
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Booking</button>
-                            <a href="{{ route('bookings.index') }}">
+                            <button type="submit" class="btn btn-primary">Update Booking Seats</button>
+                            <a href="{{ route('bookings.show',$booking->id) }}">
                                 <button type="button" class="btn btn-danger">Back</button>
                             </a>
                         </div>
@@ -97,3 +113,20 @@
     </section>
 </div>
 @endsection
+@push('jquery')
+<script>
+     $(document).ready(function(){
+         $('input[type="checkbox"]').click(function(event){
+             var txt=$(this).next().text();
+            var checked = $(this).is(':checked');
+            if(checked) {
+                if(!confirm('Are you sure you want to add '+txt+' for booking seats?')){         
+                    event.preventDefault();
+                }
+            } else if(!confirm('Are you sure you want to remove '+txt+' for booking seats?')){
+                event.preventDefault();
+            }
+         });
+     });
+</script>
+@endpush

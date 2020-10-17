@@ -52,7 +52,7 @@ class TheaterController extends Controller
             'end_date'      =>'required|date_format:Y-m-d|after:start_date',
         ]);
         
-        //updating movie_theater table
+        //updating an existing row from movie_theater table
         $theater->movies()->updateExistingPivot($request->movie,['status'=>$request->status,'start_date'=>$request->start_date,'end_date'=>$request->end_date]);
         return redirect()->route('cinemas.show',$cinema->id);
 

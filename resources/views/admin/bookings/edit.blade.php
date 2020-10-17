@@ -141,10 +141,12 @@
                 $("#date").attr("readonly", true);
                 $("#hr").attr("readonly", true);
                 $("#min").attr("readonly", true);
+                $("#sec").attr("readonly", true);
             }else{
                 $("#date").removeAttr("readonly");
                 $("#hr").removeAttr("readonly");
                 $("#min").removeAttr("readonly");
+                $("#sec").removeAttr("readonly");
             }
             
         });

@@ -22,16 +22,13 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    { 
        $bookings=Booking::all();
        foreach($bookings as $booking){
            $user=$booking->user;
        }
-      
        return view('admin.bookings.index',compact('bookings'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,8 +38,6 @@ class BookingController extends Controller
     {
         $users=User::where('role','user')->get();
         $booking_no=mt_rand();
-       
-       
         return view('admin.bookings.create',compact('users','booking_no'));
     }
 
@@ -68,11 +63,7 @@ class BookingController extends Controller
 
         $request->session()->flash('status','A New Booking is created successfully!');
         return redirect()->route('bookings.index');
-       
     }
-    
-    
-    
     /**
      * Display the specified resource.
      *
@@ -119,8 +110,6 @@ class BookingController extends Controller
                 array_push($theaters,$theater);
             }
         }
-
-        //return $movietheatertimetables;
         return view('admin.bookings.show',compact('booking','movietheatertimetables','timetables','movietheaters','movies','theaters','booking_seats'));
     }
 
@@ -146,7 +135,6 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
         $request->validate([
             'date'  => 'required',
             'hr'    => 'required',
@@ -175,12 +163,12 @@ class BookingController extends Controller
         $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
         return $booking_movietheatertimetable;
     }
-    // public function delete($id){
-    //     $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
-    //     $booking=Booking::find($booking_movietheatertimetable->booking_id);
-    //     $booking->movietheater_timetables()->detach($booking_movietheatertimetable->movietheater_timetable_id);
-    //     return redirect()->route('bookings.index');
-    // }
+    /**
+     * Add the movie theaters for booking.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function addmovietheater($id){
         $booking_id=[];
         $timetables=[];
@@ -193,7 +181,6 @@ class BookingController extends Controller
         foreach($booking_movietheatertimetables as $val){
             array_push($booking_id,$val->id);
         }
-
         
         $movietheater_timetables=Movietheater_timetable::whereNotIn('id',$booking_id)->get();//retrieve except booking's movietheater timetables
 
@@ -217,14 +204,15 @@ class BookingController extends Controller
                 if(!in_array($theater,$theaters)){
                     array_push($theaters,$theater);
                 }
-                    
-
-                
         }
-        //return $movietheater_timetables;
        return view('admin.bookings.addmovietheater',compact('booking','movietheater_timetables','timetables','movietheaters','movies','theaters'));
     }
-
+    /**
+     * Store new created movie_theaters for booking.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function storemovietheater(Request $request, $id){
         $request->validate([
             'movietheater_timetables'  => 'required'
@@ -237,12 +225,14 @@ class BookingController extends Controller
         }else{
             $request->session()->flash('status','A New Movie is booked successfully!');
         }
-       
         return redirect()->route('bookings.show',$booking->id);
-        
     }
-
-    // adding seats to booking
+    /**
+     * Add new seats for each movie_theaters booking.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function addSeat($booking_id,$id){
         
         $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
@@ -261,8 +251,12 @@ class BookingController extends Controller
        
         return view('admin.bookings.addSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
     }
-
-    //to store booking seats
+   /**
+     * Store new created seats for each movie_theaters booking.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function storeSeat($booking_id,$id,Request $request){
         $results=[];
         $request->validate([
@@ -280,6 +274,12 @@ class BookingController extends Controller
         $request->session()->flash('status','Seats('.$booking_seats.' )are added to booking successfully!'); 
         return redirect()->route('bookings.show',$booking_id);
     }
+    /**
+     * Edit booking_seats for each movie_theaters.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function editBookingSeat($booking_id,$id){
         $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
 
@@ -295,6 +295,27 @@ class BookingController extends Controller
         $movie=Movie::find($movietheater->movie_id);
         $theater=Theater::find($movietheater->theater_id);
         return view('admin.bookings.editBookingSeat',compact('booking_movietheatertimetable','booking','timetable','movie','theater'));
+    }
+    /**
+     * Update booking_seats for each movie_theaters.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateBookingSeat($booking_id,$id,Request $request){
+        $results=[];
+        $request->validate([
+            'seats' =>'required'
+        ]);
+        foreach($request->seats as $seat){          //to get seat.no from seat table using seat_id
+            $result=Seat::find($seat);
+            array_push($results,$result->seat_no);
+        }
+        $booking_seats=implode(',',$results);       //to invert array to string for status
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+        $booking_movietheatertimetable->seats()->sync($request->seats);
+        $request->session()->flash('status','Seats('.$booking_seats.' )are added to booking successfully!'); 
+        return redirect()->route('bookings.show',$booking_id);
     }
     protected function getmovietheater(array $array){
         $movietheaters=[];

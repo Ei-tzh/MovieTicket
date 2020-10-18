@@ -1,10 +1,29 @@
 @extends('layouts.master')
-
+@section('style')
+<style>
+    .add-button{
+        padding:0px 3px 0px 4px;
+        width:20px;
+        background-color:#28a745;
+        border-radius:3px;
+    }
+    .add-button i{
+        font-size:12px;
+        color:#fff;
+    }
+</style>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         @if ($message = Session::get('status'))
             <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            <br>
+        @elseif($message= Session::get('error'))
+            <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
@@ -140,10 +159,10 @@
                                                             @endif
                                                         @endforeach
                                                     @endforeach
-                                                        <div class="float-right">
+                                                        <div class="float-right add-button" title="Add Seats">
                                                             <a href="{{ route('bookings.addSeat',['booking_id'=>$booking->id,
                                                                                                 'id'=>$movietheatertimetable->pivot->id] )}}">
-                                                                <i class="fas fa-plus green" style="font-size:16px;"></i>
+                                                                <i class="fas fa-plus green"></i>
                                                             </a>
                                                         </div>
                                                     </td> 
@@ -173,7 +192,9 @@
                                                             <i class="fas fa-edit blue"></i>
                                                         </a> /
                                                         @method('DELETE')
-                                                        <a href="" title="Delete">
+                                                        <a href="#deletemovietheater" class="delete-button" data-toggle="modal" data-delete-link="{{ route('bookings.deleteMovietheater',['booking_id'=>$booking->id,
+                                                                                                                                                        'id'=>$movietheatertimetable->pivot->id] ) }}"
+                                                                                                                                                         title="Delete">
                                                             <i class="fas fa-trash red"></i>
                                                         </a>
                                                     </td>
@@ -187,6 +208,44 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="deletemovietheater">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Modal</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete?</p>
+                            <p class="text-danger"><i class="fas fa-info-circle pr-2"></i>It will delete all seats which were booked for this movie!!</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <form  id="delete-court-form" method="POST" action="">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                <!-- /.modal-content -->
+                </div>
+                    <!-- /.modal-dialog -->
+            </div>
+            
+
         </section>
     </div>  
 @endsection
+@push('jquery')
+<script>
+     $(document).ready(function(){
+        $('.delete-button').on('click', function () {
+            $('#delete-court-form').attr('action', $(this).data('delete-link'));
+        });
+     });
+</script>
+@endpush

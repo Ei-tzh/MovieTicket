@@ -109,14 +109,12 @@
                                             </div>
                                        </div>
                                     </div>
-                            
-                            
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                     <a href="{{ route('bookings.index') }}"><button type="button" class="btn btn-danger">Cancel</button></a>
                                 </div>
-                           
+                            </form>
                         </div>
                            
                     </div>

@@ -160,8 +160,7 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
-        return $booking_movietheatertimetable;
+        
     }
     /**
      * Add the movie theaters for booking.
@@ -226,6 +225,23 @@ class BookingController extends Controller
             $request->session()->flash('status','A New Movie is booked successfully!');
         }
         return redirect()->route('bookings.show',$booking->id);
+    }
+    /**
+     * Delete a movietheater with seats in booking.
+     * First,seats must be deleted because booking_movietheater has many to many relationship with seats.
+     * And then,booking_movietheater will be deleted in that booking.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteMovietheater($booking_id,$id,Request $request){
+        $booking_movietheatertimetable=Booking_movietheatertimetable::find($id);
+
+        $booking_movietheatertimetable->seats()->detach();
+        $booking=Booking::find($booking_id);
+        
+        $booking->movietheater_timetables()->detach($booking_movietheatertimetable->movietheater_timetable_id);
+        $request->session()->flash('error','You have successfully deleted in booking.no " '.$booking->booking_no.' "!');
+        return redirect()->route('bookings.show',$booking_id);
     }
     /**
      * Add new seats for each movie_theaters booking.

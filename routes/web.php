@@ -47,5 +47,6 @@ Route::get('/admin/bookings/{booking_id}/{id}/addSeat','Admin\BookingController@
 Route::post('/admin/bookings/{booking_id}/{id}','Admin\BookingController@storeSeat')->name('bookings.storeSeat');  
 Route::get('/admin/bookings/{booking_id}/{id}/edit-BookingSeat','Admin\BookingController@editBookingSeat')->name('bookings.editBookingSeat');  
 Route::put('/admin/bookings/{booking_id}/{id}','Admin\BookingController@updateBookingSeat')->name('bookings.updateBookingSeat');  
+Route::delete('/admin/bookings/{booking_id}/{id}','Admin\BookingController@deleteMovietheater')->name('bookings.deleteMovietheater');  
 
 Route::resource('/admin/testing','test\testController');

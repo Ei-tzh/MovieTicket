@@ -96,12 +96,12 @@
                             </div>
                            
                         </div>    
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Booking</button>
-                                <a href="{{ route('bookings.index') }}">
-                                    <button type="button" class="btn btn-danger">Back</button>
-                                </a>
-                            </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Booking</button>
+                            <a href="{{ route('bookings.index') }}">
+                                <button type="button" class="btn btn-danger">Back</button>
+                            </a>
+                        </div>
                         </form>
                          <!-- form end -->
                     </div>

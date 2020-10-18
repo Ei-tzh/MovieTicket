@@ -104,7 +104,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{ route('bookings.index') }}"><button type="button" class="btn btn-danger">Cancel</button></a>
                             </div>
-                        
+                        </form>
                     </div>
                         
                 </div>

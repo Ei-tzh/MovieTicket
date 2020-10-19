@@ -50,8 +50,11 @@
                         <div class="col-8 col-sm-6">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                <h3 class="card-title">{{ $theater->name }}<span style='font-size:16px'> ({{$theater->location}}) </span></h3>
-                                <a href="{{ route('theaters.create',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-outline-light float-right'>Create</button></a>
+                                    <h3 class="card-title">{{ $theater->name }}<span style='font-size:16px'> ({{$theater->location}}) </span></h3>
+                                    <div class="float-right">
+                                        <a href="{{ route('seats.index',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-info text-white'>{{'( ' .count($theater->seats).' )seats'}}</button></a>
+                                        <a href="{{ route('theaters.create',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-outline-light'>Create</button></a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped">

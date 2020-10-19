@@ -45,8 +45,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-        
         <section class="content">
             <div class="container-fluid">
                 <div class="row" >
@@ -95,7 +93,6 @@
                                 </div>
                             </div>
                             <!--end info row -->
-                            
                             <div class="row">
                                 <div class="col-12 table-responsive">
                                     <a href='{{ route('bookings.addmovietheater',$booking->id)}}' class="float-right mb-3" >
@@ -204,9 +201,57 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6 float-right">
+                                    <p class="lead">Amount Details</p>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                        <tr>
+                                            <th style="width:50%">Subtotal:</th>
+                                            <td>
+                                             @php $subtotal=0 @endphp
+                                                @foreach($booking->movietheater_timetables as $movietheatertimetable)
+                                                    @foreach($booking_seats as $booking_seat)
+                                                        @foreach($booking_seat as $val)
+                                                            @if($movietheatertimetable->pivot->id == $val->pivot->booking_timetable_id)
+                                                                @php $subtotal+=$val['price'] @endphp
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                @endforeach
+                                                {{ 'MMK '.$subtotal }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax:</th>
+                                            <td>
+                                                @php $tax=500.00 @endphp
+                                                {{ 'MMK '.$tax }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td>
+                                                @php
+                                                    $total=0;
+                                                    $total=$subtotal+$tax;
+                                                @endphp
+                                                {{ 'MMK '.$total }}
+                                            </td>
+                                        </tr>
+                                        </table>
+                                        <div class="back-button float-right">
+                                            <a href="{{ route('bookings.index') }}"><button type="button" class="btn btn-danger">Back</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div class="modal fade" id="deletemovietheater">
                 <div class="modal-dialog">
@@ -235,8 +280,6 @@
                 </div>
                     <!-- /.modal-dialog -->
             </div>
-            
-
         </section>
     </div>  
 @endsection

@@ -125,7 +125,7 @@
             event.stopPropagation();
             addRow();
             
-        });
+            });
         function addRow(){
             i++;
             var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'

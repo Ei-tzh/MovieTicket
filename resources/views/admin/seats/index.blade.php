@@ -37,7 +37,7 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Seats</h3>
-                                <a href="" class="float-right">
+                                <a href="{{ route('seats.create',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id])}}" class="float-right">
                                     <button class='btn btn-outline-light'><i class="fas fa-plus"></i> Add Seats</button>
                                 </a>
                             </div>

@@ -24,9 +24,10 @@ class SeatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($cinema_id,$theater_id)
     {
-        //
+        $theater=Theater::find($theater_id);
+        return view('admin.seats.create',compact('theater'));
     }
 
     /**

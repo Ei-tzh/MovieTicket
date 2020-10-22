@@ -6,7 +6,7 @@
     }
     .new-button{
         position:absolute;
-        bottom:0px;
+        top:30px;
         right:0px;
     }
     </style>
@@ -41,7 +41,7 @@
                                 <p>{{' - ' .$theater->cinema->name }}</p>
                             </div>
                             <!-- /.card-header -->
-                            <form action="" method="POST" >
+                            <form action="{{ route('seats.store',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id]) }}" method="POST" >
                             @csrf
                             <div class="card-body">
                                 <div class="row" id="create-seats">
@@ -51,11 +51,20 @@
                                                     <div class="col-6">
                                                         <label for="seats">Seat.No:</label>
                                                         <input type="text" class="form-control" id="seats" name="seats[]" v-model="i.seat_no" placeholder="*(Eg-A3)" autofocus>
+                                                        @foreach ($errors->get('seats.*') as $message)
+                                                            @foreach($message as $value)
+                                                                <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
+                                                            @endforeach
+                                                        @endforeach 
                                                     </div>
                                                     <div class="col-5">
                                                         <label for="prices">Price:</label>
                                                         <input type="text" class="form-control" id="prices" name="prices[]" v-model="i.price" placeholder="*(Eg-5000)">
-                                                        
+                                                        @foreach ($errors->get('prices.*') as $message)
+                                                            @foreach($message as $value)
+                                                                <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
+                                                            @endforeach
+                                                        @endforeach 
                                                     </div>
                                                     <div class="col-1 new-button">
                                                         <button type="button" class='btn btn-danger' v-on:click="removeseat(k)"  v-show="k!=0">x</button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Theater;
+use App\Seat;
 class SeatController extends Controller
 {
     /**
@@ -36,9 +37,13 @@ class SeatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$cinema_id,$theater_id)
     {
-        //
+        $request->validate([
+            'seats.*'  => 'regex:/^([A-Z]?)([0-9]{1,2})$/', //any string that contain only 1st character uppercase A to Z and digit between 1 or 2 words.(eg-A22)
+            'prices.*'  =>'regex:/^([1-9]+)(\d{1,4})$/'     //any digit that contain 1st number through 1 to 9 and any number only between 1 and 4 words
+        ]);
+        return $request;
     }
 
     /**

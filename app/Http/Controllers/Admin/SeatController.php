@@ -16,8 +16,9 @@ class SeatController extends Controller
     public function index($cinema_id,$theater_id)
     {
         $theater=Theater::find($theater_id);
-
-        return view('admin.seats.index',compact('theater'));
+        //$seats=$theater->seats()->orderby('price','asc')->get();
+        $seats=$theater->seats()->latest()->get();
+        return view('admin.seats.index',compact('theater','seats'));
     }
 
     /**
@@ -43,7 +44,15 @@ class SeatController extends Controller
             'seats.*'  => 'regex:/^([A-Z]?)([0-9]{1,2})$/', //any string that contain only 1st character uppercase A to Z and digit between 1 or 2 words.(eg-A22)
             'prices.*'  =>'regex:/^([1-9]+)(\d{1,4})$/'     //any digit that contain 1st number through 1 to 9 and any number only between 1 and 4 words
         ]);
-        return $request;
+        $theater=Theater::find($theater_id);
+        foreach($request->seats as $key=>$value){
+            Seat::create([
+                'seat_no'=>$value,
+                'price'=>$request->prices[$key],
+                'theater_id'=>$theater_id
+            ]);
+        }
+        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
     }
 
     /**
@@ -63,9 +72,11 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($cinema_id,$theater_id,$seat)
     {
-        //
+        $seat=Seat::find($seat);
+        //return $seat->theater->cinema->id;
+        return view('admin.seats.edit',compact('seat'));
     }
 
     /**
@@ -75,9 +86,19 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($cinema_id,$theater_id,$seat,Request $request)
     {
-        //
+        $request->validate([
+            'seat_no'  => 'regex:/^([A-Z]?)([0-9]{1,2})$/', //any string that contain only 1st character uppercase A to Z and digit between 1 or 2 words.(eg-A22)
+            'price'    =>  'regex:/^([1-9]+)(\d{1,4})$/'     //any digit that contain 1st number through 1 to 9 and any number only between 1 and 4 words
+        ]);
+        $seat_update=Seat::find($seat);
+        Seat::where('id',$seat)->update([
+            'seat_no'=>$request->seat_no,
+            'price' => $request->price
+        ]);
+        $request->session()->flash('status','You have successfully updated for '.$seat_update->seat_no.' .');
+        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
     }
 
     /**
@@ -86,8 +107,10 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($cinema_id,$theater_id,$seat)
     {
-        //
+        $theater=Theater::find($theater_id);
+        $theater->seats()->detach($seat);
+        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
     }
 }

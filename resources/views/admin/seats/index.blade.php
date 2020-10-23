@@ -48,24 +48,24 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Seat.No</th>
-                                            <th>Price</th>
+                                            <th>Price(MMK)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $num=1 @endphp
-                                        @foreach($theater->seats as $seat)
+                                        @foreach($seats as $seat)
                                             <tr>
                                                 <td>{{ $num++ }}</td>
                                                 <td>{{ $seat->seat_no }}</td>
                                                 <td>{{ $seat->price }}</td>
                                                 <td>
-                                                    <a href="" title="Edit" class="btn btn-primary">
+                                                    <a href="{{ route('seats.edit',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id,'seat'=>$seat->id])}}" title="Edit" class="btn btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     {{-- can't delete --}}
                                                     @method('DELETE')                         
-                                                    <a href="" title="Delete" class="btn btn-danger"> 
+                                                    <a href="{{ route('seats.destroy',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id,'seat'=>$seat->id])}}" title="Delete" class="btn btn-danger"> 
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

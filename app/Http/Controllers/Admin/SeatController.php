@@ -109,8 +109,7 @@ class SeatController extends Controller
      */
     public function destroy($cinema_id,$theater_id,$seat)
     {
-        $theater=Theater::find($theater_id);
-        $theater->seats()->detach($seat);
+        Seat::destroy($seat);
         return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
     }
 }

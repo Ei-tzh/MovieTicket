@@ -74,8 +74,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="{{ route('dashboard.index')}}" class="nav-link {{ Request::path() == 'admin/dashboard'?'active':'' }}">
+          <li class="nav-item">
+            <a href="{{ route('dashboard.index')}}" class="nav-link @if(Request::is('admin/dashboard*')){{'active'}} @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -84,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href='{{ route('movies.index')}}' class="nav-link {{ Request::path()=='admin/movies'?'active':''}}">
+            <a href='{{ route('movies.index')}}' class="nav-link  @if(Request::is('admin/movies*')){{'active'}} @endif">
               <i class="nav-icon fas fa-video"></i>
               <p>
                 Movies
@@ -93,7 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('cinemas.index') }}" class="nav-link {{ Request::path()=='admin/cinemas'?'active':''}}">
+            <a href="{{ route('cinemas.index') }}" class="nav-link @if(Request::is('admin/cinemas*')){{'active'}} @endif">
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Cinemas
@@ -102,7 +102,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('timetables.index') }}" class="nav-link {{ Request::path()=='admin/timetables'?'active':''}}">
+            <a href="{{ route('timetables.index') }}" class="nav-link @if(Request::is('admin/timetables*')){{'active'}} @endif">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Timetables
@@ -111,7 +111,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('bookings.index')}}" class="nav-link {{ Request::path()=='admin/bookings'?'active':''}}">
+            <a href="{{ route('bookings.index')}}" class="nav-link @if(Request::is('admin/bookings*')){{'active'}} @endif">
             <i class="nav-icon fas fa-notes-medical"></i>
               <p>
                 Bookings
@@ -130,7 +130,7 @@
             </a>
           </li> --}}
           <li class="nav-item">
-            <a href="{{ route('users.index')}}" class="nav-link {{ Request::path()=='admin/users'?'active':''}}">
+            <a href="{{ route('users.index')}}" class="nav-link  @if(Request::is('admin/users*')){{'active'}} @endif">
             <i class="nav-icon fas fa-user"></i>
               <p>
                 Users

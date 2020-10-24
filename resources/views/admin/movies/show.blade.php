@@ -37,7 +37,6 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap ">
                                     <thead>
@@ -45,8 +44,6 @@
                                             <th>Cinemas</th>
                                             <th>Theaters</th>
                                             <th>Timetables</th>
-                                            <th>Action</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +69,7 @@
                                                         @endif
                                                     @endforeach
                                                 @endforeach
-                                                <td>
+                                                {{-- <td>
                                                     <a href="{{ route('movies.edit',$movie->id) }}" title="Edit">
                                                         <i class="fas fa-edit blue"></i>
                                                     </a> /
@@ -80,14 +77,16 @@
                                                     <a href="{{ route('movies.destroy',$movie->id) }}" title="Delete">
                                                         <i class="fas fa-trash red"></i>
                                                     </a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="float-right">
+                                    <a href="{{ route('movies.index')}}"><button type="button" class="btn btn-danger">Back</button></a>
+                                </div>
                             </div>
                             <!-- </card-body> -->
-                            
                         </div>
                     </div>
                 </div>

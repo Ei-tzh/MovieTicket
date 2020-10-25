@@ -32,6 +32,7 @@
         "bootstrap-switch-button": "^1.1.0",
         "datatables.net": "^1.10.22",
         "datatables.net-dt": "^1.10.22",
+        "ionicons": "^5.2.3",
         "save": "^2.4.0",
         "select2": "^4.0.13"
     }

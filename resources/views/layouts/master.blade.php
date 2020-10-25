@@ -8,7 +8,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.css') }}">
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
@@ -32,7 +32,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -41,7 +41,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     
     

@@ -52,6 +52,11 @@ class SeatController extends Controller
                 'theater_id'=>$theater_id
             ]);
         }
+        if(count($request->seats)>1){
+            $request->session()->flash('status','You have successfully created a new seat.'); 
+        }else{
+            $request->session()->flash('status','You have successfully created new seats.');
+        }
         return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
     }
 

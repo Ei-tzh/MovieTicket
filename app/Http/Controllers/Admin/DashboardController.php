@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Booking;
-use App\User;
-use App\Movie;
-use App\Cinema;
-class AdminController extends Controller
+
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $bookings=Booking::all();
-        $users=User::where('role','user')->get();
-        $movies=Movie::all();
-        $cinemas=Cinema::all();
-        return view('admin.dashboard',compact('bookings','users','movies','cinemas'));
+        //
     }
 
     /**

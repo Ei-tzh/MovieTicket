@@ -5,7 +5,7 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-duration-picker/dist/bootstrap-duration-picker.css';
 //bootstrap-switch
 @import '~bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
@@ -29,7 +29,7 @@
 //datatables
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
 
-//@import '~tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
+
 
 input[type='file']{
     font-size: 14px;

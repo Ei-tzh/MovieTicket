@@ -14,21 +14,19 @@
     {{-- logo --}}
     <link rel="icon" type="png/image" href="images/logo/logo.png">
     <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Raleway" rel="stylesheet">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
        .logo{
            width:30px;
            height:30px;
-           margin:5px;
        }
         .app_name{
             font-size:22px;
-            font-family: 'Work Sans', sans-serif;
-            font-weight:900;
+            font-family: 'Raleway', sans-serif;
+            font-weight:400;
         }
         .masthead {
             height: 100vh;
@@ -37,14 +35,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            position:relative;
-        }
-        .banner-caption{
-            text-align:center;
-            position:absolute;
-            top:45%;
-            width: 100%;
-            background:rgba(255,255,255,0.4);
+            
         }
         /*.carousel-item {
             height: 65vh;
@@ -75,22 +66,17 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-teal shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
             <div class="container">
-                <img src="images/logo/logo.png" alt="..." class="logo">
-                <a class="navbar-brand app_name" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="images/logo/logo.png" alt="..." class="d-inline-block align-top logo">
+                    <span class="app_name">{{ config('app.name', 'Laravel') }}</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">

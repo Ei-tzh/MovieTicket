@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     {{-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="2000">
         <ol class="carousel-indicators">
             @foreach($movies as $key => $movie)
@@ -33,14 +32,17 @@
             <span class="sr-only">Next</span>
         </a>
     </div> --}}
-<header class="masthead">
-        <div class="align-items-center">
-            <div class="banner-caption">
-                <h1 class="font-weight-light text-light">Welcome To Our WebSite</h1>
-                <p class="lead text-light">Easy way to book movies in few minutes.</p>
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="font-weight-light text-light">Welcome To YCTC</h1>
+                    <p class="lead text-light">Easy way to book movies in few minutes.</p>
+                </div>
             </div>
         </div>
-</header>
+    </header>
+    
 {{-- page content --}}
 <section class="py-5">
   <div class="container">

@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    {{-- logo --}}
+    <link rel="icon" type="png/image" href="images/logo/logo.png">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,10 +20,56 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+       .logo{
+           width:30px;
+           height:30px;
+           margin:5px;
+       }
         .app_name{
             font-size:22px;
             font-family: 'Work Sans', sans-serif;
-            font-weight:500;
+            font-weight:900;
+        }
+        .masthead {
+            height: 100vh;
+            min-height: 500px;
+            background-image: url('images/cover.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position:relative;
+        }
+        .banner-caption{
+            text-align:center;
+            position:absolute;
+            top:45%;
+            width: 100%;
+            background:rgba(255,255,255,0.4);
+        }
+        /*.carousel-item {
+            height: 65vh;
+            min-height: 500px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-color:#8DB8A0;
+            position:relative;
+        }*/
+        img{
+            width:100%;
+            height:auto;
+        }
+        .movie-info{
+            border:2px solid #fff;
+            width:150px;
+            color:#fff;
+            transition: width .20s ease-out;
+        }
+        .movie-info:hover{
+            color:#eee;
+            width:120px;
         }
     </style>
 </head>
@@ -30,6 +77,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-teal shadow-sm">
             <div class="container">
+                <img src="images/logo/logo.png" alt="..." class="logo">
                 <a class="navbar-brand app_name" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -79,7 +127,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                
+                                    <a class="dropdown-item" href="#">Your Tickets</a>
+                                    {{-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -96,9 +147,14 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
+        {{-- <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+            <div class="container text-center">
+                <small>Copyright &copy; Your Website</small>
+            </div>
+        </footer> --}}
     </div>
 </body>
 </html>

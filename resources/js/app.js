@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('bootstrap/js/dist/carousel.js');
+
 require('admin-lte/dist/js/adminlte.min.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');

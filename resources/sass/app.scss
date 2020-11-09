@@ -1,6 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 // Variables
 @import 'variables';
 
@@ -29,10 +30,24 @@
 
 //datatables
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito', sans-serif;
+}
+p{
+  font-family: 'Lora', serif;
+}
+a{
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+}
+nav{
+  background-color:#385963;
+  //background-color:#699DB3;
+}
 input[type='file']{
     font-size: 14px;
     padding:3px;
-    
   }
 .image_upload{
     position: absolute;
@@ -42,10 +57,43 @@ input[type='file']{
 .nav-link{
   font-size: 13px;
   text-transform: uppercase;
-  font-family: 'Raleway', sans-serif;
   letter-spacing: .2em;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+header.masthead h1 {
+  font-size: 2.25rem;//1rem=16px
+}
+.btn-xl{
+    padding: 1.25rem 2.25rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10rem;
+}
+.btn-primary{
+  background-color:#699DB3 ;
+}
+@media (min-width: 992px) {
+  header.masthead {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 4.5rem;
+    padding-bottom: 0;
+  }
+  header.masthead p {
+    font-size: 1.15rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 1200px) {
+  header.masthead h1 {
+    font-size: 3.5rem;
+  }
 }

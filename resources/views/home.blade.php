@@ -32,12 +32,25 @@
             <span class="sr-only">Next</span>
         </a>
     </div> --}}
-    <header class="masthead">
+    {{-- <header class="masthead">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center">
-                    <h1 class="font-weight-light text-light">Welcome To YCTC</h1>
+                    <h1 class="text-uppercase text-white font-weight-bold">Welcome To YCTC</h1>
                     <p class="lead text-light">Easy way to book movies in few minutes.</p>
+                </div>
+            </div>
+        </div>
+    </header> --}}
+    <header class="masthead">
+        <div class="container h-100 " >
+            <div class="row h-100 align-items-center justify-content-center text-center ">
+                <div class="col-lg-10 align-self-end banner-caption">
+                    <h1 class="text-uppercase text-white font-weight-bold ">Welcome To YCTC</h1>
+                </div>
+                <div class="col-lg-8 align-self-baseline mt-2">
+                    <p class="text-white font-weight-bold mb-5 banner-caption">Easy Way To Book Movies in less seconds</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">View Information</a>
                 </div>
             </div>
         </div>
@@ -46,8 +59,8 @@
 {{-- page content --}}
 <section class="py-5">
   <div class="container">
-    <h2 class="font-weight-light">Page Content</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.</p>
+    <h1>Movies</h1>
+    <p>Be Sure Not To Miss These Movies Today</p>
   </div>
 </section>
 @endsection

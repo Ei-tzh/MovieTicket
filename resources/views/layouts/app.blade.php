@@ -25,17 +25,21 @@
        }
         .app_name{
             font-size:22px;
-            font-family: 'Raleway', sans-serif;
-            font-weight:400;
+            font-weight:600;
         }
-        .masthead {
-            height: 100vh;
-            min-height: 500px;
-            background-image: url('images/cover.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            
+        /*.banner-caption{
+            border:1px solid #666;
+            background:rgba(128,128,128,0.5);
+            border-radius:10px;
+        }*/
+        header.masthead {
+        height: 100vh;
+        min-height: 500px;
+        background:linear-gradient(to bottom, rgba(255,255,255, 0.1) 0%, rgba(128,128,128,0.5) 100%), url('images/cover1.jpg');
+        
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         }
         /*.carousel-item {
             height: 65vh;
@@ -49,9 +53,10 @@
             position:relative;
         }*/
         img{
-            width:100%;
+            width:auto;
             height:auto;
         }
+        
         .movie-info{
             border:2px solid #fff;
             width:150px;
@@ -66,7 +71,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="images/logo/logo.png" alt="..." class="d-inline-block align-top logo">

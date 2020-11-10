@@ -36,7 +36,6 @@
         height: 100vh;
         min-height: 500px;
         background:linear-gradient(to bottom, rgba(255,255,255, 0.1) 0%, rgba(128,128,128,0.5) 100%), url('images/cover1.jpg');
-        
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -56,8 +55,7 @@
             width:auto;
             height:auto;
         }
-        
-        .movie-info{
+        /*.movie-info{
             border:2px solid #fff;
             width:150px;
             color:#fff;
@@ -66,12 +64,13 @@
         .movie-info:hover{
             color:#eee;
             width:120px;
-        }
+        }*/
+       
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="images/logo/logo.png" alt="..." class="d-inline-block align-top logo">

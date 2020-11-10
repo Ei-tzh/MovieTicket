@@ -59,8 +59,44 @@
 {{-- page content --}}
 <section class="py-5">
   <div class="container">
-    <h1>Movies</h1>
-    <p>Be Sure Not To Miss These Movies Today</p>
+      <div class="row">
+            <div class="col-12">
+                <div class="row" id="movies">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="movies-caption">
+                            <h1>Movies</h1>
+                            <p>Be Sure Not To Miss These Movies Today</p>
+                        </div>
+                        <div class="movies-info row">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 align-self-center">
+                                <h3>Now Showing</h3>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+                                <p><i class="fas fa-city"></i>City:Yangon</p>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+                                <p><i class="fas fa-calendar-day"></i>Date:Yangon</p>
+                            </div>
+                        </div>
+                        <div id="now-showing" class="row my-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="#">Project One</a>
+                                        </h4>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end .col -->
+      </div>
+      <!-- end .row -->
   </div>
 </section>
 @endsection

@@ -41,7 +41,7 @@ a{
   font-family: 'Raleway', sans-serif;
   color: #fff;
 }
-nav{
+.navbar-dark{
   background-color:#385963;
   //background-color:#699DB3;
 }
@@ -77,6 +77,29 @@ header.masthead h1 {
 }
 .btn-primary{
   background-color:#699DB3 ;
+}
+/*==============================
+      section(movies)
+==============================*/
+#movies .movies-info{
+  background-color:#699DB3;
+  border-radius:10px;
+  padding:8px;
+}
+#movies .movies-info h3{
+  padding-top:5px;
+  color:#fff;
+  }
+#movies .movies-info p{
+padding-top:8px;
+color:#fff;
+}
+#movies .movies-info i{
+margin-right:5px;
+background-color:#fff;
+color:#699DB3;
+padding:8px;
+border-radius:100%;
 }
 @media (min-width: 992px) {
   header.masthead {

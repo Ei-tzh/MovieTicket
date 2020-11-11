@@ -78,18 +78,39 @@
                                 <p><i class="fas fa-calendar-day"></i>Date:Yangon</p>
                             </div>
                         </div>
-                        <div id="now-showing" class="row my-3">
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-                                <div class="card h-100">
-                                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            <a href="#">Project One</a>
-                                        </h4>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                        <div id="now-showing" class="row">
+                            @foreach($timetables as $timetable)
+                            @foreach($timetable->movie_theaters as $movie_theater)
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
+                                    <div class="card h-100">
+                                    @foreach($movies as $movie)
+                                        @foreach($theaters as $theater)
+                                            @if($movie->id == $movie_theater->movie_id && $theater->id == $movie_theater->theater_id)
+                                                <div class="cropped-image">
+                                                    <a href="#"><img class="card-img-top" src="{{ $movie->poster }}" alt="" ></a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h1 class="card-title">
+                                                        <a href="#">{{ $movie->name }}</a>
+                                                    </h1>
+                                                    <div class="card-text">
+                                                        <ul>
+                                                            <li>{{ $theater->cinema->name }}</li>
+                                                            <li>{{ $theater->name }}</li>
+                                                            <li>{{ $timetable->show_time }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+                            @endforeach
+                        </div>
+                        <div class="see-more">
+                            <a href="" class="float-right">See More <i class="fas fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>

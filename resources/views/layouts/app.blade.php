@@ -27,6 +27,7 @@
             font-size:22px;
             font-weight:600;
         }
+        
         /*.banner-caption{
             border:1px solid #666;
             background:rgba(128,128,128,0.5);
@@ -51,10 +52,8 @@
             background-color:#8DB8A0;
             position:relative;
         }*/
-        img{
-            width:auto;
-            height:auto;
-        }
+       
+       
         /*.movie-info{
             border:2px solid #fff;
             width:150px;
@@ -65,7 +64,11 @@
             color:#eee;
             width:120px;
         }*/
-       
+        .see-more a{
+            background:#B0AA5B;
+            padding:0.75rem;
+            border-radius:30px;
+        }
     </style>
 </head>
 <body>

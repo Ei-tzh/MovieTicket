@@ -30,7 +30,18 @@
 
 //datatables
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
-
+/*==============================
+      for admin dashboard
+==============================*/
+input[type='file']{
+  font-size: 14px;
+  padding:3px;
+}
+.image_upload{
+  position: absolute;
+  bottom: 0px;
+  left: 10%;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Nunito', sans-serif;
 }
@@ -41,19 +52,16 @@ a{
   font-family: 'Raleway', sans-serif;
   color: #fff;
 }
+.row{
+  margin:0 auto;
+  max-width: 62.5rem;
+  width: 100%;
+}
 .navbar-dark{
   background-color:#385963;
   //background-color:#699DB3;
 }
-input[type='file']{
-    font-size: 14px;
-    padding:3px;
-  }
-.image_upload{
-    position: absolute;
-    bottom: 0px;
-    left: 10%;
-}
+
 .nav-link{
   font-size: 13px;
   text-transform: uppercase;
@@ -63,7 +71,9 @@ input[type='file']{
   padding-left: 20px;
   padding-right: 20px;
 }
-
+/*==============================
+      header
+==============================*/
 header.masthead h1 {
   font-size: 2.25rem;//1rem=16px
 }
@@ -78,6 +88,7 @@ header.masthead h1 {
 .btn-primary{
   background-color:#699DB3 ;
 }
+
 /*==============================
       section(movies)
 ==============================*/
@@ -101,6 +112,54 @@ color:#699DB3;
 padding:8px;
 border-radius:100%;
 }
+.cropped-image{
+  width:100%;
+  height:200px;
+  overflow:hidden;
+}
+.cropped-image img{
+  margin: -180px 0px 0px 0px;
+}
+.card-body{
+  padding:1rem;
+}
+.card-title a{
+  font-size:1.375rem;
+  font-weight:weight;
+  color:#385963;
+}
+
+.card-text ul li{
+  font-size:1.0625rem;
+}
+//==============================================
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  .cropped-image img{
+    margin: -120px 0px 0px 0px;
+  }
+  .card-title a{
+    font-size:1.25rem;
+    font-weight:weight;
+  }
+  .card-text ul li{
+    font-size:1rem; 
+  }
+}
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    /*.cropped-image img{
+      margin: -150px 0px 0px 0px;
+    }*/
+    .card-title a{
+      font-size:1.375rem; 
+      font-weight:weight;
+    }
+    .card-text ul li{
+      font-size:0.875rem; 
+    }
+}
+// Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;
@@ -114,9 +173,30 @@ border-radius:100%;
   header.masthead h1 {
     font-size: 3rem;
   }
+  /*.cropped-image img{
+    margin: -170px 0px 0px 0px;
+  }*/
+  .card-title a{
+    font-size:1.4375rem;
+    font-weight:weight;
+  }
+  .card-text ul li{
+    font-size:0.8rem;
+  }
 }
+// Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   header.masthead h1 {
     font-size: 3.5rem;
   }
+  /*.cropped-image img{
+    margin: -180px 0px 0px 0px;
+  }*/
+  // .card-title a{
+  //   font-size:1.5rem; 
+  //   font-weight:weight;
+  // }
+  // .card-text ul li{
+  //   font-size:0.75rem;
+  // }
 }

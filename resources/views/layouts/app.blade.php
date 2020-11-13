@@ -64,6 +64,17 @@
             color:#eee;
             width:120px;
         }*/
+        .cropped-image:hover img{
+            -webkit-transform: scale(1.2);
+	        -webkit-transition: all .4s ease;
+        }
+        .card-text ul li{
+            margin-bottom:2px;
+        }
+        .card-text ul li i{
+            color:#699DB3;
+        }
+        
         .see-more a{
             background:#B0AA5B;
             padding:0.75rem;

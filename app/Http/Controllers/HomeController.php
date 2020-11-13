@@ -50,6 +50,6 @@ class HomeController extends Controller
         }
         
         //return $theaters;
-        return view('home',compact('timetables','movies','theaters'));
+        return view('home',compact('timetables','movies','theaters','current_date'));
     }
 }

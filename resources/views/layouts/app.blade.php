@@ -53,7 +53,6 @@
             position:relative;
         }*/
        
-       
         /*.movie-info{
             border:2px solid #fff;
             width:150px;
@@ -79,6 +78,21 @@
             background:#B0AA5B;
             padding:0.75rem;
             border-radius:30px;
+        }
+        #cinemas .card-body{
+            position:relative;
+        }
+        .card-body>a{
+            position:absolute;
+            bottom:10px;
+            right:10px;
+            background-color:#385963;
+            border-radius:100%;
+        }
+        .card-body>a>i{
+            font-size:18px;
+            padding:6px;
+            color:#fff;
         }
     </style>
 </head>

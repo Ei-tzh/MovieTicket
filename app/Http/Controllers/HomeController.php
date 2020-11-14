@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Movie;
+use App\Cinema;
 use App\Theater;
 use App\Timetable;
 class HomeController extends Controller
@@ -48,8 +49,8 @@ class HomeController extends Controller
                 }
             }
         }
-        
+        $cinemas=Cinema::all();
         //return $theaters;
-        return view('home',compact('timetables','movies','theaters','current_date'));
+        return view('home',compact('timetables','movies','theaters','current_date','cinemas'));
     }
 }

@@ -61,6 +61,7 @@
   <div class="container">
       <div class="row">
             <div class="col-12">
+                {{-- Movies'section --}}
                 <div class="row" id="movies">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="movies-caption">
@@ -78,10 +79,9 @@
                                 <p><i class="fas fa-calendar-day"></i>Date:{{' '.$current_date }}</p>
                             </div>
                         </div>
-                        
+                        <div id="now-showing" class="row @if(count($timetables)==0){{'error align-items-center justify-content-center text-center my-3'}}@endif">
                             @forelse ($timetables as $timetable)
                                 @foreach($timetable->movie_theaters as $movie_theater)
-                                <div id="now-showing" class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-3">
                                         <div class="card h-100">
                                         @foreach($movies as $movie)
@@ -107,15 +107,13 @@
                                         @endforeach
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                                 @empty
-                                <div id="error" class="row align-items-center justify-content-center text-center my-3">
                                     <div class="col-12 align-self-center text-secondary">
                                         <i class="fas fa-info-circle mr-1"></i>Sorry!There is no movies showing today!!
                                     </div>
-                                </div>
                             @endforelse 
+                        </div>
                         @if(count($timetables)!=0)
                         <div class="see-more">
                             <a href="" class="float-right">See More <i class="fas fa-angle-double-right"></i></a>
@@ -123,6 +121,39 @@
                         @endif
                     </div>
                 </div>
+                {{-- end Movies'section --}}
+
+                {{-- Cinemas' section --}}
+                <div class="row py-4" id="cinemas">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="cinemas_caption">
+                            <h1>Cinemas</h1>
+                            <p>All About Locations And Schedules For Each Cinemas.</p>
+                        </div>
+                        {{-- cinemas' index --}}
+                        <div class="row">
+                            @foreach($cinemas as $cinema)
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                                    <div class="card h-100">
+                                        <div class="cinema-cropped-image">
+                                            <a href="#"><img class="card-img-top" src="{{ $cinema->image }}" alt=""></a>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">{{ $cinema->township->name }}</p>
+                                            <h4 class="card-title">
+                                                {{ $cinema->name }}
+                                            </h4>
+                                            <a href="" class="text-dark" title="View Info"><i class="fas fa-arrow-right"></i></a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        {{--end cinemas' index --}}
+                    </div>
+                </div>
+                {{-- end Cinemas' section --}}
             </div>
             <!-- end .col -->
       </div>

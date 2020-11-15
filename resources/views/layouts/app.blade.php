@@ -63,37 +63,7 @@
             color:#eee;
             width:120px;
         }*/
-        .cropped-image:hover img{
-            -webkit-transform: scale(1.2);
-	        -webkit-transition: all .4s ease;
-        }
-        .card-text ul li{
-            margin-bottom:2px;
-        }
-        .card-text ul li i{
-            color:#699DB3;
-        }
         
-        .see-more a{
-            background:#B0AA5B;
-            padding:0.75rem;
-            border-radius:30px;
-        }
-        #cinemas .card-body{
-            position:relative;
-        }
-        .card-body>a{
-            position:absolute;
-            bottom:10px;
-            right:10px;
-            background-color:#385963;
-            border-radius:100%;
-        }
-        .card-body>a>i{
-            font-size:18px;
-            padding:6px;
-            color:#fff;
-        }
     </style>
 </head>
 <body>
@@ -123,7 +93,7 @@
                             <a class="nav-link" href="#">Cinemas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#services">Services</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>

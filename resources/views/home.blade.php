@@ -126,7 +126,7 @@
                 {{-- Cinemas' section --}}
                 <div class="row py-4" id="cinemas">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="cinemas_caption">
+                        <div class="cinemas-caption">
                             <h1>Cinemas</h1>
                             <p>All About Locations And Schedules For Each Cinemas.</p>
                         </div>
@@ -144,13 +144,15 @@
                                                 {{ $cinema->name }}
                                             </h4>
                                             <a href="" class="text-dark" title="View Info"><i class="fas fa-arrow-right"></i></a>
-                                            
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                         {{--end cinemas' index --}}
+                        <div class="see-more">
+                            <a href="" class="float-right">View All <i class="fas fa-angle-double-right"></i></a>
+                        </div>
                     </div>
                 </div>
                 {{-- end Cinemas' section --}}
@@ -159,5 +161,59 @@
       </div>
       <!-- end .row -->
   </div>
+</section>
+{{-- Our services --}}
+<section class="section section-lg bg-gray-darker text-white" id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="services-caption">
+                    <h1>Our Services</h1>
+                </div>
+                <div class="row text-left services-body">
+                    <div class="col-sm-10 col-md-6 col-lg-3">
+                        <div class="services-box">
+                            <div class="services-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <p class="services-title">Perfect Information</p>
+                            <hr>
+                            <div class="services-text text-spacing-sm">We provide to watch informations about cinemas and movies at one place.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-md-6 col-lg-3">
+                        <div class="services-box">
+                            <div class="services-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <p class="services-title">24/7 Online Support</p>
+                            <hr>
+                            <div class="services-text text-spacing-sm">You can easily book movies tickets at any time.(24/7 online service)</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-md-6 col-lg-3">
+                        <div class="services-box">
+                            <div class="services-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <p class="services-title">Up To Date Seats'plans</p>
+                            <hr>
+                            <div class="services-text text-spacing-sm">You can see seats' plans which are available for booking or unavailable.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-md-6 col-lg-3">
+                        <div class="services-box">
+                            <div class="services-icon">
+                                <i class="fas fa-money-check"></i>
+                            </div>
+                            <p class="services-title">Easy Payment Method</p>
+                            <hr>
+                            <div class="services-text text-spacing-sm">Our Customers can pay cash at Mini Store(eg.City Express,g&g and ABC) by showing order.No to counter.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection

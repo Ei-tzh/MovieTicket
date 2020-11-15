@@ -137,9 +137,29 @@ border-radius:100%;
   height:80px;
   background-color:#eee;
 }
+.cropped-image:hover img{
+  -webkit-transform: scale(1.2);
+  -webkit-transition: all .4s ease;
+}
+.card-text ul li{
+  margin-bottom:2px;
+}
+.card-text ul li i{
+  color:#699DB3;
+}
+
+.see-more a{
+  background:#B0AA5B;
+  padding:0.75rem;
+  border-radius:30px;
+}
+
 /*==============================
       section(Cinemas)
 ==============================*/
+.movies-caption,.cinemas-caption{
+  margin-bottom:50px;
+}
 .cinema-cropped-image{
   width:100%;
   height:100px;
@@ -150,6 +170,72 @@ border-radius:100%;
 }
 #cinemas .card-title{
   font-size:1.25rem;
+}
+#cinemas .card-body{
+  position:relative;
+}
+#cinemas .card:hover{
+  box-shadow: 0 0 15px #acacac;
+}
+.card-body>a{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  background-color:#385963;
+  border-radius:100%;
+}
+.card-body>a:hover{
+-webkit-transform: translateY(-5px);
+-webkit-transition: all .5s ease;
+}
+.card-body>a>i{
+  font-size:16px;
+  padding:6px;
+  color:#fff;
+}
+
+/*==============================
+      section(Services)
+==============================*/
+#services{
+  padding:60px 0;
+}
+.bg-gray-darker{
+  background-color:#8DB8A0;
+  
+}
+#services .services-caption{
+  text-transform:uppercase;
+}
+#services .services-body{
+  margin:50px 0;
+}
+#services .services-body .services-box{
+  padding: 20px 15px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  transition: 450ms ease-in-out;
+  margin-bottom: 20px;
+  height:auto;
+  overflow: hidden;
+}
+#services .services-body .services-box:hover{
+  background-color:#8CB884;
+  -webkit-transform: translateY(-20px);
+  -webkit-transition: all .5s ease;
+}
+#services .services-box .services-icon>i{
+  font-size:30px;
+}
+#services .services-box .services-title{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:400px;
+  font-family:'Nunito', sans-serif;
+}
+hr{
+   border-top:1px solid #ededed;
+   opacity:0.5;
 }
 //==============================================
 // Small devices (landscape phones, 576px and up)
@@ -189,6 +275,12 @@ border-radius:100%;
     #cinemas .card-title{
       font-size:1.125rem;
     }
+    #services .services-body .services-box{
+      height: 250px;
+    }
+    #services .services-box .services-icon>i{
+      font-size:35px;
+    }
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
@@ -220,6 +312,13 @@ border-radius:100%;
   #cinemas .card-title{
     font-size:0.875rem;
   }
+  #services .services-body .services-box{
+    padding:40px 25px 45px;
+    height: 350px;
+  }
+  #services .services-box .services-icon>i{
+    font-size:40px;
+  }
 }
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
@@ -229,11 +328,8 @@ border-radius:100%;
   .cropped-image img{
     margin: -80px 0px 0px 0px;
   }
-  // .card-title a{
-  //   font-size:1.5rem; 
-  //   font-weight:weight;
-  // }
-  // .card-text ul li{
-  //   font-size:0.75rem;
-  // }
+  #services .services-body .services-box{
+      padding:40px 30px 45px;
+  }
+  
 }

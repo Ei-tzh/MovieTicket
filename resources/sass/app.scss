@@ -242,6 +242,48 @@ hr{
    border-top:1px solid #ededed;
    opacity:0.5;
 }
+/*==============================
+      section(About)
+================================*/
+#about>.container>.row{
+  background-color:#031059;
+  padding-top:12px;
+  border-radius:10px;
+}
+#about .about-image{
+  margin-bottom:12px;
+  overflow:hidden;
+  width:100%;
+  height:auto;
+  border-radius: 10px;
+}
+#about .about-image img{
+  margin:0px 0px 0px -150px;
+}
+.about-text{
+  /*background-color:#fff;
+  border:1px solid #eee;
+  border-radius:10px;*/
+  background-color:#031059;
+  color:#fff;
+  padding:30px 20px 12px;
+}
+.about-text>.title{
+  color:#F2C4B3;
+  text-transform: uppercase;
+  display: block;
+  font-size: 24px;
+  margin-bottom: 25px;
+  margin-top: -6px;
+}
+.about-text>h2{
+  text-transform: uppercase;
+  margin-bottom:15px;
+}
+.about-text>p{
+  font-family:'Nunito', sans-serif;
+  margin-bottom:20px;
+}
 //==============================================
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
@@ -286,6 +328,9 @@ hr{
     #services .services-box .services-icon>i{
       font-size:35px;
     }
+    #about .about-image img{
+      margin:0px 0px 0px 0px;
+    }
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
@@ -323,6 +368,12 @@ hr{
   }
   #services .services-box .services-icon>i{
     font-size:40px;
+  }
+  #about .about-image img{
+    margin:0px 0px 0px -180px;
+  }
+  .about-text{
+    text-align:right;
   }
 }
 // Extra large devices (large desktops, 1200px and up)

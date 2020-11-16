@@ -63,7 +63,39 @@
             color:#eee;
             width:120px;
         }*/
-       
+       #about>.container>.row{
+           /*background:linear-gradient(90deg, #0f5ae0 0%, #7400ba 100%);*/
+       }
+       #about .about-image{
+           padding:12px;
+           overflow:hidden;
+           width:100%;
+           height:auto;
+       }
+        #about .about-image img{
+            margin:0px 0px 0px -150px;
+        }
+        .about-text{
+            background-color:#fff;
+            border:1px solid #eee;
+            border-radius:10px;
+            padding:30px 20px;
+        }
+        .about-text>.title{
+            color:#385963;
+            text-transform: uppercase;
+            display: block;
+            font-size: 24px;
+            margin-bottom: 25px;
+            margin-top: -6px;
+        }
+        .about-text>h2{
+            text-transform: uppercase;
+        }
+        .about-text>p{
+            font-family:'Nunito', sans-serif;
+            margin-bottom:20px;
+        }
     </style>
 </head>
 <body>

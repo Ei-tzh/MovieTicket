@@ -202,4 +202,26 @@
         </div>
     </div>
 </section>
+<section class="section section-lg py-5" id="about">
+    <div class="container">
+        <div class="section-caption">
+            <h1>About Us</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="about-image">
+                    <img src="{{ asset('images/logo/about.jpg')}}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="about-text">
+                    <span class="title">We Are YCTC</span>
+                    <h2>Get to know us</h2>
+                    <p>YCTB is Yangon Cinema Ticket Booking website.This website helps the movie lovers to make ticket bookings easily among Yangon cinemas. It will show the cinemas' available movies and their shedules.</p>
+                    <p> Users can choose the seats and the website will pay back the receipe. If you interest and want to use, you have to sign up with your email and set the password.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

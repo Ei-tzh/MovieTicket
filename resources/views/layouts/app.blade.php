@@ -19,6 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+        
+        .navbar-collapse {
+            max-height: calc(100vh - 60px);
+            overflow-y: auto; }
        .logo{
            width:30px;
            height:30px;
@@ -67,17 +71,17 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top py-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="images/logo/logo.png" alt="..." class="d-inline-block align-top logo">
                     <span class="app_name">{{ config('app.name', 'Laravel') }}</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarResponsive">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
@@ -89,7 +93,7 @@
                             <a class="nav-link" href="#">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cinemas</a>
+                            <a class="nav-link" href="#cinemas">Cinemas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#services">Services</a>

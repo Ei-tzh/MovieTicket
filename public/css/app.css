@@ -50587,6 +50587,10 @@ a {
   width: 100%;
 }
 
+.page-section {
+  padding: 8rem 0 3rem;
+}
+
 .section-caption {
   margin-bottom: 80px;
   text-align: center;
@@ -50604,8 +50608,6 @@ a {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  padding-top: 20px;
-  padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -50755,10 +50757,6 @@ header.masthead h1 {
 /*==============================
       section(Services)
 ==============================*/
-
-#services {
-  padding: 60px 0;
-}
 
 .bg-gray-darker {
   background-color: #8DB8A0;

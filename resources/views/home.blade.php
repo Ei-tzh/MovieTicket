@@ -57,7 +57,7 @@
     </header>
     
 {{-- page content --}}
-<section class="section section-lg pt-5" id="movies">
+<section class="section section-lg page-section" id="movies">
     <div class="container">
         <div class="section-caption">
             <h1>Movies</h1>
@@ -120,7 +120,7 @@
     </div>
 </section>
                 {{-- end Movies'section --}}
-<section class="section section-lg py-5" id="cinemas">
+<section class="section section-lg page-section" id="cinemas">
     <div class="container">
         <div class="section-caption">
             <h1>Cinemas</h1>
@@ -153,7 +153,7 @@
     </div>
 </section>
 {{-- Our services --}}
-<section class="section section-lg bg-gray-darker text-white" id="services">
+<section class="section section-lg bg-gray-darker text-white page-section" id="services">
     <div class="container">
         <div class="section-caption">
             <h1>Our Services</h1>
@@ -202,7 +202,7 @@
         </div>
     </div>
 </section>
-<section class="section section-lg py-5" id="about">
+<section class="section section-lg page-section" id="about">
     <div class="container">
         <div class="section-caption">
             <h1>About Us</h1>

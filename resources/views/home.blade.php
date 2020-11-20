@@ -224,4 +224,37 @@
         </div>
     </div>
 </section>
+<section class="section section-lg bg-dark-blue text-white page-section" id="contact-us">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                <h2>Contact Us</h2>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-phone"></i>+959792345678</li>
+                    <li><a href="http://"><i class="fas fa-envelope"></i>admin@me.com</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i>Kamayut Township,Yangon</li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <h2>Quick Links</h2>
+                <ul class="footer-link">
+                    <li><a href="#movies">Now Showing</a></li>
+                    <li><a href="#cinemas">Cinemas</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div> 
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <h2>Social Links</h2>
+                <div class="social-link">
+                    <a href="http://"><i class="fab fa-facebook-square"></i></a>
+                    <a href="http://"><i class="fab fa-twitter-square"></i></a>
+                    <a href="http://"><i class="fab fa-google-plus-square"></i></a>
+                    <a href="http://"><i class="fab fa-instagram-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
 @endsection

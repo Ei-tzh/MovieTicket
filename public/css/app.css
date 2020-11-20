@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap);@import url(https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap);.bdp-input input{display:inline-block;margin-bottom:3px;width:60px}.bdp-block{display:inline-block;line-height:1;text-align:center;padding:5px 3px}/**
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap);@import url(https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap);@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap);.bdp-input input{display:inline-block;margin-bottom:3px;width:60px}.bdp-block{display:inline-block;line-height:1;text-align:center;padding:5px 3px}/**
   * bootstrap-switch - Turn checkboxes and radio buttons into toggle switches.
   *
   * @version v3.3.4
@@ -50852,6 +50852,67 @@ hr {
   margin-bottom: 20px;
 }
 
+/*==============================
+      section(contact us)
+================================*/
+
+#contact-us h2 {
+  padding-bottom: 10px;
+  font-family: "Fjalla One", sans-serif;
+}
+
+ul {
+  margin-bottom: 30px;
+}
+
+ul.footer-contact > li {
+  list-style-type: none;
+  margin: 20px 30px 10px 10px;
+  padding: 0;
+  display: block;
+}
+
+ul.footer-contact > li i {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+ul.footer-link {
+  list-style-type: disc;
+  max-height: 100px;
+  width: 300px;
+}
+
+ul.footer-link > li {
+  margin: 10px;
+  display: inline-block;
+}
+
+ul.footer-link > li:before {
+  content: "\2022   ";
+}
+
+.social-link {
+  padding-left: 40px;
+  margin: 15px;
+}
+
+.social-link > a {
+  font-size: 22px;
+  padding: 8px 10px;
+  margin-right: 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.social-link > a:hover {
+  background-color: #fff;
+}
+
+.social-link > a:hover i {
+  color: #385963;
+}
+
 @media (min-width: 576px) {
   .cropped-image img {
     margin: -120px 0px 0px 0px;
@@ -50908,6 +50969,18 @@ hr {
   #about .about-image img {
     margin: 0px 0px 0px 0px;
   }
+
+  ul.footer-contact > li {
+    display: inline-block;
+  }
+
+  ul.footer-contact > li i {
+    font-size: 22px;
+  }
+
+  .social-link > a {
+    margin-right: 10px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -50963,6 +51036,10 @@ hr {
   .about-text {
     text-align: right;
   }
+
+  .social-link > a {
+    margin-right: 5px;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -50976,6 +51053,10 @@ hr {
 
   #services .services-body .services-box {
     padding: 40px 30px 45px;
+  }
+
+  .social-link > a {
+    margin-right: 10px;
   }
 }
 

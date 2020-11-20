@@ -67,6 +67,12 @@
             color:#eee;
             width:120px;
         }*/
+        .bg-dark-blue{
+            background-color:#407A79;
+        }
+        #sticky-footer {
+            flex-shrink: none;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +106,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact-us">Contact</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -141,11 +150,11 @@
         <main>
             @yield('content')
         </main>
-        {{-- <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
             <div class="container text-center">
-                <small>Copyright &copy; Your Website</small>
+                <small>Copyright &copy;YCTB</small>
             </div>
-        </footer> --}}
+        </footer>
     </div>
 </body>
 </html>

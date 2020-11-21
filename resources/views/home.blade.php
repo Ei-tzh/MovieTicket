@@ -250,7 +250,7 @@
                     <a href="http://"><i class="fab fa-facebook-square"></i></a>
                     <a href="http://"><i class="fab fa-twitter-square"></i></a>
                     <a href="http://"><i class="fab fa-google-plus-square"></i></a>
-                    <a href="http://"><i class="fab fa-instagram-square"></i></a>
+                    <a href="http://"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

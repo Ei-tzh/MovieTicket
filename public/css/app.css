@@ -50612,6 +50612,11 @@ a {
   padding-right: 20px;
 }
 
+.navbar-collapse {
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
 /*==============================
       header
 ==============================*/

@@ -19,10 +19,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        
-        .navbar-collapse {
-            max-height: calc(100vh - 60px);
-            overflow-y: auto; }
        .logo{
            width:30px;
            height:30px;
@@ -73,6 +69,27 @@
         #sticky-footer {
             flex-shrink: none;
         }
+        #contact-us a:hover{
+            color:#ABD2DE;
+        }
+        #to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 30px;
+            z-index: 999;
+            padding:8px 12px;
+            margin: 0;
+            border: 0;
+            border-radius: 5px;
+            background:#7BC7C6;
+        }
+        a#to-top:hover{
+            -webkit-transform: translateY(-10px);
+            -webkit-transition: all .8s ease;
+        }
+        a#to-top:hover i{
+            color:#7A4F4C;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +113,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Movies</a>
+                            <a class="nav-link" href="#movies">Movies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#cinemas">Cinemas</a>
@@ -155,6 +172,9 @@
                 <small>Copyright &copy;YCTB</small>
             </div>
         </footer>
+        <a href="#app" id="to-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
     </div>
 </body>
 </html>

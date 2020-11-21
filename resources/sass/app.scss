@@ -81,6 +81,10 @@ a{
   padding-left: 20px;
   padding-right: 20px;
 }
+.navbar-collapse {
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+ }
 /*==============================
       header
 ==============================*/
@@ -393,6 +397,7 @@ ul.footer-link>li:before {
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
+  
   header.masthead {
     height: 100vh;
     min-height: 40rem;

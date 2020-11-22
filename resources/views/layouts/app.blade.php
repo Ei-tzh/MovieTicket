@@ -18,6 +18,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
        .logo{
            width:30px;
@@ -97,7 +98,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top py-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="images/logo/logo.png" alt="..." class="d-inline-block align-top logo">
+                    <img src="{{ asset('images/logo/logo.png')}}" alt="..." class="d-inline-block align-top logo">
                     <span class="app_name">{{ config('app.name', 'Laravel') }}</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +114,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#movies">Movies</a>
+                            <a class="nav-link" href="{{ route('movies.index' )}}">Movies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#cinemas">Cinemas</a>
@@ -176,5 +177,6 @@
             <i class="fas fa-angle-up"></i>
         </a>
     </div>
+    @stack('vue')
 </body>
 </html>

@@ -52,3 +52,6 @@ Route::put('/admin/bookings/{booking_id}/{id}','Admin\BookingController@updateBo
 Route::delete('/admin/bookings/{booking_id}/{id}','Admin\BookingController@deleteMovietheater')->name('bookings.deleteMovietheater');  
 
 Route::resource('/admin/testing','test\testController');
+
+//main page
+Route::resource('/home/movies','Main\MoviesController');

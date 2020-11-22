@@ -1,0 +1,508 @@
+@charset "UTF-8";
+
+/*==============================
+      for admin dashboard
+==============================*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito", sans-serif;
+}
+
+p {
+  font-family: "Lora", serif;
+}
+
+a {
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+}
+
+.row {
+  margin: 0 auto;
+  max-width: 62.5rem;
+  width: 100%;
+}
+
+.page-section {
+  padding: 8rem 0 3rem;
+}
+
+.section-caption {
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.section-caption h1 {
+  text-transform: uppercase;
+}
+
+.navbar-dark {
+  background-color: #385963;
+}
+
+.nav-link {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar-collapse.collapse.show {
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+/*==============================
+      header
+==============================*/
+
+header.masthead h1 {
+  font-size: 2.25rem;
+}
+
+.btn-xl {
+  padding: 1.25rem 2.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10rem;
+}
+
+.btn-primary {
+  background-color: #699DB3;
+}
+
+/*==============================
+      section(movies)
+==============================*/
+
+#movies .movies-info {
+  background-color: #699DB3;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+#movies .movies-info h3 {
+  padding-top: 5px;
+  color: #fff;
+}
+
+#movies .movies-info p {
+  padding-top: 8px;
+  color: #fff;
+}
+
+#movies .movies-info i {
+  margin-right: 5px;
+  background-color: #fff;
+  color: #699DB3;
+  padding: 8px;
+  border-radius: 100%;
+}
+
+.cropped-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cropped-image img {
+  margin: -180px 0px 0px 0px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title a {
+  font-size: 1.375rem;
+  font-weight: weight;
+  color: #385963;
+}
+
+.card-text ul li {
+  font-size: 1.0625rem;
+}
+
+.error {
+  height: 80px;
+  background-color: #eee;
+}
+
+.cropped-image:hover img {
+  -webkit-transform: scale(1.2);
+  -webkit-transition: all 0.4s ease;
+}
+
+.card-text ul li {
+  margin-bottom: 2px;
+}
+
+.card-text ul li i {
+  color: #699DB3;
+}
+
+.see-more a {
+  background: #B0AA5B;
+  padding: 0.75rem;
+  border-radius: 30px;
+}
+
+/*==============================
+      section(Cinemas)
+==============================*/
+
+.cinema-cropped-image {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
+.cinema-cropped-image img {
+  margin: -90px 0px 0px 0px;
+}
+
+#cinemas .card-title {
+  font-size: 1.25rem;
+}
+
+#cinemas .card-body {
+  position: relative;
+}
+
+#cinemas .card:hover {
+  box-shadow: 0 0 15px #acacac;
+}
+
+.card-body > a {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #385963;
+  border-radius: 100%;
+}
+
+.card-body > a:hover {
+  -webkit-transform: translateY(-5px);
+  -webkit-transition: all 0.5s ease;
+}
+
+.card-body > a > i {
+  font-size: 16px;
+  padding: 6px;
+  color: #fff;
+}
+
+/*==============================
+      section(Services)
+==============================*/
+
+.bg-gray-darker {
+  background-color: #8DB8A0;
+}
+
+#services .services-caption {
+  text-transform: uppercase;
+}
+
+#services .services-body {
+  margin-top: 50px;
+}
+
+#services .services-body .services-box {
+  padding: 20px 15px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  transition: 450ms ease-in-out;
+  margin-bottom: 20px;
+  height: auto;
+  overflow: hidden;
+}
+
+#services .services-body .services-box:hover {
+  background-color: #8CB884;
+  -webkit-transform: translateY(-20px);
+  -webkit-transition: all 0.5s ease;
+}
+
+#services .services-box .services-icon > i {
+  font-size: 30px;
+}
+
+#services .services-box .services-title {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 400px;
+  font-family: "Nunito", sans-serif;
+}
+
+hr {
+  border-top: 1px solid #ededed;
+  opacity: 0.5;
+}
+
+/*==============================
+      section(About)
+================================*/
+
+#about > .container > .row {
+  background-color: #031059;
+  padding-top: 12px;
+  border-radius: 10px;
+}
+
+#about .about-image {
+  margin-bottom: 12px;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#about .about-image img {
+  margin: 0px 0px 0px -150px;
+}
+
+.about-text {
+  /*background-color:#fff;
+  border:1px solid #eee;
+  border-radius:10px;*/
+  background-color: #031059;
+  color: #fff;
+  padding: 30px 20px 12px;
+}
+
+.about-text > .title {
+  color: #F2C4B3;
+  text-transform: uppercase;
+  display: block;
+  font-size: 24px;
+  margin-bottom: 25px;
+  margin-top: -6px;
+}
+
+.about-text > h2 {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.about-text > p {
+  font-family: "Nunito", sans-serif;
+  margin-bottom: 20px;
+}
+
+/*==============================
+      section(contact us)
+================================*/
+
+#contact-us h2 {
+  padding-bottom: 10px;
+  font-family: "Fjalla One", sans-serif;
+}
+
+ul {
+  margin-bottom: 30px;
+}
+
+ul.footer-contact > li {
+  list-style-type: none;
+  margin: 20px 30px 10px 10px;
+  padding: 0;
+  display: block;
+}
+
+ul.footer-contact > li i {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+ul.footer-link {
+  list-style-type: disc;
+  max-height: 100px;
+  width: 300px;
+}
+
+ul.footer-link > li {
+  margin: 10px;
+  display: inline-block;
+}
+
+ul.footer-link > li:before {
+  content: "\2022   ";
+}
+
+.social-link {
+  padding-left: 40px;
+  margin: 15px;
+}
+
+.social-link > a {
+  font-size: 22px;
+  padding: 8px 10px;
+  margin-right: 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.social-link > a:hover {
+  background-color: #fff;
+}
+
+.social-link > a:hover i {
+  color: #385963;
+}
+
+@media (min-width: 576px) {
+  .cropped-image img {
+    margin: -120px 0px 0px 0px;
+  }
+
+  .card-title a {
+    font-size: 1.25rem;
+    font-weight: weight;
+  }
+
+  .card-text ul li {
+    font-size: 1rem;
+  }
+
+  .cinema-cropped-image img {
+    margin: 0px 0px 0px 0px;
+  }
+
+  #cinemas .card-title {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cropped-image img {
+    margin: -100px 0px 0px 0px;
+  }
+
+  .card-title a {
+    font-size: 1.375rem;
+    font-weight: weight;
+  }
+
+  .card-text ul li {
+    font-size: 0.875rem;
+  }
+
+  .error {
+    height: 100px;
+  }
+
+  #cinemas .card-title {
+    font-size: 1.125rem;
+  }
+
+  #services .services-body .services-box {
+    height: 250px;
+  }
+
+  #services .services-box .services-icon > i {
+    font-size: 35px;
+  }
+
+  #about .about-image img {
+    margin: 0px 0px 0px 0px;
+  }
+
+  ul.footer-contact > li {
+    display: inline-block;
+  }
+
+  ul.footer-contact > li i {
+    font-size: 22px;
+  }
+
+  .social-link > a {
+    margin-right: 10px;
+  }
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 4.5rem;
+    padding-bottom: 0;
+  }
+
+  header.masthead p {
+    font-size: 1.15rem;
+  }
+
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+
+  .cropped-image img {
+    margin: -90px 0px 0px 0px;
+  }
+
+  .card-title a {
+    font-size: 1.4375rem;
+    font-weight: weight;
+  }
+
+  .card-text ul li {
+    font-size: 0.8rem;
+  }
+
+  .error {
+    height: 150px;
+  }
+
+  #cinemas .card-title {
+    font-size: 0.875rem;
+  }
+
+  #services .services-body .services-box {
+    padding: 40px 25px 45px;
+    height: 350px;
+  }
+
+  #services .services-box .services-icon > i {
+    font-size: 40px;
+  }
+
+  #about .about-image img {
+    margin: 0px 0px 0px -180px;
+  }
+
+  .about-text {
+    text-align: right;
+  }
+
+  .social-link > a {
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 1200px) {
+  header.masthead h1 {
+    font-size: 3.5rem;
+  }
+
+  .cropped-image img {
+    margin: -80px 0px 0px 0px;
+  }
+
+  #services .services-body .services-box {
+    padding: 40px 30px 45px;
+  }
+
+  .social-link > a {
+    margin-right: 10px;
+  }
+}
+

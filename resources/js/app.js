@@ -11,20 +11,11 @@ require('admin-lte/dist/js/adminlte.min.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');
 
-//require('');
+
 //require('bootstrap-switch-button/dist/js/bootstrap-switch-button.min.js');
 window.Vue = require('vue');
 import Vue from 'vue';
-import VCalendar from 'v-calendar';
-// Use v-calendar & v-date-picker components
-Vue.use(VCalendar, {
-    componentPrefix: 'vc' // Use <vc-calendar /> instead of <v-calendar />
-                  // ...other defaults
-  });
 
-
-import Calendar from 'v-calendar/lib/components/calendar.umd';
-import DatePicker from 'v-calendar/lib/components/date-picker.umd';
 
 import $ from 'jquery';
 window.$ = window.jQuery = $;
@@ -48,19 +39,7 @@ import  'datatables.net/js/jquery.dataTables.min.js';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('select2',require('./components/Select2.vue').default);
-
-// Register components in your 'main.js'
-Vue.component('calendar', Calendar)
-Vue.component('date-picker', DatePicker)
-
-// Or just use in separate component
-export default {
-  components: {
-    Calendar,
-    DatePicker
-  }
-  
-}
+Vue.component('datepicker',require('./components/App.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

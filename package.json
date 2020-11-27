@@ -35,6 +35,6 @@
         "ionicons": "^5.2.3",
         "save": "^2.4.0",
         "select2": "^4.0.13",
-        "v-calendar": "^2.1.1"
+        "vue2-datepicker": "^3.8.1"
     }
 }

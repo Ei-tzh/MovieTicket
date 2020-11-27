@@ -12,9 +12,19 @@
             data() {
                 return {
                     date:new Date(),
-                    today:moment(this.date).format("YYYY/MM/DD")
+                    today:''
                 };
+            },
+            methods:{
+                currentdate:function(){
+                    this.today=this.date.toLocaleDateString()
+                    
+                }
+            },
+            created:function(){
+                this.currentdate()
             }
+
             
         };
 </script>

@@ -7,7 +7,7 @@
             <div class="section-caption text-left">
                 <h1>Now Showing</h1>
                 <p>You can view movies in day by day.</p>
-                <datepicker></datepicker>
+                <date-picker v-model='selectedDate' />
             </div>
         </div>
         
@@ -16,12 +16,13 @@
 @endsection
 @push('vue')
     <script>
+       
         window.onload = function () {
+            
             var app= new Vue({
                 el: '#now-showing',
                 data:{
-                        
-                        message:"Hello"
+                        selectedDate:''
                     }
             })
         }

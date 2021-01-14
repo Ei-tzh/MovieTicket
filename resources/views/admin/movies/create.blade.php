@@ -17,62 +17,19 @@
                         <!-- Moviename -->
                         <div class="form-group">
                             <label for="name">Movie Name</label>
-                            <input type="text" class="form-control" id="name" name='name' placeholder="Enter movie name">
+                            <input type="text" class="form-control" id="name" name='name' placeholder="Enter movie name" value="{{ old('name')}}">
                             @error('name')
                                 <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <!-- Director -->
                         <div class="form-group">
-                            <label for="directorname">Director</label>
-                            <input type="text" class="form-control" id="directorname" name='director' placeholder="Enter director's name">
+                            <label for="director">Director</label>
+                            <input type="text" class="form-control" id="director" name='director' placeholder="Enter director's name" value="{{ old('director')}}">
                             @error('director')
                                 <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <!-- Start_date -->
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Start Date:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control float-right" name='start_date' id="start_date" value='{{ old("start_date") }}'>
-                                        
-                                    </div>
-                                    @error('start_date')
-                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                
-                                </div>
-                            </div>
-                            <!-- End startdate -->
-                            <!-- EndDate -->
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>End Date:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control float-right" name="end_date" id="end_date" value="{{ old('end_date') }}">
-                                        
-                                    </div>
-                                    @error('end_date')
-                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                
-                                </div>
-                            </div>
-                            <!-- end enddate -->
-                        </div>
-                        
                         <!-- Duration -->
                         <div class="form-group">
                             <label>Duration</label>
@@ -109,11 +66,32 @@
                         <!-- description -->
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class='form-control' placeholder="Enter description"></textarea>
+                            <textarea name="description" id="description" cols="30" rows="5" class='form-control' placeholder="Enter description">{{ old('description') }}</textarea>
                             @error('description')
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+                        <!-- casts -->
+                        <div class="form-group">
+                            <label for="casts">Casts</label>
+                            <textarea name="casts" id="casts" cols="30" rows="3" class='form-control' placeholder="Enter casts">{{ old('casts') }}</textarea>
+                            @error('casts')
+                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for='Categories'>Categories:</label>
+                            <select class="form-control" id='categories' name='categories[]' style="width: 100%;" multiple="multiple">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('categories')
+                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
                         <!-- type -->
                         <div class="form-group">
                             <label for="type">Type</label>

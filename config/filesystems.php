@@ -80,9 +80,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('images') => storage_path('app/public/images'),
-        public_path('videos') => storage_path('app/public/videos'),
-        public_path('images/cinemas') => storage_path('app/public/images/cinemas'),
-        public_path('images/admin') => storage_path('app/public/images/admin')
+        public_path('images/movies') => storage_path('app/public/images/movies'),
+        //public_path('cinemas') => storage_path('app/public/images/cinemas'),
+        //public_path('images/admin') => storage_path('app/public/images/admin')
         ],
     ];

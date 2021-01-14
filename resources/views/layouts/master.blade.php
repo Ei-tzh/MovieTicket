@@ -93,6 +93,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href='{{ route('movieCategories.index')}}' class="nav-link  @if(Request::is('admin/movieCategories*')){{'active'}} @endif">
+              <i class="nav-icon fas fa-video"></i>
+              <p>
+                Movies-Categories
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('cinemas.index') }}" class="nav-link @if(Request::is('admin/cinemas*')){{'active'}} @endif">
               <i class="nav-icon fas fa-building"></i>
               <p>

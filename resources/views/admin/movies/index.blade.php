@@ -39,8 +39,9 @@
                     <th>MovieName</th>
                     <th>Poster</th>
                     <th>Duration</th>
-                    <th>StartDate/EndDate</th>
                     <th>Type</th>
+                    <th>Casts</th>
+                    <th>Categories</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -48,11 +49,23 @@
                     @foreach($movies as $movie)
                     <tr>
                         <td>{{ $movie->id }}</td>
-                        <td>{{ $movie->name }}</td>
-                        <td><img src="{{ $movie->poster }}" alt="poster" style="width:100px;height:auto;"></td>
+                        <td class="text-bold">{{ $movie->name }}</td>
+                        <td><img src="{{ $movie->poster }}" alt="Movie poster" style="width:100px;height:auto;"></td>
                         <td>{{ $movie->duration}}</td>
-                        <td>{{ $movie->start_date.'/'.$movie->end_date}}</td>
                         <td>{{ $movie->type }}</td>
+                        <td>{{ $movie->casts }}</td>
+                        <td>
+                            @forelse ($movie->categories as $category)
+                                @if($loop->last)
+                                  {{ $category->name}}
+                                @else
+                                {{ $category->name .','}}
+                                @endif
+                                @empty
+                                    {{"No "}}
+                                
+                            @endforelse
+                        </td>
                         <td><a href="{{ route('movies.show',$movie->id) }}" title="view">
                               <i class="fas fa-eye green"></i>
                             </a> /

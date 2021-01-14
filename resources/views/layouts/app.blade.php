@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('movies.index' )}}">Movies</a>
+                            <a class="nav-link" href="{{ route('allmovies.index' )}}">Movies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#cinemas">Cinemas</a>

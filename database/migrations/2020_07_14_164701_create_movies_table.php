@@ -17,12 +17,10 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('director');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->time('duration');
             $table->string('poster');
-            $table->string('trailer')->nullable();
             $table->text('description');
+            $table->string('casts');
             $table->string('type');
             $table->timestamps();
         });

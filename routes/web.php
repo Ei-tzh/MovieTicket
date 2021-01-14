@@ -23,6 +23,7 @@ Route::resource('/admin/dashboard', 'Admin\AdminController')->middleware(['auth'
 Route::get('/home','HomeController@index')->name('home')->middleware(['auth','user']);
 
 Route::resource('/admin/movies','Admin\MovieController');
+Route::resource('/admin/movieCategories','Admin\MovieCategoriesController');
 Route::resource('/admin/cinemas','Admin\CinemaController');
 
 Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');
@@ -54,4 +55,4 @@ Route::delete('/admin/bookings/{booking_id}/{id}','Admin\BookingController@delet
 Route::resource('/admin/testing','test\testController');
 
 //main page
-Route::resource('/home/movies','Main\MoviesController');
+Route::resource('/home/allmovies','Main\MoviesController');

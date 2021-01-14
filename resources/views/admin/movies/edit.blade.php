@@ -32,49 +32,7 @@
                                 <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <!-- Start_date -->
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Start Date:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control float-right" name='start_date' id="start_date" value={{ $movie->start_date }}>
-                                        
-                                    </div>
-                                    @error('start_date')
-                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                
-                                </div>
-                            </div>
-                            <!-- End startdate -->
-                            <!-- EndDate -->
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>End Date:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control float-right" name="end_date" id="end_date" value="{{ $movie->end_date }}">
-                                        
-                                    </div>
-                                    @error('end_date')
-                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                
-                                </div>
-                            </div>
-                            <!-- end enddate -->
-                        </div>
-                        
+                       
                         <!-- Duration -->
                         <div class="form-group">
                             <label>Duration</label>
@@ -120,6 +78,33 @@
                                     <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+                        <!-- casts -->
+                        <div class="form-group">
+                            <label for="casts">Casts</label>
+                            <textarea name="casts" id="casts" cols="30" rows="3" class='form-control' placeholder="Enter casts">{{ $movie->casts }}</textarea>
+                            @error('casts')
+                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for='Categories'>Categories:</label>
+                            <select class="form-control" id='categories' name='categories[]' style="width: 100%;" multiple="multiple">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" 
+                                        @foreach ($movie_categories as $movie_category)
+                                            @if($movie_category->id==$category->id)
+                                                {{'selected'}}
+                                            @endif
+                                        @endforeach
+                                        >{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('categories')
+                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
                         <!-- type -->
                         <div class="form-group">
                             <label for="type">Type</label>

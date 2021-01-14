@@ -8,8 +8,7 @@ use App\Cinema;
 class Movie extends Model
 {
     //
-    protected $fillable=['name','director','start_date','end_date',
-    'duration','poster','trailer','description','type'];
+    protected $fillable=['name','director','duration','poster','trailer','description','casts','type'];
 
 
     public function categories(){

@@ -18,8 +18,6 @@ class CreateMovieTheaterTable extends Migration
             $table->unsignedBigInteger('movie_id');
             $table->unsignedBigInteger('theater_id');
             $table->boolean('status');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->timestamps();
 
             $table->foreign('movie_id')->references('id')->on('movies');

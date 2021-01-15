@@ -46,33 +46,35 @@ class CinemaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CinemaRequest $request)
+    public function store(Request $request)
     {
-    
         
-        $validated = $request->validated();
-        $filename = $request->image->getClientOriginalName();
-        $request->image->storeAs('/public/images/cinemas',$filename);
-        $url=Storage::url('images/cinemas/'.$filename);
-        
-        $phone=implode(",",$request->ph_no);
-        $cinema=Cinema::create([
-            'name' => $request->name,
-            'address'=>$request->address,
-            'ph_no'=>$phone,
-            'image' => $url,
-            'township_id'=>$request->township
-        ]);
-        $cinema_theater=Cinema::find($cinema->id);
-       foreach($request->theaters as $theater){
-            
-            $cinema_theater->theaters()->create([
-                'name' =>$theater,
-                'location'=>'2nd floor'
-            ]);
-       }
+        //$validated = $request->validated();     //for validation
+        return $request;
+        //for uploading image 
+        // $filename = $request->image->getClientOriginalName();
+        // $request->image->storeAs('/public/images/cinemas',$filename);
+        // $url=Storage::url('images/cinemas/'.$filename);
        
-        return redirect()->route('cinemas.index');
+        //$phone=implode(",",$request->ph_no);    //Array to String
+    //     $cinema=Cinema::create([
+    //         'name' => $request->name,
+    //         'address'=>$request->address,
+    //         'ph_no'=>$phone,
+    //         'image' => $url,
+    //         'township_id'=>$request->township
+    //     ]);
+        
+    //     foreach($request->theaters as $theater){
+            
+    //         Theater::create([
+    //             'name'      =>$theater,
+    //             'location'  =>'2nd floor',
+    //             'cinema_id' => $cinema->id
+    //         ]);
+    //    }
+       
+        //return redirect()->route('cinemas.index');
     }
 
     /**

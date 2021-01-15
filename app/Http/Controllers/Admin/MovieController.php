@@ -56,7 +56,7 @@ class MovieController extends Controller
             'categories'    =>'required',
             'type'          =>'required'
         ]);
-        //return $request->casts;
+
         $extension=$request->poster->extension();
         $uuid=Str::uuid();
 
@@ -112,7 +112,6 @@ class MovieController extends Controller
         $categories=Category::all();
         $movie=Movie::find($id);
         $movie_categories=$movie->categories;
-        
         return view('admin.movies.edit',compact('movie','movie_categories','categories'));
     }
 
@@ -141,6 +140,7 @@ class MovieController extends Controller
         $min=$request->min;
 
         //image upload
+        //if you upload a new photo,it will remove old photo in folder.
         if($request->hasfile('poster')){
             if(file_exists(public_path($movie->poster))){
                 unlink(public_path($movie->poster));

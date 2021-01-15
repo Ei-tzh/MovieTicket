@@ -47,36 +47,33 @@
                                                 </div>
 
                                             <!-- /.input group -->
-                                        @foreach ($errors->get('ph_no.*') as $message)
+                                            @foreach ($errors->get('ph_no.*') as $message)
                                                 @foreach($message as $value)
                                                     <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
                                                 @endforeach
-                                            
                                             @endforeach
-                                            
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <div id="phone"></div>
                                 {{-- theaters --}}
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="theaters">Select numbers of theaters which you want to create:</label>
-                                            <select class="form-control" id="theaters" name='theaters'>
-                                                <option value='' selected disabled>(Choose at least one)</option>
-                                                @for($i = 1; $i <= 5; $i++)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        <div id="new_theater"></div>
-                                        @error('theaters')
+                                            <label for="theaters">Add Theaters:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="theaters" name="theaters[]" placeholder="Enter A Theater's Name" >
+                                                <div id="new_theater">
+                                                    <button type="button" class='btn btn-success ml-1'>+</button>
+                                                </div>
+                                            </div>
+                                            @error('theaters')
                                                 <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
+                                <div id="theater"></div>
                                 <!-- image -->
                                 <div class="form-group">
                                     <label for="image">Image:</label>
@@ -120,47 +117,45 @@
     <script>
         $(document).ready(function(){
             var i=1;
+            var theater=1;
             $("#new_task").click(function(event){
-            event.preventDefault();
-            event.stopPropagation();
-            addRow();
-            
+                event.preventDefault();
+                event.stopPropagation();
+                addRow();
             });
-        function addRow(){
-            i++;
-            var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'
-                        +'<input type="tel" class="form-control" id="ph_no" name="ph_no[]" placeholder="09" >'
-                            +'<div id="clear">'
-                                +'<button type="button" class="btn btn-danger ml-1">-</button>'
-                            +'</div>'
-                    +'</div>'+'</div>'+'</div>'+'</div>';
-            $('#phone').append(row);
-        }
-        $(this).on('click','#clear',function(){
-            var button_id=$(this).parents('.row').attr('id'); 
-            $('#'+button_id).remove();
-            //console.log(button_id);
-            //$(this).parent().remove();
-        });
-          
-        
-
-        //for theaters
-        var input=$('<input/>',{type:'text',class:"form-control mt-2",id:"theaters",name:"theaters[]",placeholder:"Enter theater's name"});
-        function addDiv(){
-            //var input=$('<input/>',{type:'text',class:"form-control mt-2",id:"theaters",name:"theaters[]",placeholder:"Enter theater's name"});
-            $('#new_theater').append(input.clone());
-        }
-        $('#theaters').change(function () {
-            $( "#new_theater" ).empty(); //clear the recent input text
-            
-            var str=$(this).children("option:selected").val();
-            for(var i=1;i<=str;i++){
-             addDiv();
-             
+            $("#new_theater").click(function(event){
+                event.preventDefault();
+                event.stopPropagation();
+                addTheater();
+            });
+            function addRow(){
+                i++;
+                var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'
+                            +'<input type="tel" class="form-control" id="ph_no" name="ph_no[]" placeholder="09" >'
+                                +'<div id="clear">'
+                                    +'<button type="button" class="btn btn-danger ml-1">-</button>'
+                                +'</div>'
+                        +'</div>'+'</div>'+'</div>'+'</div>';
+                $('#phone').append(row);
             }
-        });
-         
+            $(this).on('click','#clear',function(){
+                var button_id=$(this).parents('.row').attr('id'); 
+                $('#'+button_id).remove();
+            });
+            function addTheater(){
+                theater++;
+                var row='<div class="row" id="newtheater'+theater+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'
+                            +'<input type="tel" class="form-control" id="theaters" name="theaters[]" placeholder="Enter A Theater\'s Name" >'
+                                +'<div id="remove_theater">'
+                                    +'<button type="button" class="btn btn-danger ml-1">-</button>'
+                                +'</div>'
+                        +'</div>'+'</div>'+'</div>'+'</div>';
+                $('#theater').append(row);
+            }  
+            $(this).on('click','#remove_theater',function(){
+                var button_id=$(this).parents('.row').attr('id'); 
+                $('#'+button_id).remove();
+            });
         });
     </script>
 @endpush

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Category;
-class MovieCategoriesController extends Controller
+use App\Township;
+class TownshipController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class MovieCategoriesController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
-        return view('admin.movieCategories.index',compact('categories'));
+        $townships=Township::all();
+        return view('admin.townships.index',compact('townships'));
     }
 
     /**
@@ -25,7 +25,8 @@ class MovieCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.movieCategories.create');
+        
+        return view('admin.townships.create');
     }
 
     /**
@@ -37,13 +38,12 @@ class MovieCategoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|alpha|unique:categories'
+            'name'  => 'required'
         ]);
-        Category::create([
-            'name'=> $request->name
+        Township::create([
+            'name'  => $request->name
         ]);
-        $request->session()->flash('status','A New Category is created!');
-        return redirect()->route('movieCategories.index');
+        return redirect()->route('townships.index');
     }
 
     /**
@@ -65,8 +65,8 @@ class MovieCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category=Category::find($id);
-        return view('admin.movieCategories.edit',compact('category'));
+        $township=Township::find($id);
+        return view('admin.townships.edit',compact('township'));
     }
 
     /**
@@ -78,14 +78,14 @@ class MovieCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $request->validate([
-            'name'=>'required|alpha|unique:categories'
+            'name'  => 'required'
         ]);
-        Category::where('id',$id)->update([
+        Township::where('id',$id)->update([
             'name'=>$request->name
         ]);
-        $request->session()->flash('status','You have successfully edited!');
-        return redirect()->route('movieCategories.index');
+        return redirect()->route('townships.index');
     }
 
     /**
@@ -96,7 +96,7 @@ class MovieCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category=Category::find($id);
-        $category->delete();
+        $township=Township::find($id);
+        $township->delete();
     }
 }

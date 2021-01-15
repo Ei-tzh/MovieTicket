@@ -111,6 +111,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('townships.index') }}" class="nav-link @if(Request::is('admin/townships*')){{'active'}} @endif">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Townships
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('timetables.index') }}" class="nav-link @if(Request::is('admin/timetables*')){{'active'}} @endif">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>

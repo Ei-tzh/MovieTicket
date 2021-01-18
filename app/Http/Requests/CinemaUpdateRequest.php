@@ -33,10 +33,10 @@ class CinemaUpdateRequest extends FormRequest
             $rules['ph_no.'.$key] = 'required|digits_between:9,11';
             
         }
-        foreach($this->request->get('theaters') as $key => $val){
-            $rules['theaters.'.$key]='required';
+        // foreach($this->request->get('theaters') as $key => $val){
+        //     $rules['theaters.'.$key]='required';
             
-        }
+        // }
         return $rules;
     }
     

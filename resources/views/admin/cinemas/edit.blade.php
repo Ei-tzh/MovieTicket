@@ -31,57 +31,36 @@
                                         <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <!-- ph.no -->
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group" >
-                                            <label for="ph_no">Ph.no:</label>
-                                                <phone-number   v-for="(phone,index) in phoneno"
-                                                                v-bind:test="phone"
-                                                                v-bind:k="index"
-                                                                v-on:remove="remove_phoneno"></phone-number>
-                                                <button type="button" class='btn btn-success  mt-2' v-on:click="addnew_phoneno" >Add New</button> 
-                                            <!-- /.input group -->
-                                            @foreach ($errors->get('ph_no.*') as $message)
-                                                @foreach($message as $value)
-                                                    <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
-                                                @endforeach
-                                            
-                                            @endforeach
-                                            
+                                <div id="old_phoneno">
+                                    <label for="ph_no">Ph.no:</label>
+                                    <button id="add_new" class="btn btn-success mb-2">Add New phone.no</button>
+                                    @foreach ($phoneno as $key=>$phone)
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="tel" class="form-control" id="ph_no{{$key}}" name="ph_no[]" value="{{ $phone }}">
+                                                            <div id="remove">
+                                                                <button type="button" class='btn btn-danger ml-1'>x</button>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
+                                    @endforeach
                                 </div>
-                                
-                                <!-- theater -->
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="theaters">Theaters:</label>
-                                                    <theater-item   v-for="(theater,index) in theaters"
-                                                                    v-bind:item="theater"
-                                                                    v-bind:k="index"
-                                                                    v-on:remove='removetheater'></theater-item>
-                                                            
-                                                    <button type="button" class='btn btn-success  mt-2' id='create_theater' v-on:click='addtheater'>Add New Theater</button>
-                                                @foreach ($errors->get('theaters.*') as $message)
-                                                    @foreach($message as $value)
-                                                        <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
-                                                    @endforeach
-                                                
-                                                @endforeach    
-                                           
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+                                @foreach ($errors->get('ph_no.*') as $message)
+                                    @foreach($message as $value)
+                                        <small id="bodyhelp" class="form-text text-danger">{{$value}}</small>
+                                    @endforeach
+                                @endforeach
+                                <div id="new_phoneno"></div>
                                <!-- image -->
                                 <div class="form-group mt-4">
                                     <label for="image">Image</label>
                                     <div class="input-group">
                                         <img src="{{ $cinema->image}} " alt="" style="width:100px;height:auto;">
-                                        <input type="file" id="image" name="image" value="{{ $cinema->image }}" class="image_upload">
+                                        <input type="file" id="image" name="image" class="image_upload">
                                     @error('image')
                                             <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -113,46 +92,39 @@
     </section>
 </div>
 @endsection
-
-@push('vue')
-<script>
-
-window.onload = function () {
-Vue.component('theater-item',{
-    props:['item','k','remove'],
-    template:' <div class="input-group" v-bind:id="k"><input type="text" class="form-control mt-2" id="theaters" name="theaters[]" v-model="item.name" ><div class="input-group-append mt-2"><button type="button" @click="$emit(\'remove\',k)" class="btn btn-danger" >X</button></div></div>'
-    
-}),
-Vue.component('phone-number',{
-    props:['test','k','remove'],
-    template:' <div class="input-group" v-bind:id="k"><div class="input-group-prepend mt-2"><span class="input-group-text"><i class="fas fa-phone"></i></span></div><input type="tel" class="form-control mt-2" id="ph_no" name="ph_no[]"  placeholder="Enter phone number" v-bind:value="test"><button type="button" class="btn btn-danger ml-2 mt-2" v-on:click="$emit(\'remove\',k)" >X</button></div>'
-     
-})
-    var app2= new Vue({
-        el: '#app-2',
-        data: {
-            theaters:@json($theaters),
-            phoneno:@json($phoneno)
-        },
-        methods:{
-            addtheater:function(){
-                this.theaters.push({
-                    name:''
-                })
-            },
-            removetheater:function(index){
-                this.theaters.splice(index,1)
-            },
-            remove_phoneno:function(index){
-               this.phoneno.splice(index,1)
-            },
-            addnew_phoneno:function(){
-                this.phoneno.push('')
+@push('jquery')
+    <script>
+        $(document).ready(function(){
+            var i=0;
+            $("#add_new").click(function(event){
+                event.preventDefault();
+                event.stopPropagation();
+                addRow();
+            });
+            $(this).on('click','#remove',function(){
+                if(confirm('Are you sure you want to delete this phone number?')){         
+                    var button_id=$(this).siblings().attr('id'); 
+                    //alert(button_id);
+                    $('#'+button_id).remove();
+                    $(this).remove();
+                }
+            });
+            function addRow(){
+                i++;
+                var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'
+                            +'<input type="tel" class="form-control" id="ph_no" name="ph_no[]" placeholder="09" >'
+                                +'<div id="clear">'
+                                    +'<button type="button" class="btn btn-danger ml-1">-</button>'
+                                +'</div>'
+                        +'</div>'+'</div>'+'</div>'+'</div>';
+                $('#new_phoneno').append(row);
             }
-            
-        }
-        
-    })
-}  
-</script>
-@endpush                       
+            $(this).on('click','#clear',function(){
+                var button_id=$(this).parents('.row').attr('id'); 
+                $('#'+button_id).remove();
+            });
+           
+        });
+    </script>
+@endpush
+

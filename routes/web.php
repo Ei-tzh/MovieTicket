@@ -25,13 +25,14 @@ Route::get('/home','HomeController@index')->name('home')->middleware(['auth','us
 Route::resource('/admin/movies','Admin\MovieController');
 Route::resource('/admin/movieCategories','Admin\MovieCategoriesController');
 Route::resource('/admin/cinemas','Admin\CinemaController');
+Route::resource('/admin/cinemas/{id}/theaters','Admin\CinemaTheaterController');
 Route::resource('/admin/townships','Admin\TownshipController');
 
-Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');
-Route::post('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@store')->name('theaters.store');
-Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@edit')->name('theaters.edit');
-Route::put('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@update')->name('theaters.update');
-Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','Admin\TheaterController@destroy')->name('theaters.destroy');
+// Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');
+// Route::post('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@store')->name('theaters.store');
+// Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@edit')->name('theaters.edit');
+// Route::put('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@update')->name('theaters.update');
+// Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','Admin\TheaterController@destroy')->name('theaters.destroy');
 
 Route::resource('/admin/cinemas/{cinema_id}/theaters/{theater_id}/seats','Admin\SeatController');
 

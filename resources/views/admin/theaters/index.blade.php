@@ -15,14 +15,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <a href='{{ route('cinemas.create')}}' class="float-left">
-                            <button class='btn btn-primary'><i class="fas fa-plus"></i> Add New Cinema</button>
-                        </a>
+                       <h1>{{ $cinema->name }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item active">Cinemas</li>
+                        <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
+                        <li class="breadcrumb-item active">{{ $cinema->id }}</li>
                         </ol>
                     </div>
                 </div>
@@ -34,39 +33,34 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Cinema Table</h3>
+                                <h3 class="card-title">Theaters Table</h3>
+                                <div class="new-theater float-right">
+                                    <a href="{{ route('theaters.create',$cinema->id)}}">
+                                        <button type="button" class="btn btn-primary">Add New Theater</button>
+                                    </a>
+                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" id="theaters">
                                     <thead class="bg-primary">
                                         <tr>
-                                            <th>ID</th>
+                                            <th>No</th>
                                             <th>Name</th>
-                                            <th>Address</th>
-                                            <th style="width: 150px">Ph.no</th>
-                                            <th>Theaters</th>
+                                            <th>Location</th>
                                             <th>Image</th>
-                                            <th>Township</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($cinemas as $cinema)
-                                        <tr>
-                                            <td>{{ $cinema->id }}</td>
-                                            <td>{{ $cinema->name}}</td>
-                                            <td>{{ $cinema->address}}</td>
-                                            <td><pre>{{ $cinema->ph_no }}</pre></td>
-                                            <td>
-                                                <a href="{{route('theaters.index',['id'=>$cinema->id] )}}" title="View Theaters">
-                                                    <button type="button" class="btn btn-primary">View Theaters({{ count($cinema->theaters)}})</button>
-                                                </a>
-                                            </td>
-                                            <td><img src="{{ $cinema->image }}" alt="image" style="width:80px;height:auto;"></td>
-                                            <td>{{ $cinema->township->name }}</td>
-                                            <td>
-                                                <a href="{{route('cinemas.edit',$cinema->id)}}" title="Edit">
+                                       @foreach ($theaters as $theater)
+                                           <tr>
+                                               <td>{{ ++$loop->index }}</td>
+                                               <td>{{ $theater->name }}</td>
+                                               <td>{{ $theater->location }}</td>
+                                               <td><img src="{{ $theater->image }}" alt="Theater" style="width:100px;height:auto;"></td>
+                                               <td>
+                                                <a href="" title="Edit">
                                                     <i class="fas fa-edit blue"></i>
                                                 </a> /
                                                 @method('DELETE')
@@ -74,8 +68,8 @@
                                                     <i class="fas fa-trash red"></i>
                                                 </a>
                                             </td>
-                                        </tr>
-                                        @endforeach
+                                           </tr>
+                                       @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -86,3 +80,10 @@
         </section>
     </div>
 @endsection
+@push('jquery')
+<script>
+        $(document).ready(function(){
+            $('#theaters').DataTable();
+        });
+</script>
+@endpush

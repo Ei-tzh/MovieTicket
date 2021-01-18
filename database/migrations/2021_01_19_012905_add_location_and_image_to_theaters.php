@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTheatersTable extends Migration
+class AddLocationAndImageToTheaters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateTheatersTable extends Migration
      */
     public function up()
     {
-        Schema::create('theaters', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('cinema_id');
-            $table->timestamps();
-
-            $table->foreign('cinema_id')->references('id')->on('cinemas');
+        Schema::table('theaters', function (Blueprint $table) {
+            $table->string('location')->after('name');
+            $table->string('image')->after('location');
         });
     }
 
@@ -31,7 +27,7 @@ class CreateTheatersTable extends Migration
     public function down()
     {
         Schema::table('theaters', function (Blueprint $table) {
-            $table->dropColumn('location');
+            //
         });
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+   
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -38,21 +38,17 @@
                                     <strong><i class="fas fa-phone mr-1"></i>Ph.no</strong>
                                     <p class="text-muted">{{ $cinema->ph_no}}</p>
                                     <hr>
-                                    
-                                    
-                                     
                                 </div>  
                             </div>
                         </div>
                     </div>
-                    @foreach($theaters as $theater)
+                    {{-- @foreach($theaters as $theater)
                     <div class="row mt-3">
                         <div class="col-8 col-sm-6">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">{{ $theater->name }}<span style='font-size:16px'> ({{$theater->location}}) </span></h3>
+                                    <h3 class="card-title">{{ $theater->name }}</h3>
                                     <div class="float-right">
-                                        <a href="{{ route('seats.index',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-info text-white'>{{'( ' .count($theater->seats).' )seats'}}</button></a>
                                         <a href="{{ route('theaters.create',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id ]) }}"><button type="button" class='btn btn-outline-light'>Create</button></a>
                                     </div>
                                 </div>
@@ -62,8 +58,6 @@
                                             <tr>
                                                 <th>Movies</th>
                                                 <th>Status</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
                                                 <th>Modify</th>
                                             </tr>
                                         </thead>
@@ -72,8 +66,6 @@
                                             <tr>
                                                 <td>{{ $movie->name }}</td>
                                                 <td class="{{ $movie->pivot->status==1 ?'text-success':'text-danger' }}">{{ $movie->pivot->status==1 ?'Active':'Inactive' }}</td>
-                                                <td>{{ $movie->pivot->start_date }}</td>
-                                                <td>{{ $movie->pivot->end_date }}</td>
                                                 <td><a href="{{ route('theaters.edit',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id,'id'=>$movie->pivot->id])}}" title="Edit">
                                                     <i class="fas fa-edit blue"></i>
                                                     </a> /
@@ -91,8 +83,8 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
-              <!-- /.card-body -->
+                    @endforeach --}}
+              
                 </div>
             </div>
         </section>

@@ -82,6 +82,6 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('images/movies') => storage_path('app/public/images/movies'),
         public_path('images/cinemas') => storage_path('app/public/images/cinemas'),
-        //public_path('images/admin') => storage_path('app/public/images/admin')
+        public_path('images/theaters') => storage_path('app/public/images/theaters')
         ],
     ];

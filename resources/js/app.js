@@ -10,12 +10,7 @@ require('bootstrap/js/dist/carousel.js');
 require('admin-lte/dist/js/adminlte.min.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker.js');
 require('bootstrap-duration-picker/dist/bootstrap-duration-picker-debug.js');
-
-
 //require('bootstrap-switch-button/dist/js/bootstrap-switch-button.min.js');
-window.Vue = require('vue');
-import Vue from 'vue';
-
 
 import $ from 'jquery';
 window.$ = window.jQuery = $;
@@ -37,8 +32,8 @@ import  'datatables.net/js/jquery.dataTables.min.js';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('select2',require('./components/Select2.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('select2',require('./components/Select2.vue').default);
 //Vue.component('datepicker',require('./components/App.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -46,6 +41,6 @@ Vue.component('select2',require('./components/Select2.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// const app = new Vue({
-//     el: '#app',
-// });
+const app = new Vue({
+    el: '#app',
+});

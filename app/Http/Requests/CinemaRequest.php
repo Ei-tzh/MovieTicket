@@ -26,12 +26,12 @@ class CinemaRequest extends FormRequest
         $rules=[
             'name'      =>'required',
             'address'   =>'required',
-            'theaters'  =>'required',
             'township'  => 'required',
-            'image'        => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
         foreach($this->request->get('ph_no') as $key => $val){
             $rules['ph_no.'.$key] = 'required|digits_between:9,11';
+            
         }
         return $rules;
     }

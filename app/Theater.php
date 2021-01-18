@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Theater extends Model
 {
-    protected $fillable=['name','location','cinema_id'];
+    protected $fillable=['name','location','image','cinema_id'];
     public function cinema(){
         return $this->belongsTo('App\Cinema');
     }

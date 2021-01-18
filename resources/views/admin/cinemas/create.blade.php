@@ -56,24 +56,6 @@
                                     </div>
                                 </div>
                                 <div id="phone"></div>
-                                {{-- theaters --}}
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="theaters">Add Theaters:</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="theaters" name="theaters[]" placeholder="Enter A Theater's Name" >
-                                                <div id="new_theater">
-                                                    <button type="button" class='btn btn-success ml-1'>+</button>
-                                                </div>
-                                            </div>
-                                            @error('theaters')
-                                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="theater"></div>
                                 <!-- image -->
                                 <div class="form-group">
                                     <label for="image">Image:</label>
@@ -123,11 +105,11 @@
                 event.stopPropagation();
                 addRow();
             });
-            $("#new_theater").click(function(event){
-                event.preventDefault();
-                event.stopPropagation();
-                addTheater();
-            });
+            // $("#new_theater").click(function(event){
+            //     event.preventDefault();
+            //     event.stopPropagation();
+            //     addTheater();
+            // });
             function addRow(){
                 i++;
                 var row='<div class="row" id="newphone'+i+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'+'<div class="input-group-prepend">'+'<span class="input-group-text"><i class="fas fa-phone"></i></span>'+'</div>'
@@ -142,20 +124,20 @@
                 var button_id=$(this).parents('.row').attr('id'); 
                 $('#'+button_id).remove();
             });
-            function addTheater(){
-                theater++;
-                var row='<div class="row" id="newtheater'+theater+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'
-                            +'<input type="tel" class="form-control" id="theaters" name="theaters[]" placeholder="Enter A Theater\'s Name" >'
-                                +'<div id="remove_theater">'
-                                    +'<button type="button" class="btn btn-danger ml-1">-</button>'
-                                +'</div>'
-                        +'</div>'+'</div>'+'</div>'+'</div>';
-                $('#theater').append(row);
-            }  
-            $(this).on('click','#remove_theater',function(){
-                var button_id=$(this).parents('.row').attr('id'); 
-                $('#'+button_id).remove();
-            });
+            // function addTheater(){
+            //     theater++;
+            //     var row='<div class="row" id="newtheater'+theater+'">'+'<div class="col-4">'+'<div class="form-group">'+'<div class="input-group">'
+            //                 +'<input type="tel" class="form-control" id="theaters" name="theaters[]" placeholder="Enter A Theater\'s Name" >'
+            //                     +'<div id="remove_theater">'
+            //                         +'<button type="button" class="btn btn-danger ml-1">-</button>'
+            //                     +'</div>'
+            //             +'</div>'+'</div>'+'</div>'+'</div>';
+            //     $('#theater').append(row);
+            // }  
+            // $(this).on('click','#remove_theater',function(){
+            //     var button_id=$(this).parents('.row').attr('id'); 
+            //     $('#'+button_id).remove();
+            // });
         });
     </script>
 @endpush

@@ -11,7 +11,7 @@ class Theater extends Model
         return $this->belongsTo('App\Cinema');
     }
     public function movies(){
-        return $this->belongsToMany('App\Movie')->withPivot('id','status','start_date','end_date');
+        return $this->belongsToMany('App\Movie')->withPivot('id','status');
     }
     public function seats(){
         return $this->hasMany('App\Seat');

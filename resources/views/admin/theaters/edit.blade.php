@@ -2,99 +2,71 @@
 
 @section('content')
 <div class="content-wrapper">
-   <section class="content">
+    <section class="content-header">
         <div class="container-fluid">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">{{ $theater->name }}</h3>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinema->id)}}">Theaters</a></li>
+                        <li class="breadcrumb-item active">edit</li>
+                    </ol>
                 </div>
-                <form action="{{ route('theaters.update',['cinema_id'=>$cinema->id,'theater_id'=>$theater->id,'id'=>$movie_theater->id])}}" method="POST" >
-                @csrf
-                @method('put')
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group mb-4">
-                                <label for="movie">Movies:</label>
-                                <select class="form-control select2" id='movie' name='movie' style="width: 100%;" readonly>
-                                    <option value="{{ $movie->id }}" selected >{{ $movie->name }}</option>
-                                </select>
-                            </div>
-                            {{-- status --}}
-                                <label for="status">Status:</label>
-                                <input type="checkbox" name="status" id="status" {{ $movie_theater->status == 1 ? 'checked':''}} data-bootstrap-switch data-off-color="danger" data-on-color="success" data-on-text="Active" data-off-text="Inactive">
-                            <!-- Start_date -->
-                            <div class="row mt-3" >
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label>Start Date:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" class="form-control float-right" name='start_date' id="start_date" value='{{ $movie_theater->start_date }}' >
-                                            
-                                        </div>
-                                        @error('start_date')
-                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                        @enderror
-                                    
-                                    </div>
-                                </div>
-                            <!-- End startdate -->
-                            <!-- EndDate -->
-                            <div class="col-4">
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ $cinema->name }}</h3>
+                        </div>
+                        <form action="{{ route('theaters.update',['id'=>$cinema->id,'theater'=>$theater->id])}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method("PUT")
+                            <div class="card-body">
                                 <div class="form-group">
-                                    <label>End Date:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control float-right" name="end_date" id="end_date" value="{{ $movie_theater->end_date }}" >
-                                        
-                                    </div>
-                                    @error('end_date')
-                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                    <label for="name">Theater's Name:</label>
+                                    <input type="text" class="form-control" id="name" name='name' placeholder="Enter theater's name" value="{{ $theater->name }}">
+                                    @error('name')
+                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
+                                </div>
                                 
+                                <div class="form-group">
+                                    <label for="location">Location:</label>
+                                    <input type="text" class="form-control" id="location" name='location' placeholder="Enter location" value="{{ $theater->location }}">
+                                    @error('location')
+                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <!-- image -->
+                                <div class="form-group">
+                                    <label for="image">Image:</label>
+                                    <div class="input-group">
+                                        <img src="{{ $theater->image}} " alt="" style="width:100px;height:auto;">
+                                        <input type="file" id="image" name="image" class='image_upload' value='{{ old('image')}}'>
+                                    </div>
+                                    @error('image')
+                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- end enddate -->
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-success">Update</button>
-                    <a href="{{ route('cinemas.show',$cinema->id) }}">
-                        <button type="button" class="btn btn-primary">Back</button>
-                    </a>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <a href="{{ route('theaters.index',$cinema->id)}}"><button type="button" class="btn btn-danger">Back</button></a>
+                            </div>
+                        </form>
+                    <div>
                 </div>
             </div>
         </div>
     </section>
-    
-
-</div> 
+</div>
 @endsection
-@push('jquery')
-    <script>
-        $(document).ready(function(){
-            $('#movies').select2({
-                placeholder:"Select Movies you want to create",
-                tags:true
-                
-            });
-            
-           $("#status").bootstrapSwitch('state');
-           
-            $('#start_date').datepicker({ dateFormat: 'yy-mm-dd' });
-            $('#end_date').datepicker({ dateFormat: 'yy-mm-dd' });
-        });
+
+
         
-    </script>   
-@endpush

@@ -1,9 +1,14 @@
 @extends('layouts.master')
-
+@section('style')
+    <style>
+        .card-header{
+            background-color: transparent;
+        }
+    </style>   
+@endsection
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        {{-- alert block --}}
         @if ($message = Session::get('status'))
             <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -21,6 +26,7 @@
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('theaters.index',['id'=>$cinema->id,'theater'=>$cinematheater->id])}}">Theaters</a></li>
                         <li class="breadcrumb-item active">{{ $cinema->id }}</li>
                         </ol>
                     </div>
@@ -31,46 +37,41 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card card-secondary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Theaters Table</h3>
+                                <h3 class="card-title">{{ $cinematheater->name }}</h3>
                                 <div class="new-theater float-right">
-                                    <a href="{{ route('theaters.create',$cinema->id)}}">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>Add New Theater</button>
+                                    <a href="{{ route('movietheaters.create',[$cinema->id,$cinematheater->id])}}">
+                                        <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>Add New Movie</button>
                                     </a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered" id="theaters">
-                                    <thead class="bg-primary">
+                                <table class="table table-bordered" id="movietheaters">
+                                    <thead class="bg-secondary">
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 10px">ID</th>
                                             <th>Name</th>
-                                            <th>Location</th>
-                                            <th>Image</th>
-                                            <th>Movies</th>
-                                            <th>Action</th>
+                                            <th style="width: 20px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       @foreach ($theaters as $theater)
+                                       @foreach ($cinematheater->movies as $movietheater)
                                            <tr>
-                                               <td>{{ ++$loop->index }}</td>
-                                               <td>{{ $theater->name }}</td>
-                                               <td>{{ $theater->location }}</td>
-                                               <td><img src="{{ $theater->image }}" alt="Theater" style="width:100px;height:auto;"></td>
-                                               <td>
+                                               <td>{{ $movietheater->id }}</td>
+                                               <td>{{ $movietheater->name }}</td>
+                                               {{-- <td>
                                                     <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
                                                         <button type="button" class="btn btn-info">View Movies</button>
                                                     </a> 
-                                               </td>
+                                               </td> --}}
                                                <td>
-                                                <a href="{{ route('theaters.edit',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
+                                                <a href="{{ route('movietheaters.edit',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->id])}}" title="Edit">
                                                     <i class="fas fa-edit blue"></i>
                                                 </a> /
                                                 @method('DELETE')
-                                                <a href="{{ route('theaters.destroy',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Delete">
+                                                <a href="{{ route('movietheaters.destroy',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->id])}}" title="Delete">
                                                     <i class="fas fa-trash red"></i>
                                                 </a>
                                             </td>
@@ -89,7 +90,7 @@
 @push('jquery')
 <script>
         $(document).ready(function(){
-            $('#theaters').DataTable({
+            $('#movietheaters').DataTable({
                 "lengthMenu":[ 5,10, 25, 50, 75, 100 ]
             });
         });

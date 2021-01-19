@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Theater;
 use App\Cinema;
 class CinemaTheaterController extends Controller
@@ -45,10 +46,12 @@ class CinemaTheaterController extends Controller
             'location'  => 'required',
             'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
-        $filename=$request->image->getClientOriginalName();
+       
         //$filename  = $name.time().'.'.$extension;
-        $request->image->storeAs('/public/images/theaters',$filename);
-        $url=Storage::url('images/theaters/'.$filename);
+        $extension=$request->image->extension();
+        $uuid=Str::uuid();
+        $request->image->storeAs('/public/images/theaters',$uuid.".".$extension);
+        $url=Storage::url('images/theaters/'.$uuid.'.'.$extension);
         
         Theater::create([
             'name'  => $request->name,
@@ -56,6 +59,7 @@ class CinemaTheaterController extends Controller
             'image'     => $url,
             'cinema_id' => $id
         ]);
+        $request->session()->flash('status','Congratulation,A New Theater was created successfully!');
         return redirect()->route('theaters.index',$id);
     }
 
@@ -76,9 +80,11 @@ class CinemaTheaterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$theater)
     {
-        //
+        $cinema=Cinema::find($id);
+        $theater=Theater::find($theater);
+        return view('admin.theaters.edit',compact('theater','cinema'));
     }
 
     /**
@@ -88,9 +94,31 @@ class CinemaTheaterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$theater)
     {
-        //
+        $cinema_theater=Theater::find($theater);
+        $request->validate([
+            'name'      => 'required',
+            'location'  => 'required',
+            'image'     => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+        if($request->hasfile('image')){
+           
+            if(file_exists(public_path($cinema_theater->image))){
+                unlink(public_path($cinema_theater->image));
+            }
+            $extension=$request->image->extension();
+            $uuid=Str::uuid();
+            $request->image->storeAs('/public/images/theaters',$uuid.".".$extension);
+            $url=Storage::url('images/theaters/'.$uuid.'.'.$extension);
+        }
+        Theater::where('id',$theater)->update([
+            'name'      =>  $request->name,
+            'location'  =>  $request->location,
+            'image'     =>  $request->image==''? $cinema_theater->image:$url,
+        ]);
+        $request->session()->flash('status','Congratulation,You have updated successfully!');
+        return redirect()->route('theaters.index',$id);
     }
 
     /**
@@ -99,8 +127,10 @@ class CinemaTheaterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$theater)
     {
-        //
+        $cinema_theater=Theater::find($theater);
+        $cinema_theater->delete();
+        return redirect()->route('theaters.index',$id);
     }
 }

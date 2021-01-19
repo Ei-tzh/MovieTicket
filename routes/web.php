@@ -26,6 +26,7 @@ Route::resource('/admin/movies','Admin\MovieController');
 Route::resource('/admin/movieCategories','Admin\MovieCategoriesController');
 Route::resource('/admin/cinemas','Admin\CinemaController');
 Route::resource('/admin/cinemas/{id}/theaters','Admin\CinemaTheaterController');
+Route::resource('/admin/cinemas/{id}/theaters/{theater}/movietheaters','Admin\MovieTheaterController');
 Route::resource('/admin/townships','Admin\TownshipController');
 
 // Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');

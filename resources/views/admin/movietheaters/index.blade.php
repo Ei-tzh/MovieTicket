@@ -53,6 +53,8 @@
                                         <tr>
                                             <th style="width: 10px">ID</th>
                                             <th>Name</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
                                             <th style="width: 20px">Action</th>
                                         </tr>
                                     </thead>
@@ -61,6 +63,19 @@
                                            <tr>
                                                <td>{{ $movietheater->id }}</td>
                                                <td>{{ $movietheater->name }}</td>
+                                                   @foreach ($startdates as $startdate)
+                                                       @if ($movietheater->pivot->id == $startdate->pivot->movietheater_id)
+                                                            <td>{{ $startdate->show_date }}</td>
+                                                       @endif
+                                                   @endforeach
+                                               
+                                               
+                                                @foreach ($enddates as $enddate)
+                                                    @if ($movietheater->pivot->id == $enddate->pivot->movietheater_id)
+                                                        <td>{{ $enddate->show_date }}</td>
+                                                    @endif
+                                                @endforeach
+                                               
                                                {{-- <td>
                                                     <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
                                                         <button type="button" class="btn btn-info">View Movies</button>

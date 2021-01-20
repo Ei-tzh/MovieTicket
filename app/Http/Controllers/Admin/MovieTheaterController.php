@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Cinema;
 use App\Theater;
 use App\Movie;
+use App\Movie_theater;
 class MovieTheaterController extends Controller
 {
     /**
@@ -18,7 +19,18 @@ class MovieTheaterController extends Controller
     {
         $cinema=Cinema::find($id);
         $cinematheater=Theater::find($theater);
-        return view('admin.movietheaters.index',compact('cinema','cinematheater'));
+        $movies=$cinematheater->movies;
+        $startdates=[];
+        $enddates=[];
+        foreach($movies as $movie){
+            $movietheater=Movie_theater::find($movie->pivot->id);
+            $enddate=$movietheater->timetables()->orderBy('show_date','DESC')->first();
+            $startdate=$movietheater->timetables()->orderBy('show_date','ASC')->first();
+            array_push($startdates,$startdate);
+            array_push($enddates,$enddate);
+        }
+        //return $enddates;
+        return view('admin.movietheaters.index',compact('cinema','cinematheater','startdates','enddates'));
     }
 
     /**

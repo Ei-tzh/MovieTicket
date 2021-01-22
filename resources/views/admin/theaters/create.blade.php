@@ -7,7 +7,7 @@
             <div class="row mb-2">
                 <div class="col-12">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinema->id)}}">Cinemas</a></li>
                         <li class="breadcrumb-item active">create</li>

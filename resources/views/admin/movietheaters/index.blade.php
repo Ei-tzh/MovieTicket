@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('theaters.index',['id'=>$cinema->id,'theater'=>$cinematheater->id])}}">Theaters</a></li>
                         <li class="breadcrumb-item active">{{ $cinema->id }}</li>
@@ -42,7 +42,7 @@
                                 <h3 class="card-title">{{ $cinematheater->name }}</h3>
                                 <div class="new-theater float-right">
                                     <a href="{{ route('movietheaters.create',[$cinema->id,$cinematheater->id])}}">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>Add New Movie</button>
+                                        <button type="button" class="btn btn-info"><i class="fas fa-plus"></i>Add New Movie</button>
                                     </a>
                                 </div>
                             </div>
@@ -53,36 +53,35 @@
                                         <tr>
                                             <th style="width: 10px">ID</th>
                                             <th>Name</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
+                                            <th>Status</th>
+                                            <th>Schedules</th>
                                             <th style="width: 20px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                        @foreach ($cinematheater->movies as $movietheater)
                                            <tr>
-                                               <td>{{ $movietheater->id }}</td>
+                                               <td>{{ ++$loop->index }}</td>
                                                <td>{{ $movietheater->name }}</td>
-                                                   @foreach ($startdates as $startdate)
+                                               <td><span class="badge {{ $movietheater->pivot->status==1?'badge-success':'badge-danger'}}">{{ $movietheater->pivot->status }}</span></td>
+                                                   {{-- @foreach ($startdates as $startdate)
                                                        @if ($movietheater->pivot->id == $startdate->pivot->movietheater_id)
                                                             <td>{{ $startdate->show_date }}</td>
                                                        @endif
                                                    @endforeach
+                                                    @foreach ($enddates as $enddate)
+                                                        @if ($movietheater->pivot->id == $enddate->pivot->movietheater_id)
+                                                            <td>{{ $enddate->show_date }}</td>
+                                                        @endif
+                                                    @endforeach --}}
                                                
-                                               
-                                                @foreach ($enddates as $enddate)
-                                                    @if ($movietheater->pivot->id == $enddate->pivot->movietheater_id)
-                                                        <td>{{ $enddate->show_date }}</td>
-                                                    @endif
-                                                @endforeach
-                                               
-                                               {{-- <td>
-                                                    <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
-                                                        <button type="button" class="btn btn-info">View Movies</button>
-                                                    </a> 
-                                               </td> --}}
                                                <td>
-                                                <a href="{{ route('movietheaters.edit',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->id])}}" title="Edit">
+                                                    <a href="" title="View">
+                                                        View Schedules
+                                                    </a> 
+                                               </td>
+                                               <td>
+                                                <a href="{{ route('movietheaters.edit',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->pivot->id])}}" title="Edit">
                                                     <i class="fas fa-edit blue"></i>
                                                 </a> /
                                                 @method('DELETE')

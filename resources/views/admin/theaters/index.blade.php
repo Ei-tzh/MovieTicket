@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
                         <li class="breadcrumb-item active">{{ $cinema->id }}</li>
                         </ol>
@@ -36,14 +36,14 @@
                                 <h3 class="card-title">Theaters Table</h3>
                                 <div class="new-theater float-right">
                                     <a href="{{ route('theaters.create',$cinema->id)}}">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>Add New Theater</button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-plus"></i>Add New Theater</button>
                                     </a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered" id="theaters">
-                                    <thead class="bg-primary">
+                                    <thead class="bg-success">
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
@@ -62,7 +62,7 @@
                                                <td><img src="{{ $theater->image }}" alt="Theater" style="width:100px;height:auto;"></td>
                                                <td>
                                                     <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
-                                                        <button type="button" class="btn btn-info">View Movies</button>
+                                                        <button type="button" class="btn btn-secondary">View Movies({{ count($theater->movies)}})</button>
                                                     </a> 
                                                </td>
                                                <td>

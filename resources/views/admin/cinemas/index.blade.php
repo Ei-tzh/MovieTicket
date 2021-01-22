@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item active">Cinemas</li>
                         </ol>
                     </div>
@@ -60,7 +60,7 @@
                                             <td><pre>{{ $cinema->ph_no }}</pre></td>
                                             <td>
                                                 <a href="{{route('theaters.index',['id'=>$cinema->id] )}}" title="View Theaters">
-                                                    <button type="button" class="btn btn-primary">View Theaters({{ count($cinema->theaters)}})</button>
+                                                    <button type="button" class="btn btn-success">View Theaters({{ count($cinema->theaters)}})</button>
                                                 </a>
                                             </td>
                                             <td><img src="{{ $cinema->image }}" alt="image" style="width:80px;height:auto;"></td>

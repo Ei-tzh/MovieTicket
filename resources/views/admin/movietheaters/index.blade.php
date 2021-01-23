@@ -26,8 +26,8 @@
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('theaters.index',['id'=>$cinema->id,'theater'=>$cinematheater->id])}}">Theaters</a></li>
-                        <li class="breadcrumb-item active">{{ $cinema->id }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinema->id)}}">Theaters</a></li>
+                        <li class="breadcrumb-item active">Movies</li>
                         </ol>
                     </div>
                 </div>

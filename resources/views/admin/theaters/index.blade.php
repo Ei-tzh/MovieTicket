@@ -21,7 +21,7 @@
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
-                        <li class="breadcrumb-item active">{{ $cinema->id }}</li>
+                        <li class="breadcrumb-item active">Theaters</li>
                         </ol>
                     </div>
                 </div>
@@ -50,6 +50,7 @@
                                             <th>Location</th>
                                             <th>Image</th>
                                             <th>Movies</th>
+                                            <th>Seats</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -61,10 +62,15 @@
                                                <td>{{ $theater->location }}</td>
                                                <td><img src="{{ $theater->image }}" alt="Theater" style="width:100px;height:auto;"></td>
                                                <td>
-                                                    <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
-                                                        <button type="button" class="btn btn-secondary">View Movies({{ count($theater->movies)}})</button>
+                                                    <a href="{{ route('movietheaters.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="View Movies">
+                                                        <button type="button" class="btn btn-secondary">View Movies <span class="badge badge-light">{{ count($theater->movies)}}</span></button>
                                                     </a> 
                                                </td>
+                                               <td>
+                                                    <a href="{{ route('seats.index',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
+                                                        <button type="button" class="btn btn-info">View Seats <span class="badge badge-light">{{ count($theater->seats)}}</span></button>
+                                                    </a> 
+                                                </td>
                                                <td>
                                                 <a href="{{ route('theaters.edit',['id'=>$cinema->id,'theater'=>$theater->id])}}" title="Edit">
                                                     <i class="fas fa-edit blue"></i>

@@ -16,10 +16,9 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('cinemas.show',$seat->theater->cinema->id)}}">{{ $seat->theater->name }}</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('seats.index',["cinema_id"=>$seat->theater->cinema->id,'theater_id'=>$seat->theater_id])}}">Seats</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('seats.index',[$cinematheater->cinema->id,$cinematheater->id])}}">Seats</a></li>
                         <li class="breadcrumb-item active">{{ $seat->id }}</li>
                     </ol>
                 </div>
@@ -30,13 +29,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card card-primary">
+                        <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">{{ $seat->theater->name}}</h3>
-                                <p>{{' - ' .$seat->theater->cinema->name }}</p>
+                                <h3 class="card-title">{{ $cinematheater->name }}</h3>
+                                <p>{{' - ' .$cinematheater->cinema->name }}</p>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ route('seats.update',['cinema_id'=>$seat->theater->cinema->id,'theater_id'=>$seat->theater->id,'seat'=>$seat->id])}}" method="POST" >
+                            <form action="{{ route('seats.update',[$cinematheater->cinema->id,$cinematheater->id,$seat->id])}}" method="POST" >
                             @csrf
                             @method('put')
                             <div class="card-body">
@@ -66,7 +65,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('seats.index',['cinema_id'=>$seat->theater->cinema->id,'theater_id'=>$seat->theater->id])}}"><button type="button" class="btn btn-danger">Back</button></a>
+                                <a href="{{ route('seats.index',[$cinematheater->cinema->id,$cinematheater->id])}}"><button type="button" class="btn btn-danger">Back</button></a>
                             </div>
                             </form>
                         </div>

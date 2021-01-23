@@ -16,15 +16,11 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h2>Create Seats</h2>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <div class="col-12">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('cinemas.show',$theater->cinema->id)}}">{{ $theater->name }}</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('seats.index',["cinema_id"=>$theater->cinema->id,'theater_id'=>$theater->id])}}">Seats</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('seats.index',[$cinematheater->cinema->id,$cinematheater->id])}}">Seats</a></li>
                         <li class="breadcrumb-item active">Create Seats</li>
                     </ol>
                 </div>
@@ -35,13 +31,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card card-primary">
+                        <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">{{ $theater->name}}</h3>
-                                <p>{{' - ' .$theater->cinema->name }}</p>
+                                <h3 class="card-title">{{ $cinematheater->name }}</h3>
+                                <p>{{' - ' .$cinematheater->cinema->name }}</p>
                             </div>
                             <!-- /.card-header -->
-                            <form action="{{ route('seats.store',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id]) }}" method="POST" >
+                            <form action="{{ route('seats.store',[$cinematheater->cinema->id,$cinematheater->id])}}" method="POST" >
                             @csrf
                             <div class="card-body">
                                 <div class="row" id="create-seats">
@@ -78,7 +74,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <a href="{{ route('seats.index',['cinema_id'=>$theater->cinema->id,'theater_id'=>$theater->id])}}"><button type="button" class="btn btn-danger">Back</button></a>
+                                <a href="{{ route('seats.index',[$cinematheater->cinema->id,$cinematheater->id])}}"><button type="button" class="btn btn-danger">Back</button></a>
                             </div>
                             </form>
                         </div>

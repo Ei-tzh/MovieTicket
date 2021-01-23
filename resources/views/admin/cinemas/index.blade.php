@@ -60,7 +60,7 @@
                                             <td><pre>{{ $cinema->ph_no }}</pre></td>
                                             <td>
                                                 <a href="{{route('theaters.index',['id'=>$cinema->id] )}}" title="View Theaters">
-                                                    <button type="button" class="btn btn-success">View Theaters({{ count($cinema->theaters)}})</button>
+                                                    <button type="button" class="btn btn-success">View Theaters<span class="badge badge-light">{{ count($cinema->theaters)}}</button>
                                                 </a>
                                             </td>
                                             <td><img src="{{ $cinema->image }}" alt="image" style="width:80px;height:auto;"></td>

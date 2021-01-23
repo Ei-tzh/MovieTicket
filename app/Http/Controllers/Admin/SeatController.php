@@ -13,12 +13,13 @@ class SeatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($cinema_id,$theater_id)
+    public function index($id,$theater)
     {
-        $theater=Theater::find($theater_id);
+        
+        $cinematheater=Theater::find($theater);
         //$seats=$theater->seats()->orderby('price','asc')->get();
-        $seats=$theater->seats()->latest()->get();
-        return view('admin.seats.index',compact('theater','seats'));
+        $seats=$cinematheater->seats;
+        return view('admin.seats.index',compact('id','cinematheater','seats'));
     }
 
     /**
@@ -26,10 +27,10 @@ class SeatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($cinema_id,$theater_id)
+    public function create($id,$theater)
     {
-        $theater=Theater::find($theater_id);
-        return view('admin.seats.create',compact('theater'));
+        $cinematheater=Theater::find($theater);
+        return view('admin.seats.create',compact('cinematheater'));
     }
 
     /**
@@ -38,26 +39,24 @@ class SeatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$cinema_id,$theater_id)
+    public function store(Request $request,$id,$theater)
     {
         $request->validate([
             'seats.*'  => 'regex:/^([A-Z]?)([0-9]{1,2})$/', //any string that contain only 1st character uppercase A to Z and digit between 1 or 2 words.(eg-A22)
             'prices.*'  =>'regex:/^([1-9]+)(\d{1,4})$/'     //any digit that contain 1st number through 1 to 9 and any number only between 1 and 4 words
         ]);
-        $theater=Theater::find($theater_id);
+        $cinematheater=Theater::find($theater);
+        
         foreach($request->seats as $key=>$value){
             Seat::create([
                 'seat_no'=>$value,
                 'price'=>$request->prices[$key],
-                'theater_id'=>$theater_id
+                'theater_id'=>$theater
             ]);
         }
-        if(count($request->seats)>1){
-            $request->session()->flash('status','You have successfully created a new seat.'); 
-        }else{
-            $request->session()->flash('status','You have successfully created new seats.');
-        }
-        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
+       
+        $request->session()->flash('status','You have successfully created new seats!');
+        return redirect()->route('seats.index',[$id,$theater]);
     }
 
     /**
@@ -77,11 +76,12 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($cinema_id,$theater_id,$seat)
+    public function edit($id,$theater,$seat)
     {
+        $cinematheater=Theater::find($theater);
         $seat=Seat::find($seat);
         //return $seat->theater->cinema->id;
-        return view('admin.seats.edit',compact('seat'));
+        return view('admin.seats.edit',compact('id','cinematheater','seat'));
     }
 
     /**
@@ -91,7 +91,7 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($cinema_id,$theater_id,$seat,Request $request)
+    public function update($id,$theater,$seat,Request $request)
     {
         $request->validate([
             'seat_no'  => 'regex:/^([A-Z]?)([0-9]{1,2})$/', //any string that contain only 1st character uppercase A to Z and digit between 1 or 2 words.(eg-A22)
@@ -103,7 +103,7 @@ class SeatController extends Controller
             'price' => $request->price
         ]);
         $request->session()->flash('status','You have successfully updated for '.$seat_update->seat_no.' .');
-        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
+        return redirect()->route('seats.index',[$id,$theater]);
     }
 
     /**
@@ -112,9 +112,9 @@ class SeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cinema_id,$theater_id,$seat)
+    public function destroy($id,$theater,$seat)
     {
         Seat::destroy($seat);
-        return redirect()->route('seats.index',['cinema_id'=>$cinema_id,'theater_id'=>$theater_id]);
+        return redirect()->route('seats.index',[$id,$theater]);
     }
 }

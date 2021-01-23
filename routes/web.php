@@ -27,6 +27,7 @@ Route::resource('/admin/movieCategories','Admin\MovieCategoriesController');
 Route::resource('/admin/cinemas','Admin\CinemaController');
 Route::resource('/admin/cinemas/{id}/theaters','Admin\CinemaTheaterController');
 Route::resource('/admin/cinemas/{id}/theaters/{theater}/movietheaters','Admin\MovieTheaterController');
+Route::resource('/admin/cinemas/{id}/theaters/{theater}/seats','Admin\SeatController');
 Route::resource('/admin/townships','Admin\TownshipController');
 
 // Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}','Admin\TheaterController@create')->name('theaters.create');
@@ -35,7 +36,7 @@ Route::resource('/admin/townships','Admin\TownshipController');
 // Route::put('/admin/cinemas/{cinema_id}/theaters/{theater_id}/edit/{id}','Admin\TheaterController@update')->name('theaters.update');
 // Route::get('/admin/cinemas/{cinema_id}/theaters/{theater_id}/delete/{id}','Admin\TheaterController@destroy')->name('theaters.destroy');
 
-Route::resource('/admin/cinemas/{cinema_id}/theaters/{theater_id}/seats','Admin\SeatController');
+//Route::resource('/admin/cinemas/{cinema_id}/theaters/{theater_id}/seats','Admin\SeatController');
 
 Route::resource('/admin/timetables','Admin\TimetableController');
 Route::get('/admin/timetables/{id}/add','Admin\TimetableController@add')->name('timetables.add');

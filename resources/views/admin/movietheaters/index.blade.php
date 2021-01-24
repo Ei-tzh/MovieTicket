@@ -76,7 +76,7 @@
                                                     @endforeach --}}
                                                
                                                <td>
-                                                    <a href="" title="View">
+                                                    <a href="{{ route('timetables.index',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->pivot->id])}}" title="View Schedules">
                                                         View Schedules
                                                     </a> 
                                                </td>

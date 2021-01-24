@@ -119,7 +119,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('timetables.index') }}" class="nav-link @if(Request::is('admin/timetables*')){{'active'}} @endif">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
@@ -127,7 +127,7 @@
                 <i class="right fas fa-angle-right"></i>
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('bookings.index')}}" class="nav-link @if(Request::is('admin/bookings*')){{'active'}} @endif">
             <i class="nav-icon fas fa-notes-medical"></i>

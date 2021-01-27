@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinematheater->cinema->id)}}">Theaters</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('movietheaters.index',[$cinematheater->cinema->id,$cinematheater->id])}}">Movies</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('movietheaters.index',[$cinematheater->cinema->id,$cinematheater->id,$movie_theater->id])}}">Timetables</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('timetables.index',[$cinematheater->cinema->id,$cinematheater->id,$movie_theater->id])}}">Timetables</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div>

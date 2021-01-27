@@ -10,6 +10,13 @@
         </div>
         <br>
     @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+        <br>
+    @endif
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

@@ -53,20 +53,26 @@ class TimetableController extends Controller
             'showtime'=>'required'
         ]);
         $movie_theater=Movie_theater::find($movietheater);
-        $timetables=Timetable::all();
-        foreach($timetables as $t){
-            if($t->show_date == $request->showdate && $t->show_time ==$request->showtime){
-                $movie_theater->timetables()->attach($t->id);
-            }
-             else{
-                $timetable=Timetable::Create([
-                    'show_date'=> $request->showdate,
-                    'show_time'=> $request->showtime
-                ]);
-                $movie_theater->timetables()->attach($timetable->id);
-             }
-        }
-        $request->session()->flash('status','Congratulation! A New Schedule was created successfully!');
+
+        //Retrieve same data which is compared with $request data and old inserted datas in timetables table
+        $oldtimetable=Timetable::where('show_date',$request->showdate)->where('show_time',$request->showtime)->first();
+
+        //want to avoid duplicate datas in many to many table(movietheater_timetables)
+        if(!$movie_theater->timetables()->where('show_date',$request->showdate)->where('show_time',$request->showtime)->count()) {  //if duplicate datas not found,we will compared with the overall timetables table.
+                if($oldtimetable){                                                                                                  //if old data is founded,we will attach with it's id.
+                    $movie_theater->timetables()->attach($oldtimetable->id);
+                }
+                else{                                                                                                               //else we will insert new data in timetables table and attach with its id.
+                    $newtimetable=Timetable::Create([
+                        'show_date'=> $request->showdate,
+                        'show_time'=> $request->showtime
+                    ]);
+                    $movie_theater->timetables()->attach($newtimetable->id);
+                }
+             $request->session()->flash('status','Congratulation! A New Schedule was created successfully!');
+       }else{                                                                                                                       //to show error alert box for creating existing datas.
+        $request->session()->flash('error','You have created \''.$request->showdate.'\' & \''.$request->showtime.'\'!');
+       }
         return redirect()->route('timetables.index',[$id,$theater,$movietheater]);
     }
 

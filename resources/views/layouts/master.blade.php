@@ -9,7 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.standalone.min.css') }}"> --}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/js/tempusdominus-bootstrap-4.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/css/tempusdominus-bootstrap-4.min.css" crossorigin="anonymous" />
+    {{-- <link rel="stylesheet" href="{{ asset('bootstrap-timepicker/css/timepicker.less') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.css') }}"> --}}
     <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
     
@@ -275,9 +282,12 @@
 <!-- ./wrapper -->
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
-<script src="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.min.js') }}"></script>
+<script src="{{ asset('bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js') }}" ></script>
+{{-- <script src="{{ asset('bootstrap-timepicker/js/bootstrap-timepicker.js') }}" ></script> --}}
+{{-- <script src="{{ asset('bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" ></script> --}}
+{{-- <script src="{{ asset('js/jquery-timepicker-1.3.5/jquery.timepicker.min.js') }}"></script> --}}
 
 @stack('jquery')
 @stack('vue')

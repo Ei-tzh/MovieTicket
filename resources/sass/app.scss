@@ -11,7 +11,9 @@
 @import '~bootstrap/scss/_carousel.scss';
 @import '~bootstrap-duration-picker/dist/bootstrap-duration-picker.css';
 //bootstrap-switch
+//@import '~bootstrap-switch/src/sass/bootstrap4/bootstrap-switch.scss';
 @import '~bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
+// @import '~bootstrap-switch-button/css/bootstrap-switch-button.min.css';
 //@import '~bootstrap-switch-button/css/bootstrap-switch-button.min.css';
 //adminlte
 @import '~admin-lte/dist/css/adminlte.css';
@@ -31,6 +33,7 @@
 
 //datatables
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+@import '~tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 
 input[type='file']{
   font-size: 14px;

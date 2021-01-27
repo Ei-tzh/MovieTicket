@@ -18,11 +18,11 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="">Admin</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinematheater->cinema->id)}}">Theaters</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('movietheaters.index',[$cinematheater->cinema->id,$cinematheater->id])}}">MovieTheaters</a></li>
-                    <li class="breadcrumb-item active">Timetables</li>
+                        <li class="breadcrumb-item"><a href="">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('cinemas.index')}}">Cinemas</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('theaters.index',$cinematheater->cinema->id)}}">Theaters</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('movietheaters.index',[$cinematheater->cinema->id,$cinematheater->id])}}">MovieTheaters</a></li>
+                        <li class="breadcrumb-item active">Timetables</li>
                     </ol>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <div class="card card-info card-outline">
                         <div class="card-header">
                             <h2 class="card-title">{{ $movie->name }}<span class="badge badge-pill badge-primary">{{ $cinematheater->name }}</span></h2>
-                            <a href="" class="float-right">
+                            <a href="{{ route('timetables.create',[$cinematheater->cinema->id,$cinematheater->id,$movie_theater->id])}}" class="float-right">
                                 <button class='btn btn-primary'><i class="fas fa-plus"></i> Add New Timetables</button>
                             </a>
                         </div>

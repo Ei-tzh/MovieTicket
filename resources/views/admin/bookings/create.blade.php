@@ -24,81 +24,21 @@
                                     <label for="user">User:</label>
                                     <select class="form-control col-md-6 select2" id='user' name='user' style="width: 100%;" >
                                         @foreach($users as $user)
-                                            <option value="{{ $user->id }}">
-                                            {{ $user->name }}
-                                            </option>
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     <select>
-                                    
                                 </div>
-
-                                {{-- <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Date:</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-calendar-alt"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="form-control float-right" name="date" id="date" value="{{ $booking->date}}">
-                                                
-                                            </div>
-                                            @error('date')
-                                                    <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="input-group">
-                                                    <div class="col-2">
-                                                        <label for="hr">Hour:</label>
-                                                        <?php $time=explode(':',$booking->time); ?>
-                                                        <input type="number" id="hr" class='form-control' name="hr" min="1" max="24" value="{{ $time[0] }}">
-
-                                                        @error('hr')
-                                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <label for="min">Min:</label>
-                                                        <input type="number" id="min" class='form-control' name="min" min="0" max="59" value="{{ $time[1] }}">
-
-                                                        @error('min')
-                                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <label for="sec">Min:</label>
-                                                        <input type="number" id="sec" class='form-control' name="sec" min="0" max="59" value="{{ $time[2] }}">
-
-                                                        @error('sec')
-                                                            <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <div class="form-check">
                                             <input class="form-check-input" id="current_datetime" type="checkbox"  name="checkbox">
                                             <label class="form-check-label" for="current_datetime" ><u>Current Date and Time</u></label>
                                         </div>
-                                       
                                     </div>
                                     @error('checkbox')
                                         <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                        
-                        
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -106,7 +46,6 @@
                             </div>
                         </form>
                     </div>
-                        
                 </div>
             </div>
         </div>

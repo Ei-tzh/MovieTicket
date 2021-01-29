@@ -47,7 +47,7 @@
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="townships">
                         <thead>                  
                             <tr class="bg-info text-white">
                                 <th style="width: 10px">ID</th>
@@ -80,3 +80,13 @@
     </section>
 </div>    
 @endsection
+@push('jquery')
+    <script>
+         $(document).ready(function(){
+            $('#townships').DataTable({
+                "lengthMenu":[ 5,10, 25, 50, 75, 100 ]
+            });
+        });
+    </script>
+
+@endpush

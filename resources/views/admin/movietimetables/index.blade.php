@@ -41,9 +41,9 @@
                 <div class="col-12">
                     <div class="card card-info card-outline">
                         <div class="card-header">
-                            <h2 class="card-title">{{ $movie->name }}<span class="badge badge-pill badge-primary">{{ $cinematheater->name }}</span></h2>
+                            <h2 class="card-title">{{ $movie->name }}<span class="badge badge-pill badge-info text-white">{{ $cinematheater->name }}</span></h2>
                             <a href="{{ route('timetables.create',[$cinematheater->cinema->id,$cinematheater->id,$movie_theater->id])}}" class="float-right">
-                                <button class='btn btn-primary'><i class="fas fa-plus"></i> Add New Timetables</button>
+                                <button class='btn btn-info text-white'><i class="fas fa-plus"></i> Add New Timetables</button>
                             </a>
                         </div>
                         <div class="card-body">
@@ -53,7 +53,7 @@
                                         <th style="width: 10px">ID</th>
                                         <th>Show Date</th>
                                         <th>Show Time</th>
-                                        <th>Action</th>
+                                        <th style="width: 10px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,12 +63,12 @@
                                             <td>{{ $timetable->show_date }}</td>
                                             <td>{{ $timetable->show_time }}</td>
                                             <td>
-                                                <a href="" title="Edit" class="btn btn-primary">
+                                                {{-- <a href="" title="Edit" class="btn btn-primary">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                
+                                                 --}}
                                                 @method('DELETE')                         
-                                                <a href="" title="Delete" class="btn btn-danger"> 
+                                                <a href="{{route('timetables.destroy',[$cinematheater->cinema->id,$cinematheater->id,$movie_theater->id,$timetable->id])}}" title="Delete" class="btn btn-danger"> 
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                            </td>
@@ -84,3 +84,12 @@
     </section>
 </div> 
 @endsection
+@push('jquery')
+    <script>
+         $(document).ready(function(){
+            $('#timetables').DataTable({
+                "lengthMenu":[ 5,10, 25, 50, 75, 100 ]
+            });
+        });
+    </script>  
+@endpush

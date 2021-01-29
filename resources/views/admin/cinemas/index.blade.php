@@ -34,11 +34,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Cinema Table</h3>
+                                <h3 class="card-title">Cinemas Table</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" id="cinemas">
                                     <thead class="bg-primary">
                                         <tr>
                                             <th>ID</th>
@@ -86,3 +86,12 @@
         </section>
     </div>
 @endsection
+@push('jquery')
+    <script>
+         $(document).ready(function(){
+            $('#cinemas').DataTable({
+                "lengthMenu":[ 5,10, 25, 50, 75, 100 ]
+            });
+        });
+    </script>
+@endpush

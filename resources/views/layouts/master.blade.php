@@ -101,7 +101,7 @@
           </li>
           <li class="nav-item">
             <a href='{{ route('movieCategories.index')}}' class="nav-link  @if(Request::is('admin/movieCategories*')){{'active'}} @endif">
-              <i class="nav-icon fas fa-video"></i>
+              <i class="nav-icon fas fa-list"></i>
               <p>
                 Movies-Categories
                 <i class="right fas fa-angle-right"></i>
@@ -119,7 +119,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('townships.index') }}" class="nav-link @if(Request::is('admin/townships*')){{'active'}} @endif">
-              <i class="nav-icon fas fa-building"></i>
+              <i class="nav-icon fas fa-map-marked-alt"></i>
               <p>
                 Townships
                 <i class="right fas fa-angle-right"></i>

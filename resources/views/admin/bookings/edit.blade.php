@@ -47,57 +47,33 @@
                                             </span>
                                         @enderror
                                     </div>
-
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label>Date:</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i class="fas fa-calendar-alt"></i>
-                                                        </span>
+                                                <div class="input-group date" id="datepicker" data-target-input="nearest">
+                                                    <div class="input-group-prepend" data-target="#datepicker" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
-                                                    <input type="text" class="form-control float-right" name="date" id="date" value="{{ $booking->date}}">
-                                                    
+                                                    <input type="text" class="form-control datetimepicker-input" name="date" data-target="#datepicker" data-toggle="datetimepicker" value="{{ $booking->date }}"/>
                                                 </div>
                                                 @error('date')
-                                                        <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
+                                                    <small id="bodyhelp" class="form-text text-danger">*{{ $message }}</small>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                
-                                                <div class="row">
-                                                    <div class="input-group">
-                                                        <div class="col-2">
-                                                            <label for="hr">Hour:</label>
-                                                            <?php $time=explode(':',$booking->time); ?>
-                                                            <input type="number" id="hr" class='form-control' name="hr" min="1" max="24" value="{{ $time[0] }}">
-
-                                                            @error('hr')
-                                                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <label for="min">Min:</label>
-                                                            <input type="number" id="min" class='form-control' name="min" min="0" max="59" value="{{ $time[1] }}">
-
-                                                            @error('min')
-                                                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <label for="sec">Min:</label>
-                                                            <input type="number" id="sec" class='form-control' name="sec" min="0" max="59" value="{{ $time[2] }}">
-
-                                                            @error('sec')
-                                                                <small id="bodyhelp" class="form-text text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
+                                                <label>Show Time:</label>
+                                                <div class="input-group date" id="timepicker" data-target-input="nearest">
+                                                    <div class="input-group-prepend" data-target="#timepicker" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                                     </div>
+                                                    <input type="text" class="form-control datetimepicker-input" name="time" data-target="#timepicker" data-toggle="datetimepicker" value="{{ $booking->time }}"/>
                                                 </div>
+                                                @error('time')
+                                                    <small id="bodyhelp" class="form-text text-danger">*{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -133,20 +109,18 @@
              placeholder:"Please Select Movies You Want To Book",
              tags:true
          });
-         $('#date').datepicker({ dateFormat: 'yy-mm-dd' });
+         $('#datepicker').datetimepicker({
+                    format: 'YYYY-MM-DD'
+                });
+        $('#timepicker').datetimepicker({format: 'HH:mm:ss'});
         $('#current_datetime').click(function(){
             if(this.checked){
-                $("#date").attr("readonly", true);
-                $("#hr").attr("readonly", true);
-                $("#min").attr("readonly", true);
-                $("#sec").attr("readonly", true);
+                $("#datepicker input").attr("readonly", true);
+                $("#timepicker input").attr("readonly", true);
             }else{
-                $("#date").removeAttr("readonly");
-                $("#hr").removeAttr("readonly");
-                $("#min").removeAttr("readonly");
-                $("#sec").removeAttr("readonly");
+                $("#datepicker input").removeAttr("readonly");
+                $("#timepicker input").removeAttr("readonly");
             }
-            
         });
      });
     </script>

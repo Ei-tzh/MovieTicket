@@ -35,20 +35,11 @@
                     <div class="col-lg-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Bookings</h3>
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3 class="card-title">Bookings table</h3>
                         </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-striped">
+                    
+                    <div class="card-body">
+                        <table class="table table-striped table-bordered" id="bookings">
                             <thead>                  
                                 <tr>
                                    <th>ID</th>
@@ -63,7 +54,7 @@
                                    <tr>
                                         <td>{{ $booking->id }}</td>
                                         <td>{{ $booking->booking_no }}</td>
-                                        <td class="text-primary">{{ $booking->user->name }}</td>
+                                        <td class="text-primary text-bold">{{ $booking->user->name }}</td>
                                         <td>{{ $booking->date.'/ '.$booking->time }}</td>
                                         <td>
                                         <a href="{{ route('bookings.show',$booking->id)}}" title="view">
@@ -88,3 +79,12 @@
         </section>
     </div>
 @endsection
+@push('jquery')
+    <script>
+         $(document).ready(function(){
+            $('#bookings').DataTable({
+                "lengthMenu":[ 5,10, 25, 50, 75, 100 ]
+            });
+        });
+    </script>  
+@endpush

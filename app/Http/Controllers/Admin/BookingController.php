@@ -24,9 +24,6 @@ class BookingController extends Controller
     public function index()
     { 
        $bookings=Booking::all();
-       foreach($bookings as $booking){
-           $user=$booking->user;
-       }
        return view('admin.bookings.index',compact('bookings'));
     }
     /**
@@ -61,7 +58,7 @@ class BookingController extends Controller
             'time'      =>$dt->toTimeString()
         ]);
 
-        $request->session()->flash('status','A New Booking is created successfully!');
+        $request->session()->flash('status','A New Booking was created successfully!');
         return redirect()->route('bookings.index');
     }
     /**
@@ -137,19 +134,16 @@ class BookingController extends Controller
     {
         $request->validate([
             'date'  => 'required',
-            'hr'    => 'required',
-            'min'   => 'required',
-            'sec'   => 'required'
+            'time'  => 'required'
         ]);
         $dt = Carbon::now();
-       
-        $datetime=$request->hr.':'.$request->min.':'.$request->sec;
         Booking::where('id',$id)->update([
             'user_id'=>$request->user,
             'date'   =>$request->current_datetime==''?$request->date : $dt->toDateString(),
-            'time'   =>$request->current_datetime==''?$datetime : $dt->toTimeString()
+            'time'   =>$request->current_datetime==''?$request->time : $dt->toTimeString()
         ]);
         return redirect()->route('bookings.index');
+        //return $request;
     }
 
     /**

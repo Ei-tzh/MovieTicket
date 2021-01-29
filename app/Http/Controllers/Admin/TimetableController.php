@@ -95,7 +95,7 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -116,8 +116,10 @@ class TimetableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$theater,$movietheater,$timetable)
     {
-        //
+        $movie_theater=Movie_theater::find($movietheater);
+        $movie_theater->timetables()->detach($timetable);
+        return redirect()->route('timetables.index',[$id,$theater,$movietheater]);
     }
 }

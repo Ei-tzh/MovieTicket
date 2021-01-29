@@ -42,7 +42,7 @@
                                 <h3 class="card-title">{{ $cinematheater->name }}</h3>
                                 <div class="new-theater float-right">
                                     <a href="{{ route('movietheaters.create',[$cinema->id,$cinematheater->id])}}">
-                                        <button type="button" class="btn btn-info"><i class="fas fa-plus"></i>Add New Movie</button>
+                                        <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>Add New Movie</button>
                                     </a>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                                
                                                <td>
                                                     <a href="{{ route('timetables.index',['id'=>$cinema->id,'theater'=>$cinematheater->id,'movietheater'=>$movietheater->pivot->id])}}" title="View Schedules">
-                                                        View Schedules
+                                                        <button type="button" class="btn btn-outline-primary">View Timetables</button>
                                                     </a> 
                                                </td>
                                                <td>

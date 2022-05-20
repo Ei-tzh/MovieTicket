@@ -9,16 +9,28 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     {{-- logo --}}
     <link rel="icon" type="png/image" href="images/logo/logo.png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Raleway" rel="stylesheet">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    {{-- <link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="css/nice-select.css">
+	<link rel="stylesheet" href="css/nouislider.min.css"> --}}
+	
     <!-- Styles -->
+    
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <style>
        .logo{
            width:30px;
@@ -42,28 +54,7 @@
         background-position: center;
         background-repeat: no-repeat;
         }
-        /*.carousel-item {
-            height: 65vh;
-            min-height: 500px;
-            background: no-repeat center center scroll;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            background-color:#8DB8A0;
-            position:relative;
-        }*/
-       
-        /*.movie-info{
-            border:2px solid #fff;
-            width:150px;
-            color:#fff;
-            transition: width .20s ease-out;
-        }
-        .movie-info:hover{
-            color:#eee;
-            width:120px;
-        }*/
+        
         .bg-dark-blue{
             background-color:#407A79;
         }
@@ -99,7 +90,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/logo/logo.png')}}" alt="..." class="d-inline-block align-top logo">
-                    <span class="app_name">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="app_name">{{ config('app.name', 'Ticket') }}</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -109,12 +100,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home
-                                <span class="sr-only">(current)</span>
+                            <a class="nav-link" href="{{ route('home') }}">Home
+                                
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('allmovies.index' )}}">Movies</a>
+                            <a class="nav-link" href="/movies">Movies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#cinemas">Cinemas</a>
@@ -130,35 +121,35 @@
                         </li>
                         <!-- Authentication Links -->
                         @guest
+                            @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+                            @endif
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                        
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="">Profile</a>
+                              
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{{ route('logout') }}" 
+                              onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                
-                                    <a class="dropdown-item" href="#">Your Tickets</a>
-                                    {{-- <div class="dropdown-divider"></div> --}}
-                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            </div>
+                          </li>
                         @endguest
                     </ul>
                 </div>
@@ -166,9 +157,10 @@
         </nav>
 
         <main>
+            
             @yield('content')
         </main>
-        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <footer  class="bg-dark text-white-50 footer">
             <div class="container text-center">
                 <small>Copyright &copy;YCTB</small>
             </div>

@@ -51,6 +51,6 @@ class HomeController extends Controller
         }
         $cinemas=Cinema::all();
         //return $theaters;
-        return view('home',compact('timetables','movies','theaters','current_date','cinemas'));
+        return view('main.movies.home',compact('timetables','movies','theaters','current_date','cinemas'));
     }
 }

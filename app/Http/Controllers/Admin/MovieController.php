@@ -58,9 +58,13 @@ class MovieController extends Controller
         ]);
 
         $extension=$request->poster->extension();
+        // $extension=$request->poster->getClientOriginalName();
         $uuid=Str::uuid();
 
-        $request->poster->storeAs('/public/images/movies',$uuid.".".$extension);
+        // $path = $request->poster->storeAs('uploads', $extension, 'public');
+        // $aa='/storage/'.$path;
+        // dd($aa);
+        $request->poster->storeAs('public/images/movies',$uuid.".".$extension);
         $url=Storage::url('images/movies/'.$uuid.".".$extension);
 
         $hr=$request->hr;

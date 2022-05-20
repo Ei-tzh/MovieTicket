@@ -12,18 +12,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
-        //$this->call(MovieTableSeeder::class);
-        //$this->call(CategoriesTableSeeder::class);
-        //$this->call(Movie_CategoriesTableSeeder::class);
-        //$this->call(CinemaTableSeeder::class);
-        //$this->call(TheaterTableSeeder::class);
-        //$this->call(MovieTheaterTableSeeder::class);
+        $this->call(MovieTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(Movie_CategoriesTableSeeder::class);
+        $this->call(CinemaTableSeeder::class);
+        $this->call(TheaterTableSeeder::class);
+        $this->call(MovieTheaterTableSeeder::class);
         $this->call(SeatTableSeeder::class);
-        //$this->call(Seat_theaterTableSeeder::class);
-        //$this->call(Seat_timetabletheaterTableSeeder::class);
+        $this->call(Seat_theaterTableSeeder::class);
+        $this->call(Seat_timetabletheaterTableSeeder::class);
 
-        //$this->call(BookingTableSeeder::class);
+        $this->call(BookingTableSeeder::class);
 
-        //$this->call(BookingSeatTableSeeder::class);
+        $this->call(BookingSeatTableSeeder::class);
     }
 }

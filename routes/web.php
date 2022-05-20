@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/admin/dashboard', 'Admin\AdminController')->middleware(['auth','admin']);
-Route::get('/home','HomeController@index')->name('home')->middleware(['auth','user']);
+Route::get('/','HomeController@index')->name('home')->middleware(['auth','user']);
 
 Route::resource('/admin/movies','Admin\MovieController');
 Route::resource('/admin/movieCategories','Admin\MovieCategoriesController');
@@ -60,4 +60,4 @@ Route::delete('/admin/bookings/{booking_id}/{id}','Admin\BookingController@delet
 Route::resource('/admin/testing','test\testController');
 
 //main page
-Route::resource('/home/allmovies','Main\MoviesController');
+Route::resource('/movies','Main\MoviesController');

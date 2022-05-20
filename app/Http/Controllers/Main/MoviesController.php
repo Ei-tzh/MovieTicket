@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Category;
+use App\Movie;
 class MoviesController extends Controller
 {
     /**
@@ -14,7 +15,9 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        return view('main.movies.index');
+        $categories=Category::all();
+        $movies=Movie::all();
+        return view('main.movies.index',['categories'=>$categories,'movies'=>$movies]);
     }
 
     /**

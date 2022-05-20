@@ -23,7 +23,7 @@ import 'jquery-ui/ui/widgets/button.js';
 import  'select2/dist/js/select2.min.js';
 import  'bootstrap-switch/dist/js/bootstrap-switch.min.js';//bootstrap-switch
 import  'datatables.net/js/jquery.dataTables.min.js';
-import  'bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js';
+// import  'bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js';
 //import  'tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js'
 /**
  * Import moment js
